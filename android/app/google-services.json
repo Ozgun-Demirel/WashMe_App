@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1051380964911",
+    "project_id": "roadeo-3",
+    "storage_bucket": "roadeo-3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051380964911:android:55116cbede705c1911f0da",
+        "android_client_info": {
+          "package_name": "com.example.roadeo_3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051380964911-r69k29c03ihhsmngu32v9kelnd15b6ib.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDso3LQGFi-1ibHMgZVGZcgF8bsJQaMMIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1051380964911-r69k29c03ihhsmngu32v9kelnd15b6ib.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
