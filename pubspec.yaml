@@ -60,7 +60,7 @@ dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path : "lib/Assets/WashMe/1024.png"
+  image_path : "lib/Assets/WashMe/logoWM.png"
 
 dev_dependencies:
   flutter_test:
