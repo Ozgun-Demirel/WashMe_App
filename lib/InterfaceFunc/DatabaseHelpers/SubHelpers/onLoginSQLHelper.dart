@@ -37,15 +37,19 @@ class OnLoginHelper {
   }
 
   static placingOnlineData() async {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('users')
-        .doc(user!.uid)
-        .collection("locations").get();
-    try {
-      for (int index= 0; index < querySnapshot.docs.length; index++) {
-        LocationHelper.insertLocation(querySnapshot.docs[index].data() as Map<String, dynamic>);
+    if (user != null) {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('users')
+          .doc(user!.uid)
+          .collection("locations").get();
+      try {
+        for (int index= 0; index < querySnapshot.docs.length; index++) {
+          LocationHelper.insertLocation(querySnapshot.docs[index].data() as Map<String, dynamic>);
+        }
+      } catch (err){
+        print(err);
       }
-    } catch (err){
-      print(err);
+    } else {
+      return;
     }
   }
 
