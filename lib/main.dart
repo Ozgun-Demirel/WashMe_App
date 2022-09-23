@@ -66,7 +66,7 @@ class RoadEO_3 extends StatelessWidget {
       // restorationScopeId: 'root', // image_picker problem with gallery
       debugShowCheckedModeBanner:
           false, // There will be a red "Debug" banner on the right corner of the app if this bool is not used!
-      title: 'RoadEO',
+      title: 'WashMe',
       theme: ThemeData(
         appBarTheme: AppBarTheme(color: Colors.white),
         primarySwatch: Colors.blue,
