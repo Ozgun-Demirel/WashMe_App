@@ -1,3 +1,4 @@
+import 'package:WashMe/InterfaceFunc/platformDependedWidgetChanges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -296,7 +297,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
             // By adding the line below, it becomes possible by setting google map unscrollable.
             gestureRecognizers: Set()
               ..add(Factory<EagerGestureRecognizer>(
-                  () => EagerGestureRecognizer())),
+                      () => EagerGestureRecognizer())),
 
             onCameraIdle: () async {
               if (_cameraPosition != null) {
@@ -441,10 +442,10 @@ class _BLClientInputsState extends State<BLClientInputs> {
       timePickerString = "Time Picker";
     } else if (_orderValue.timeValue!.hour > 12) {
       timePickerString =
-          "${_orderValue.timeValue!.hour - 12}:${_orderValue.timeValue!.minute} P.M.";
+      "${_orderValue.timeValue!.hour - 12}:${_orderValue.timeValue!.minute} P.M.";
     } else {
       timePickerString =
-          "${_orderValue.timeValue!.hour}:${_orderValue.timeValue!.minute} A.M.";
+      "${_orderValue.timeValue!.hour}:${_orderValue.timeValue!.minute} A.M.";
     }
 
     return Column(
@@ -470,14 +471,14 @@ class _BLClientInputsState extends State<BLClientInputs> {
                         minTime: now,
                         maxTime: DateTime(now.year, now.month, now.day + 6),
                         onChanged: (date) {
-                      setState(() {
-                        _orderValue.dateValue = date;
-                      });
-                    }, onConfirm: (date) {
-                      setState(() {
-                        _orderValue.dateValue = date;
-                      });
-                    }, currentTime: DateTime.now(), locale: LocaleType.en);
+                          setState(() {
+                            _orderValue.dateValue = date;
+                          });
+                        }, onConfirm: (date) {
+                          setState(() {
+                            _orderValue.dateValue = date;
+                          });
+                        }, currentTime: DateTime.now(), locale: LocaleType.en);
                   },
                   child: Container(
                     width: deviceWidth * (3 / 8),
@@ -492,10 +493,10 @@ class _BLClientInputsState extends State<BLClientInputs> {
                       _orderValue.dateValue == null
                           ? "Date Picker"
                           : _orderValue.dateValue!.month.toString() +
-                              "/" +
-                              _orderValue.dateValue!.day.toString() +
-                              "/" +
-                              _orderValue.dateValue!.year.toString(),
+                          "/" +
+                          _orderValue.dateValue!.day.toString() +
+                          "/" +
+                          _orderValue.dateValue!.year.toString(),
                       style: GoogleFonts.openSans(
                           fontSize: deviceWidth / 28,
                           fontWeight: FontWeight.bold,
@@ -515,7 +516,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                             print('Unavailable selection'),
                         initialTime: TimeOfDay(hour: 0, minute: 0),
                         selectableTimePredicate: (time) =>
-                            time!.minute % 15 == 0).then((time) {
+                        time!.minute % 15 == 0).then((time) {
                       if (time != null) {
                         var now = DateTime.now();
                         _orderValue.timeValue = DateTime(now.year, now.month,
@@ -772,7 +773,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                     flex: 1,
                     child: Checkbox(
                       side: MaterialStateBorderSide.resolveWith(
-                        (states) => BorderSide(width: 2.0, color: Colors.grey),
+                            (states) => BorderSide(width: 2.0, color: Colors.grey),
                       ),
                       checkColor: Colors.white,
                       fillColor: MaterialStateProperty.all(Color(0xFF2D9BF0)),
@@ -790,7 +791,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                       onPressed: () {
                         setState(() {
                           _orderValue.isInterior =
-                              _orderValue.isInterior == true ? false : true;
+                          _orderValue.isInterior == true ? false : true;
                         });
                       },
                       child: SizedBox(
@@ -821,7 +822,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                     flex: 1,
                     child: Checkbox(
                       side: MaterialStateBorderSide.resolveWith(
-                        (states) => BorderSide(width: 2.0, color: Colors.grey),
+                            (states) => BorderSide(width: 2.0, color: Colors.grey),
                       ),
                       checkColor: Colors.white,
                       fillColor: MaterialStateProperty.all(Color(0xFF2D9BF0)),
@@ -839,7 +840,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                       onPressed: () {
                         setState(() {
                           _orderValue.isTruck =
-                              _orderValue.isTruck == true ? false : true;
+                          _orderValue.isTruck == true ? false : true;
                         });
                       },
                       child: SizedBox(
@@ -870,7 +871,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                     flex: 1,
                     child: Checkbox(
                       side: MaterialStateBorderSide.resolveWith(
-                        (states) => BorderSide(width: 2.0, color: Colors.grey),
+                            (states) => BorderSide(width: 2.0, color: Colors.grey),
                       ),
                       checkColor: Colors.white,
                       fillColor: MaterialStateProperty.all(Color(0xFF2D9BF0)),
@@ -888,7 +889,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                       onPressed: () {
                         setState(() {
                           _orderValue.isEngine =
-                              _orderValue.isEngine == true ? false : true;
+                          _orderValue.isEngine == true ? false : true;
                         });
                       },
                       child: SizedBox(
@@ -933,7 +934,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                 locationsData.isEmpty ||
                 _orderValue.dateValue == null ||
                 _orderValue.timeValue == null) {
-             return showDialog(
+              return showDialog(
                   context: context,
                   builder: (ctx) => SimpleDialog(
                     insetPadding: EdgeInsets.only(
@@ -1042,7 +1043,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
             if (now.millisecondsSinceEpoch > orderDate.millisecondsSinceEpoch) {
               return _showErrorDialogs(deviceHeight, deviceWidth,
                   firstLine:
-                      "Please make sure the time you selected is in the future.");
+                  "Please make sure the time you selected is in the future.");
             }
 
             LocationValues selectedLocation;
@@ -1051,12 +1052,12 @@ class _BLClientInputsState extends State<BLClientInputs> {
                 selectedLocation = LocationValues.fromMap(locationsData[i]);
                 User? user = FirebaseAuth.instance.currentUser;
                 DocumentSnapshot<Map<String, dynamic>> ordersDataSnapshot =
-                    await FirebaseFirestore.instance
-                        .collection('users')
-                        .doc(user!.uid)
-                        .collection("currentOrders")
-                        .doc("washMe")
-                        .get();
+                await FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(user!.uid)
+                    .collection("currentOrders")
+                    .doc("washMe")
+                    .get();
                 if (ordersDataSnapshot.data() == null) {
                   await FirestoreWashMeOrderHelper.washMeOrderAdder(
                       _orderValue, selectedLocation);
@@ -1067,7 +1068,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                 } else if (ordersDataSnapshot.data()!.keys.length >= 3) {
                   return _showErrorDialogs(deviceHeight, deviceWidth,
                       firstLine:
-                          "You already have more than 3 orders. Please wait or cancel them to give more wash orders.");
+                      "You already have more than 3 orders. Please wait or cancel them to give more wash orders.");
                 }
                 List tempCityList = [];
                 for (var element in ordersDataSnapshot.data()!.values) {
@@ -1075,7 +1076,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                     if (selectedLocation.adminArea == element["adminArea"]) {
                       return _showErrorDialogs(deviceHeight, deviceWidth,
                           firstLine:
-                              "You already have 2 orders in this city. Other orders must be terminated first to give more orders.");
+                          "You already have 2 orders in this city. Other orders must be terminated first to give more orders.");
                     }
                   } else {
                     tempCityList.add(element["adminArea"]);
@@ -1179,7 +1180,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                 builder: (BuildContext context) {
                   return notLoggedInDialog(deviceHeight, deviceWidth, context,
                       displayText:
-                          "You must login first to reach WashMe Washer Screen.");
+                      "You must login first to reach WashMe Washer Screen.");
                 });
           },
         ),
@@ -1237,6 +1238,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                       int insertResult = await LocationHelper.insertLocation(
                           _currentLocationValues!.toMap());
                       if (insertResult != -1) {
+                        if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             duration: Duration(seconds: 3),
@@ -1252,6 +1254,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                             insertResult, _currentLocationValues!);
                         selectedLocationId = insertResult;
                       } else {
+                        if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             duration: Duration(seconds: 5),
@@ -1265,11 +1268,12 @@ class _BLClientInputsState extends State<BLClientInputs> {
                         );
                       }
                       setState(() {});
+                      if (!mounted) return;
                       Navigator.of(context).pop();
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          duration: Duration(seconds: 5),
+                          duration: const Duration(seconds: 3),
                           content: Text(
                             "There are missing address informations",
                             style: TextStyle(
@@ -1296,10 +1300,10 @@ class _BLClientInputsState extends State<BLClientInputs> {
   }
 
   Widget locationInfo(
-    double deviceHeight,
-    double deviceWidth,
-    LocationValues? dialogLocationValues,
-  ) {
+      double deviceHeight,
+      double deviceWidth,
+      LocationValues? dialogLocationValues,
+      ) {
     return Column(
       children: [
         SizedBox(
@@ -1321,7 +1325,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                 width: double.infinity,
                 padding: EdgeInsets.only(
                     left: deviceWidth / 30, right: deviceWidth / 20),
-                child: Divider(thickness: 2, color: Colors.black)),
+                child: const Divider(thickness: 2, color: Colors.black)),
             Container(
               width: double.infinity,
               padding: EdgeInsets.only(
@@ -1342,14 +1346,14 @@ class _BLClientInputsState extends State<BLClientInputs> {
         Container(
           width: double.infinity,
           padding:
-              EdgeInsets.only(left: deviceWidth / 30, right: deviceWidth / 20),
+          EdgeInsets.only(left: deviceWidth / 30, right: deviceWidth / 20),
           child: Row(
             children: [
               Expanded(
                 flex: 4,
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                         width: double.infinity,
                         child: Text(
                           "${dialogLocationValues?.adminArea}",
@@ -1358,7 +1362,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                           ),
                         )),
                     Divider(thickness: 2, color: Colors.black),
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       child: Text(
                         "City",
@@ -1378,7 +1382,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                 flex: 4,
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                         width: double.infinity,
                         child: Text(
                           "${dialogLocationValues?.state}",
@@ -1387,7 +1391,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                           ),
                         )),
                     Divider(thickness: 2, color: Colors.black),
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       child: Text(
                         "State",
@@ -1407,7 +1411,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                 flex: 2,
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                         width: double.infinity,
                         child: Text(
                           "${dialogLocationValues?.zip}",
@@ -1415,8 +1419,8 @@ class _BLClientInputsState extends State<BLClientInputs> {
                             fontSize: deviceWidth / 24,
                           ),
                         )),
-                    Divider(thickness: 2, color: Colors.black),
-                    Container(
+                    const Divider(thickness: 2, color: Colors.black),
+                    SizedBox(
                       width: double.infinity,
                       child: Text(
                         "Zip",
@@ -1443,7 +1447,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
     return SimpleDialog(
       insetPadding: EdgeInsets.all(deviceWidth / 40),
       children: [
-        Container(
+        SizedBox(
           height: deviceHeight * (3 / 4),
           width: deviceWidth * (11 / 12),
           child: SingleChildScrollView(
@@ -1461,13 +1465,13 @@ class _BLClientInputsState extends State<BLClientInputs> {
                               fontWeight: FontWeight.bold),
                         )),
                     Container(
-                      margin: EdgeInsets.only(right: 10),
+                      margin: const EdgeInsets.only(right: 10),
                       child: IconButton(
                           onPressed: () {
                             Navigator.of(context, rootNavigator: true)
                                 .pop('dialog');
                           },
-                          icon: Icon(Icons.close)),
+                          icon: const Icon(Icons.close)),
                     ),
                   ],
                 ),
@@ -1481,13 +1485,13 @@ class _BLClientInputsState extends State<BLClientInputs> {
                       builder: (context, snapshot) {
                         switch (snapshot.connectionState) {
                           case ConnectionState.waiting:
-                            return Text('Loading....');
+                            return progressIndicator();
                           default:
-                            if (snapshot.hasError)
-                              return Text('Error');
-                            else {
+                            if (snapshot.hasError) {
+                              return const Text('Error');
+                            } else {
                               var dataList = snapshot.data as List;
-                              if (dataList.length == 0) {
+                              if (dataList.isEmpty) {
                                 return Column(
                                   children: [
                                     SizedBox(
@@ -1533,40 +1537,40 @@ class _BLClientInputsState extends State<BLClientInputs> {
                                             children: [
                                               Expanded(
                                                   flex: 4,
-                                                  child: Container(
+                                                  child: SizedBox(
                                                       height: deviceHeight / 12,
                                                       width: double.infinity,
                                                       child: ElevatedButton(
                                                           style: ElevatedButton.styleFrom(
                                                               primary: locationInstance[
-                                                                          "id"] ==
-                                                                      selectedLocationId
+                                                              "id"] ==
+                                                                  selectedLocationId
                                                                   ? Colors.blue
-                                                                  : Color(
-                                                                      0xFF414BB2)),
+                                                                  : const Color(
+                                                                  0xFF414BB2)),
                                                           onPressed: () {
                                                             selectedLocationId =
-                                                                locationInstance[
-                                                                    "id"];
+                                                            locationInstance[
+                                                            "id"];
                                                             Navigator.pop(
                                                                 context);
                                                           },
                                                           child: Text(
                                                               locationInstance[
-                                                                          "id"] ==
-                                                                      selectedLocationId
+                                                              "id"] ==
+                                                                  selectedLocationId
                                                                   ? "Selected"
                                                                   : "Select",
                                                               style: GoogleFonts.notoSans(
                                                                   fontSize:
-                                                                      deviceWidth /
-                                                                          24))))),
+                                                                  deviceWidth /
+                                                                      24))))),
                                               SizedBox(
                                                 width: deviceWidth / 20,
                                               ),
                                               Expanded(
                                                   flex: 4,
-                                                  child: Container(
+                                                  child: SizedBox(
                                                       height: deviceHeight / 12,
                                                       width: double.infinity,
                                                       child: ElevatedButton(
@@ -1576,8 +1580,8 @@ class _BLClientInputsState extends State<BLClientInputs> {
                                                           child: Text("Update",
                                                               style: GoogleFonts.notoSans(
                                                                   fontSize:
-                                                                      deviceWidth /
-                                                                          24))))),
+                                                                  deviceWidth /
+                                                                      24))))),
                                               Expanded(
                                                 flex: 4,
                                                 child: Container(
@@ -1591,8 +1595,8 @@ class _BLClientInputsState extends State<BLClientInputs> {
                                                           "id = ${locationInstance["id"]}");
                                                       FirestoreUserLocationsHelper
                                                           .userLocationsDeleter(
-                                                              locationInstance[
-                                                                  "id"]);
+                                                          locationInstance[
+                                                          "id"]);
                                                       Navigator.pop(context);
                                                     },
                                                     child: Image.asset(
@@ -1626,11 +1630,11 @@ class _BLClientInputsState extends State<BLClientInputs> {
   Widget yourOrderHasBeenTakenDialog(double deviceHeight, double deviceWidth) {
     return SimpleDialog(
       insetPadding:
-          EdgeInsets.only(left: deviceWidth / 20, right: deviceWidth / 20),
+      EdgeInsets.only(left: deviceWidth / 20, right: deviceWidth / 20),
       children: [
         Container(
           padding:
-              EdgeInsets.only(left: deviceWidth / 20, right: deviceWidth / 20),
+          EdgeInsets.only(left: deviceWidth / 20, right: deviceWidth / 20),
           child: Column(
             children: [
               Text(
@@ -1668,36 +1672,36 @@ class _BLClientInputsState extends State<BLClientInputs> {
     return showDialog(
         context: context,
         builder: (ctx) => SimpleDialog(
-              insetPadding: EdgeInsets.only(
+          insetPadding: EdgeInsets.only(
+              left: deviceWidth / 20, right: deviceWidth / 20),
+          children: [
+            Container(
+              padding: EdgeInsets.only(
                   left: deviceWidth / 20, right: deviceWidth / 20),
-              children: [
-                Container(
-                  padding: EdgeInsets.only(
-                      left: deviceWidth / 20, right: deviceWidth / 20),
-                  child: Column(
-                    children: [
-                      Text(
-                        "Your order is not complete.",
-                        style: GoogleFonts.notoSans(fontSize: deviceWidth / 18),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(
-                        height: deviceHeight / 40,
-                      ),
-                      Text(
-                        firstLine,
-                        style: GoogleFonts.notoSans(
-                            fontWeight: FontWeight.bold,
-                            fontSize: deviceWidth / 18),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(
-                        height: deviceHeight / 60,
-                      ),
-                    ],
+              child: Column(
+                children: [
+                  Text(
+                    "Your order is not complete.",
+                    style: GoogleFonts.notoSans(fontSize: deviceWidth / 18),
+                    textAlign: TextAlign.center,
                   ),
-                )
-              ],
-            ));
+                  SizedBox(
+                    height: deviceHeight / 40,
+                  ),
+                  Text(
+                    firstLine,
+                    style: GoogleFonts.notoSans(
+                        fontWeight: FontWeight.bold,
+                        fontSize: deviceWidth / 18),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: deviceHeight / 60,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ));
   }
 }

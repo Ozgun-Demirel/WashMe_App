@@ -7,13 +7,13 @@ import '../../../Models/Users/locationValuesType.dart';
 FirebaseAuth _auth = FirebaseAuth.instance;
 
 class FirestoreUserLocationsHelper {
-  static User? user = _auth.currentUser;
 
   static userLocationsAdder(int id, LocationValues locationValue) async {
+    User? user = _auth.currentUser;
     if(user != null ){
       return await FirebaseFirestore.instance
           .collection('users')
-          .doc(user!.uid)
+          .doc(user.uid)
           .collection("locations")
           .doc("$id")
           .set({
@@ -30,10 +30,11 @@ class FirestoreUserLocationsHelper {
   }
 
   static userLocationsDeleter(int id) async{
+    User? user = _auth.currentUser;
     if(user != null ){
       return await FirebaseFirestore.instance
           .collection('users')
-          .doc(user?.uid)
+          .doc(user.uid)
           .collection("locations")
           .doc("$id").delete();
     } else {

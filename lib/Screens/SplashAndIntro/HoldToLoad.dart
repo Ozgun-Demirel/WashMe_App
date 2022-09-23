@@ -10,11 +10,6 @@ class HoldToLoad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    /*
-    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
-    bool ensureFirebaseInitialize = arguments["ensureFirebaseInitialize"] ?? false;
-     */
-
     String _goToPage ;
 
     FirebaseAuth _auth = FirebaseAuth.instance;
@@ -22,27 +17,26 @@ class HoldToLoad extends StatelessWidget {
 
     if (user != null && !user.isAnonymous ) {
       _goToPage = "/ALClientInputs";
-      OnLoginHelper.onLogin();
     } else if (user != null && user.isAnonymous ){
       _goToPage = "/BLClientInputs";
-      OnLoginHelper.onLogin();
     } else {
       _auth.signInAnonymously();
       _goToPage = "/BLClientInputs";
-      OnLoginHelper.onLogin();
     }
 
-
+    Future.delayed(const Duration(milliseconds: 500)).then((value) {
+      OnLoginHelper.onLogin();
+    });
     Future.delayed(const Duration(milliseconds: 1000)).then((value) {
-
       Navigator.of(context).pushReplacementNamed(_goToPage);
     });
 
+
     return const Scaffold(
       body: Center(
-          child: CircularProgressIndicator(
-        color: Colors.blue,
-      ),
+        child: CircularProgressIndicator(
+          color: Colors.blue,
+        ),
       ),
     );
   }

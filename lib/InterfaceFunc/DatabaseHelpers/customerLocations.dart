@@ -7,21 +7,11 @@ import '../../Models/Users/locationValuesType.dart';
 
 Map statesDict = {'ALABAMA': 'AL', 'ALASKA': 'AK', 'ARIZONA': 'AZ', 'ARKANSAS': 'AR', 'AMERICAN SOME': 'AS','CALIFORNIA': 'CA', 'COLORADO': 'CO', 'CONNECTICUT': 'CT', 'DELAWARE': 'DE', 'DISTRICT OF COLUMBIA' : 'DC', 'FLORIDA': 'FL', 'GEORGIA': 'GA', 'GUAM':'GU', 'HAWAII': 'HI', 'IDAHO': 'ID', 'ILLINOIS': 'IL', 'INDIANA': 'IN', 'IOWA': 'IA', 'KANSAS': 'KS', 'KENTUCKY': 'KY', 'LOUISIANA': 'LA', 'MAINE': 'ME', 'MARYLAND': 'MD', 'MASSACHUSETTS': 'MA', 'MICHIGAN': 'MI', 'MINNESOTA': 'MN', 'MISSISSIPPI': 'MS', 'MISSOURI': 'MO', 'MONTANA': 'MT', 'NEBRASKA': 'NE', 'NEVADA': 'NE', 'NEW HAMPSHIRE': 'NH', 'NEW JERSEY': 'NJ', 'NEW MEXICO': 'NM', 'NEW YORK': 'NY', 'NORTH CAROLINA': 'NC', 'NORTH DAKOTA': 'ND', 'NORTHERN MARIANA ISLANDS': 'CM', 'OHIO': 'OH', 'OKLAHOMA': 'OK', 'OREGON': 'OR', 'PENNSYLVANIA': 'PA', 'PUERTO RICA': 'RI', 'RHODE ISLAND': 'RI', 'SOUTH CAROLINA': 'SC', 'SOUTH DAKOTA': 'SD', 'TENNESSEE': 'TN', 'TEXAS': 'TX', 'TRUST TERRITORIES' : 'TT', 'UTAH': 'UT', 'VERMONT': 'VT', 'VIRGINIA': 'VA', 'VIRGIN ISLANDS' : 'VI', 'WASHINGTON': 'WA', 'WEST VIRGINIA': 'WV', 'WISCONSIN': 'WI', 'WYOMING': 'WY'};
 class CustomerLocation {
-  var location = Location();
+  static var location = Location();
 
   CustomerLocation();
 
-  checkService() async {
-    var serviceEnabled = await location.serviceEnabled();
-    if (!serviceEnabled) {
-      serviceEnabled = await location.requestService();
-      if (serviceEnabled) {
-        return;
-      }
-    }
-  }
-
-  Future<bool> checkPermission() async {
+  static Future<bool> checkPermission() async {
     var permissionGranted = await location.hasPermission();
     if (permissionGranted == PermissionStatus.denied) {
       permissionGranted = await location.requestPermission();
@@ -35,7 +25,7 @@ class CustomerLocation {
     }
   }
 
-  getLocation() async {
+  static getLocation() async {
     if (await checkPermission()) {
       final Future<LocationData> locationData = location.getLocation();
       return locationData;
@@ -92,7 +82,7 @@ class CustomerLocation {
 
     }
     return locationValues;
-    }
-
-    
   }
+
+
+}

@@ -18,8 +18,8 @@ class OnLoginHelper {
   static tableDestroyer() async {
     final locationsDb = await LocationHelper.createLocationsDatabase();
     await locationsDb.execute("DROP TABLE IF EXISTS $locationsTableName");
-    final luserInformationsDb = await InformationHelper.createInformationsDatabase();
-    await luserInformationsDb.execute("DROP TABLE IF EXISTS $userInformationsTableName");
+    final userInformationsDb = await InformationHelper.createInformationsDatabase();
+    await userInformationsDb.execute("DROP TABLE IF EXISTS $userInformationsTableName");
     final vehiclesDb = await VehiclesSQLHelper.createVehiclesDatabase();
     await vehiclesDb.execute("DROP TABLE IF EXISTS $vehiclesTableName");
     print("**************");
