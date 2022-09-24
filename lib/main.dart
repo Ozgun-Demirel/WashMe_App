@@ -71,65 +71,65 @@ class RoadEO_3 extends StatelessWidget {
           false, // There will be a red "Debug" banner on the right corner of the app if this bool is not used!
       title: 'WashMe',
       theme: ThemeData(
-        appBarTheme: AppBarTheme(color: Colors.white),
+        appBarTheme: const AppBarTheme(color: Colors.white),
         primarySwatch: Colors.blue,
         colorScheme: ColorScheme.fromSwatch(primarySwatch: createMaterialColor(const Color(0xFF414BB2))),
         // backgroundColor: Colors.white,
       ),
 
 
-      home: _showIntro ? Intro() : Splash(showIntro: _showIntro,),
+      home: _showIntro ? const Intro() : Splash(showIntro: _showIntro,),
 
       routes: {
         // Splash And Intro:
         Splash.routeName : (context) => Splash(),
-        Intro.routeName : (context) => Intro(),
+        Intro.routeName : (context) => const Intro(),
 
         // Common Screens:
-        HoldToLoad.routeName : (context) => HoldToLoad(),
-        Disclaimer.routeName : (context) => Disclaimer(),
-        ContactUs.routeName : (context) => ContactUs(),
-        AboutUs.routeName : (context) => AboutUs(),
+        HoldToLoad.routeName : (context) => const HoldToLoad(),
+        Disclaimer.routeName : (context) => const Disclaimer(),
+        ContactUs.routeName : (context) => const ContactUs(),
+        AboutUs.routeName : (context) => const AboutUs(),
         //
         // After Login Routes:
-        ALClientInputs.routeName : (context) => ALClientInputs(),
+        ALClientInputs.routeName : (context) => const ALClientInputs(),
         // AL Drawer:
-        ALWashMeWasher.routeName : (context) => ALWashMeWasher(),
-        ALCurrentOrder.routeName : (context) => ALCurrentOrder(),
-        ALPersonalInformation.routeName : (context) => ALPersonalInformation(),
-        ALPreviousOrders.routeName : (context) => ALPreviousOrders(),
+        ALWashMeWasher.routeName : (context) => const ALWashMeWasher(),
+        ALCurrentOrder.routeName : (context) => const ALCurrentOrder(),
+        ALPersonalInformation.routeName : (context) => const ALPersonalInformation(),
+        ALPreviousOrders.routeName : (context) => const ALPreviousOrders(),
         // AL Personal Information Sub Pages:
-        MyAddresses.routeName : (context) => MyAddresses(),
-        MyCars.routeName : (context) => MyCars(),
-        MyInformation.routeName : (context) => MyInformation(),
-        PaymentMethods.routeName : (context) => PaymentMethods(),
+        MyAddresses.routeName : (context) => const MyAddresses(),
+        MyCars.routeName : (context) => const MyCars(),
+        MyInformation.routeName : (context) => const MyInformation(),
+        PaymentMethods.routeName : (context) => const PaymentMethods(),
         // AL WashMeWasher Not Washer Sub Pages:
-        BecomeWasher.routeName : (context) => BecomeWasher(),
-        WasherRegistration.routeName : (context) => WasherRegistration(),
-        WasherRegistrationID.routeName : (context) => WasherRegistrationID(),
-        WasherRegistrationNameAndAddress.routeName : (context) => WasherRegistrationNameAndAddress(),
-        WasherRegistrationPhotos.routeName : (context) => WasherRegistrationPhotos(),
-        WasherRegistrationSecurityCheck.routeName : (context) => WasherRegistrationSecurityCheck(),
-        ContinueWithoutRegistration.routeName : (context) => ContinueWithoutRegistration(),
+        BecomeWasher.routeName : (context) => const BecomeWasher(),
+        WasherRegistration.routeName : (context) => const WasherRegistration(),
+        WasherRegistrationID.routeName : (context) => const WasherRegistrationID(),
+        WasherRegistrationNameAndAddress.routeName : (context) => const WasherRegistrationNameAndAddress(),
+        WasherRegistrationPhotos.routeName : (context) => const WasherRegistrationPhotos(),
+        WasherRegistrationSecurityCheck.routeName : (context) => const WasherRegistrationSecurityCheck(),
+        ContinueWithoutRegistration.routeName : (context) => const ContinueWithoutRegistration(),
         // AL WashMeWasher Washer Sub Pages:
-        WasherRequests.routeName : (context) => WasherRequests(),
+        WasherRequests.routeName : (context) => const WasherRequests(),
         // AL WashMeWasher Washer Drawer:
-        WasherBoard.routeName : (context) => WasherBoard(),
-        EarningsAndPayments.routeName : (context) => EarningsAndPayments(),
-        PreviousJobs.routeName : (context) => PreviousJobs(),
-        CurrentJobs.routeName : (context) => CurrentJobs(),
+        WasherBoard.routeName : (context) => const WasherBoard(),
+        EarningsAndPayments.routeName : (context) => const EarningsAndPayments(),
+        PreviousJobs.routeName : (context) => const PreviousJobs(),
+        CurrentJobs.routeName : (context) => const CurrentJobs(),
         //AL WashMeWasher WasherBoard Sub Pages:
-        MyWashStatistics.routeName : (context) => MyWashStatistics(),
-        MyBankAccount.routeName : (context) => MyBankAccount(),
-        MyWashEquipments.routeName : (context) => MyWashEquipments(),
-        DeleteMyWasherAccount.routeName : (context) => DeleteMyWasherAccount(),
+        MyWashStatistics.routeName : (context) => const MyWashStatistics(),
+        MyBankAccount.routeName : (context) => const MyBankAccount(),
+        MyWashEquipments.routeName : (context) => const MyWashEquipments(),
+        DeleteMyWasherAccount.routeName : (context) => const DeleteMyWasherAccount(),
         //
         // Before Login Routes:
-        BLClientInputs.routeName : (context) => BLClientInputs(),
-        RegisterPage.routeName : (context) => RegisterPage(),
-        LoginPage.routeName : (context) => LoginPage(),
+        BLClientInputs.routeName : (context) => const BLClientInputs(),
+        RegisterPage.routeName : (context) => const RegisterPage(),
+        LoginPage.routeName : (context) => const LoginPage(),
         // BL Drawer: no need yet.
-        BLCurrentOrders.routeName : (context) => BLCurrentOrders(),
+        BLCurrentOrders.routeName : (context) => const BLCurrentOrders(),
 
       },
     );
