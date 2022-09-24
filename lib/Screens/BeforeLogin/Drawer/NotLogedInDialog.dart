@@ -12,7 +12,7 @@ Widget notLoggedInDialog(double deviceHeight, double deviceWidth, BuildContext c
         padding: EdgeInsets.all(deviceWidth / 20),
         child: Column(
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Text(
                 "You are not logged in.",
@@ -22,7 +22,7 @@ Widget notLoggedInDialog(double deviceHeight, double deviceWidth, BuildContext c
             SizedBox(
               height: deviceHeight / 45,
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Text(
                 displayText,
@@ -35,7 +35,7 @@ Widget notLoggedInDialog(double deviceHeight, double deviceWidth, BuildContext c
             ElevatedButton(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
+                    MaterialPageRoute(builder: (context) => const LoginPage()));
               },
               child: Container(
                 padding: EdgeInsets.all(deviceWidth/40),

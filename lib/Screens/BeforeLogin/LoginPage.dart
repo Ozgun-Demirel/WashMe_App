@@ -74,11 +74,9 @@ class _LoginPageState extends State with UserValidationMixin {
               ),
               Row(
                 children: [
-                  Expanded(
+                  const Expanded(
                     flex: 4,
-                    child: Container(
-                      child: Divider(color: Colors.black, thickness: 2),
-                    ),
+                    child: Divider(color: Colors.black, thickness: 2),
                   ),
                   Expanded(
                     flex: 2,
@@ -91,11 +89,9 @@ class _LoginPageState extends State with UserValidationMixin {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Expanded(
+                  const Expanded(
                     flex: 4,
-                    child: Container(
-                      child: Divider(color: Colors.black, thickness: 2),
-                    ),
+                    child: Divider(color: Colors.black, thickness: 2),
                   ),
                 ],
               ),
@@ -136,7 +132,7 @@ class _LoginPageState extends State with UserValidationMixin {
               SizedBox(
                 height: _deviceHeight / 45,
               ),
-              Divider(color: Colors.black, thickness: 2),
+              const Divider(color: Colors.black, thickness: 2),
               SizedBox(
                 height: _deviceHeight / 60,
               ),
@@ -150,7 +146,7 @@ class _LoginPageState extends State with UserValidationMixin {
 
   Widget buildEmailField() {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+      margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
       child: TextFormField(
         keyboardType: TextInputType.emailAddress,
         textInputAction: TextInputAction.next,
@@ -175,19 +171,19 @@ class _LoginPageState extends State with UserValidationMixin {
 
   Widget buildPasswordField() {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10, bottom: 5),
+      margin: const EdgeInsets.only(left: 10, right: 10, bottom: 5),
       child: TextFormField(
         validator: (value) => validatePassword(value.toString()),
         obscureText: _passwordInvisible,
         decoration: InputDecoration(
           fillColor: Colors.white,
-          focusedErrorBorder: OutlineInputBorder(
+          focusedErrorBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.blue),
           ),
           filled: true,
           labelText: 'Password',
           hintText: "abcd123",
-          prefixIcon: Icon(
+          prefixIcon: const Icon(
             Icons.lock_outline,
             color: Colors.black,
           ),
@@ -268,12 +264,12 @@ class _LoginPageState extends State with UserValidationMixin {
       children: [
         Expanded(
             flex: 2,
-            child: Container(
+            child: SizedBox(
               height:  deviceHeight / 6.6,
               child: TextButton(
                 child: Icon(
                   Icons.keyboard_backspace,
-                  color: Color(0xFF2D9BF0),
+                  color: const Color(0xFF2D9BF0),
                   size: deviceHeight / 6.6,
                 ),
                 onPressed: () {
@@ -287,10 +283,10 @@ class _LoginPageState extends State with UserValidationMixin {
               child: Text(
                 "WashMe",
                 style: GoogleFonts.fredokaOne(
-                    fontSize: deviceHeight / 9, color: Color(0xFF2D9BF0)),
+                    fontSize: deviceHeight / 9, color: const Color(0xFF2D9BF0)),
               ),
             )),
-        Expanded(flex: 1, child: SizedBox())
+        const Expanded(flex: 1, child: SizedBox())
       ],
     );
   }

@@ -58,7 +58,7 @@ class _DeleteMyWasherAccountState extends State<DeleteMyWasherAccount> {
               SizedBox(
                 height: _deviceHeight / 30,
               ),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: Text(
                   "Delete My Washer Account",
@@ -102,12 +102,12 @@ class _DeleteMyWasherAccountState extends State<DeleteMyWasherAccount> {
       children: [
         Expanded(
             flex: 2,
-            child: Container(
+            child: SizedBox(
               height: deviceHeight / 6.6,
               child: TextButton(
                 child: Icon(
                   Icons.keyboard_backspace,
-                  color: Color(0xFF2D9BF0),
+                  color: const Color(0xFF2D9BF0),
                   size: deviceHeight / 10,
                 ),
                 onPressed: () {
@@ -121,10 +121,10 @@ class _DeleteMyWasherAccountState extends State<DeleteMyWasherAccount> {
               child: Text(
                 "WashMe",
                 style: GoogleFonts.fredokaOne(
-                    fontSize: deviceHeight / 9, color: Color(0xFF2D9BF0)),
+                    fontSize: deviceHeight / 9, color: const Color(0xFF2D9BF0)),
               ),
             )),
-        Expanded(flex: 1, child: SizedBox())
+        const Expanded(flex: 1, child: SizedBox())
       ],
     );
   }
@@ -144,7 +144,7 @@ class _DeleteMyWasherAccountState extends State<DeleteMyWasherAccount> {
         ),
         DropdownButton(
           isDense: true,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
           ),
           // Initial Value
@@ -155,7 +155,7 @@ class _DeleteMyWasherAccountState extends State<DeleteMyWasherAccount> {
           items: rateUs1Answers.map((String answerItem) {
             return DropdownMenuItem(
               value: answerItem,
-              child: Container(
+              child: SizedBox(
                 width: deviceWidth * (3 / 4),
                 child: Text(
                   answerItem,
@@ -200,15 +200,15 @@ class _DeleteMyWasherAccountState extends State<DeleteMyWasherAccount> {
             initialRating: rateUs2Answer,
             allowHalfRating: false,
             ratingWidget: RatingWidget(
-              full: Icon(
+              full: const Icon(
                 Icons.star,
                 color: Color(0xFF414BB2),
               ),
-              empty: Icon(
+              empty: const Icon(
                 Icons.star,
                 color: Colors.grey,
               ),
-              half: Icon(
+              half: const Icon(
                 Icons.star,
                 color: Colors.yellowAccent,
               ),
@@ -240,15 +240,15 @@ class _DeleteMyWasherAccountState extends State<DeleteMyWasherAccount> {
             initialRating: rateUs3Answer,
             allowHalfRating: false,
             ratingWidget: RatingWidget(
-              full: Icon(
+              full: const Icon(
                 Icons.star,
                 color: Color(0xFF414BB2),
               ),
-              empty: Icon(
+              empty: const Icon(
                 Icons.star,
                 color: Colors.grey,
               ),
-              half: Icon(
+              half: const Icon(
                 Icons.star,
                 color: Colors.yellowAccent,
               ),
@@ -270,7 +270,7 @@ class _DeleteMyWasherAccountState extends State<DeleteMyWasherAccount> {
   }
 
   Widget deleteReasonBuilder(double deviceWidth) {
-    return TextField(
+    return const TextField(
       keyboardType: TextInputType.text,
       textInputAction: TextInputAction.next,
       maxLength: 1000,

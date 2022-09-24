@@ -47,7 +47,7 @@ class _WasherRegistrationSecurityCheckState extends State<WasherRegistrationSecu
                   SizedBox(
                     height: _deviceHeight / 30,
                   ),
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     child: Text(
                       "Background Check",
@@ -86,10 +86,10 @@ class _WasherRegistrationSecurityCheckState extends State<WasherRegistrationSecu
                     children: [
                       Checkbox(
                         side: MaterialStateBorderSide.resolveWith(
-                              (_) => BorderSide(width: 2.0, color: Colors.black),
+                              (_) => const BorderSide(width: 2.0, color: Colors.black),
                         ),
                         checkColor: Colors.white,
-                        fillColor: MaterialStateProperty.all(Color(0xFF2D9BF0)),
+                        fillColor: MaterialStateProperty.all(const Color(0xFF2D9BF0)),
                         value: sendCopy,
                         onChanged: (bool? value) {
                           sendCopy = !sendCopy;
@@ -107,10 +107,8 @@ class _WasherRegistrationSecurityCheckState extends State<WasherRegistrationSecu
                   SizedBox(
                     height: _deviceHeight / 60,
                   ),
-                  Container(
-                    child: Center(child: Text("Social Security Number",
-                      style: GoogleFonts.openSans( fontSize: _deviceWidth / 16),)),
-                  ),
+                  Center(child: Text("Social Security Number",
+                    style: GoogleFonts.openSans( fontSize: _deviceWidth / 16),)),
                   SizedBox(
                     height: _deviceHeight / 100,
                   ),
@@ -172,7 +170,7 @@ class _WasherRegistrationSecurityCheckState extends State<WasherRegistrationSecu
                         text: 'Your credit  ',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: _deviceWidth / 20),
-                        children: <TextSpan>[
+                        children: const <TextSpan>[
                           TextSpan(
                               text: 'is not affected.',
                               style: TextStyle(
@@ -184,55 +182,56 @@ class _WasherRegistrationSecurityCheckState extends State<WasherRegistrationSecu
                     ),
                   ),
                   SizedBox(height: _deviceHeight/40,),
-                  Container(
-                    child: ElevatedButton(
-                        onPressed: () async {
+                  ElevatedButton(
+                      onPressed: () async {
 
-                          FocusScope.of(context).unfocus();
+                        FocusScope.of(context).unfocus();
 
-                          showTransparentDialogOnLoad(context, _deviceHeight, _deviceWidth);
+                        showTransparentDialogOnLoad(context, _deviceHeight, _deviceWidth);
 
-                          FirebaseAuth auth = FirebaseAuth.instance;
-                          User? user = auth.currentUser;
-                          DocumentReference<Map<String, dynamic>> documentRef = FirebaseFirestore.instance.collection('users')
-                              .doc(user!.uid)
-                              .collection("washer")
-                              .doc("washerInformations");
-                          DocumentSnapshot<Map<String, dynamic>> querySnapshot = await documentRef.get();
-                          Map<String, dynamic>? data = querySnapshot.data();
-                          if (SSN == null || SSN!.length <8){
+                        FirebaseAuth auth = FirebaseAuth.instance;
+                        User? user = auth.currentUser;
+                        DocumentReference<Map<String, dynamic>> documentRef = FirebaseFirestore.instance.collection('users')
+                            .doc(user!.uid)
+                            .collection("washer")
+                            .doc("washerInformations");
+                        DocumentSnapshot<Map<String, dynamic>> querySnapshot = await documentRef.get();
+                        Map<String, dynamic>? data = querySnapshot.data();
+                        if (SSN == null || SSN!.length <8){
+
+                          if(!mounted) return;
+                          Navigator.of(context).pop();
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(duration: Duration(seconds: 5),content: Text("Enter a valid Social Security Number.")),);
+
+                          return;
+                        }
+
+                          if (data!.containsKey("SSN")){
+                            if(!mounted) return;
                             Navigator.of(context).pop();
                             ScaffoldMessenger.of(context).hideCurrentSnackBar();
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(duration: Duration(seconds: 5),content: Text("Enter a valid Social Security Number.")),);
-
+                              const SnackBar(duration: Duration(seconds: 5),content: Text("You can not add new values here.")),);
                             return;
                           }
+                          else {
+                            data.addAll({"SSN" : SSN});
+                            documentRef.set(data);
+                            var keys = data.keys;
 
-                            if (data!.containsKey("SSN")){
-                              Navigator.of(context).pop();
-                              ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(duration: Duration(seconds: 5),content: Text("You can not add new values here.")),);
-                              return;
-                            }
-                            else {
-                              data.addAll({"SSN" : SSN});
-                              documentRef.set(data);
-                              var keys = data.keys;
-
-                              if(!mounted) return;
-                              registerWasher(data, keys, context, mounted);
-                            }
-
-                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(duration: Duration(seconds: 5),content: Text("Your information has been saved successfully.")),);
-                          Navigator.of(context).pushReplacementNamed("/WasherRegistration");
-                        },
-                        child: Container(margin: EdgeInsets.only(right: _deviceWidth/10, left: _deviceWidth/10, top: _deviceWidth/20, bottom: _deviceWidth/20),child: Text("I agree and acknowledge",
-                            style: TextStyle( fontSize: _deviceWidth / 20)),)),
-                  ),
+                            if(!mounted) return;
+                            registerWasher(data, keys, context, mounted);
+                          }
+                        if(!mounted) return;
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(duration: Duration(seconds: 5),content: Text("Your information has been saved successfully.")),);
+                        Navigator.of(context).pushReplacementNamed("/WasherRegistration");
+                      },
+                      child: Container(margin: EdgeInsets.only(right: _deviceWidth/10, left: _deviceWidth/10, top: _deviceWidth/20, bottom: _deviceWidth/20),child: Text("I agree and acknowledge",
+                          style: TextStyle( fontSize: _deviceWidth / 20)),)),
                 ],
               ),
             ),
@@ -246,17 +245,15 @@ class _WasherRegistrationSecurityCheckState extends State<WasherRegistrationSecu
       children: [
         Expanded(
             flex: 2,
-            child: Container(
-              child: TextButton(
-                child: Icon(
-                  Icons.keyboard_backspace,
-                  color: Color(0xFF2D9BF0),
-                  size: deviceWidth / 12,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+            child: TextButton(
+              child: Icon(
+                Icons.keyboard_backspace,
+                color: const Color(0xFF2D9BF0),
+                size: deviceWidth / 12,
               ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             )),
         Expanded(
           flex: 12,
@@ -265,7 +262,7 @@ class _WasherRegistrationSecurityCheckState extends State<WasherRegistrationSecu
               "WashMe Washer",
               textAlign: TextAlign.center,
               style: GoogleFonts.fredokaOne(
-                  fontSize: deviceWidth / 10, color: Color(0xFF2D9BF0)),
+                  fontSize: deviceWidth / 10, color: const Color(0xFF2D9BF0)),
             ),
           ),
         )

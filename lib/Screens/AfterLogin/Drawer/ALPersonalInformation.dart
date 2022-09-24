@@ -39,7 +39,7 @@ class _ALPersonalInformationState extends State<ALPersonalInformation> {
                 SizedBox(
                   height: _deviceHeight / 30,
                 ),
-                Container(
+                SizedBox(
                   width: double.infinity,
                   child: Text(
                     "Personal Information",
@@ -63,9 +63,9 @@ class _ALPersonalInformationState extends State<ALPersonalInformation> {
                     ),
                     onPressed: () {
                       Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => MyInformation()));
+                          context, MaterialPageRoute(builder: (context) => const MyInformation()));
                     },
-                    child: Container(
+                    child: SizedBox(
                         height: _deviceHeight / 12,
                         width: _deviceWidth * (5 / 8),
                         child: Center(
@@ -80,9 +80,9 @@ class _ALPersonalInformationState extends State<ALPersonalInformation> {
                     ),
                     onPressed: () {
                       Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => MyCars()));
+                          context, MaterialPageRoute(builder: (context) => const MyCars()));
                     },
-                    child: Container(
+                    child: SizedBox(
                         height: _deviceHeight / 12,
                         width: _deviceWidth * (5 / 8),
                         child: Center(
@@ -97,9 +97,9 @@ class _ALPersonalInformationState extends State<ALPersonalInformation> {
                     ),
                     onPressed: () {
                       Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => MyAddresses()));
+                          context, MaterialPageRoute(builder: (context) => const MyAddresses()));
                     },
-                    child: Container(
+                    child: SizedBox(
                         height: _deviceHeight / 12,
                         width: _deviceWidth * (5 / 8),
                         child: Center(
@@ -115,7 +115,7 @@ class _ALPersonalInformationState extends State<ALPersonalInformation> {
                     onPressed: () {
                       null;
                     },
-                    child: Container(
+                    child: SizedBox(
                         height: _deviceHeight / 12,
                         width: _deviceWidth * (5 / 8),
                         child: Center(
@@ -137,7 +137,7 @@ class _ALPersonalInformationState extends State<ALPersonalInformation> {
                       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => Splash(showIntro: _showIntro)), (route) => false);
 
                     },
-                    child: Container(
+                    child: SizedBox(
                         height: _deviceHeight / 12,
                         width: _deviceWidth * (5 / 8),
                         child: Center(
@@ -154,12 +154,12 @@ class _ALPersonalInformationState extends State<ALPersonalInformation> {
       children: [
         Expanded(
             flex: 2,
-            child: Container(
+            child: SizedBox(
               height: deviceHeight / 6.6,
               child: TextButton(
                 child: Icon(
                   Icons.keyboard_backspace,
-                  color: Color(0xFF2D9BF0),
+                  color: const Color(0xFF2D9BF0),
                   size: deviceHeight / 6.6,
                 ),
                 onPressed: () {
@@ -173,10 +173,10 @@ class _ALPersonalInformationState extends State<ALPersonalInformation> {
               child: Text(
                 "WashMe",
                 style: GoogleFonts.fredokaOne(
-                    fontSize: deviceHeight / 9, color: Color(0xFF2D9BF0)),
+                    fontSize: deviceHeight / 9, color: const Color(0xFF2D9BF0)),
               ),
             )),
-        Expanded(flex: 1, child: SizedBox())
+        const Expanded(flex: 1, child: SizedBox())
       ],
     );
   }

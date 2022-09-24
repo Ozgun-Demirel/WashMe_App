@@ -39,11 +39,9 @@ class _WasherRegistrationState extends State<WasherRegistration> {
                 SizedBox(height: _deviceHeight/45,),
                 hamMenuAndTitle(_deviceHeight, _deviceWidth, context),
                 SizedBox(height: _deviceHeight/40,),
-                Container(
-                  child: Text("You need to proived required informations below to be a WashMe Washer!",
-                    style: GoogleFonts.openSans(fontSize: _deviceWidth / 18, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,),
-                ),
+                Text("You need to proived required informations below to be a WashMe Washer!",
+                  style: GoogleFonts.openSans(fontSize: _deviceWidth / 18, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,),
                 SizedBox(
                   height: _deviceHeight/32,
                 ),
@@ -67,17 +65,15 @@ class _WasherRegistrationState extends State<WasherRegistration> {
       children: [
         Expanded(
             flex: 2,
-            child: Container(
-              child: TextButton(
-                child: Icon(
-                  Icons.keyboard_backspace,
-                  color: Color(0xFF2D9BF0),
-                  size: deviceHeight / 16,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+            child: TextButton(
+              child: Icon(
+                Icons.keyboard_backspace,
+                color: const Color(0xFF2D9BF0),
+                size: deviceHeight / 16,
               ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             )),
         Expanded(
           flex: 12,
@@ -86,7 +82,7 @@ class _WasherRegistrationState extends State<WasherRegistration> {
               "WashMe Washer",
               textAlign: TextAlign.center,
               style: GoogleFonts.fredokaOne(
-                  fontSize: deviceWidth / 10, color: Color(0xFF2D9BF0)),
+                  fontSize: deviceWidth / 10, color: const Color(0xFF2D9BF0)),
             ),
           ),
         )
@@ -109,7 +105,7 @@ class _WasherRegistrationState extends State<WasherRegistration> {
                 }
               },
                   style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
-                  child: Container(
+                  child: SizedBox(
                     height: deviceHeight / 14,
                 child: Center(child: Text("Name & Address ${_washerInformationsMap.isNotEmpty && _washerInformationsMap["nameAndAddress"] == true ? "   (Pending)" : "   (Required)"}",
                   textAlign: TextAlign.center,
@@ -130,7 +126,7 @@ class _WasherRegistrationState extends State<WasherRegistration> {
                 }
               },
                   style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
-                  child: Container(
+                  child: SizedBox(
                     height: deviceHeight / 14,
                     child: Center(child: Text("Photos ${_washerInformationsMap.isNotEmpty && _washerInformationsMap["photosURL"] == true ? "   (Pending)" : "   (Required)"}",
                       textAlign: TextAlign.center,
@@ -152,7 +148,7 @@ class _WasherRegistrationState extends State<WasherRegistration> {
                 }
               },
                   style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
-                  child: Container(
+                  child: SizedBox(
                     height: deviceHeight / 14,
                     child: Center(child: Text("ID ${_washerInformationsMap.isNotEmpty && _washerInformationsMap["IDURL"] == true ? "   (Pending)" : "   (Required)"}",
                       textAlign: TextAlign.center,
@@ -174,7 +170,7 @@ class _WasherRegistrationState extends State<WasherRegistration> {
 
               },
                   style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
-                  child: Container(
+                  child: SizedBox(
                     height: deviceHeight / 14,
                     child: Center(child: Text("Security Check ${_washerInformationsMap.isNotEmpty && _washerInformationsMap["SSN"] == true ? "   (Pending)" : "   (Required)"}",
                       textAlign: TextAlign.center,

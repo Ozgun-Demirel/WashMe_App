@@ -21,7 +21,7 @@ class _MyInformationState extends State<MyInformation> {
 
   final _myInformationFormKey = GlobalKey<FormState>();
   var _myInformationFormData = UserInformations();
-  var _addedInformationFormData = UserInformations();
+  final _addedInformationFormData = UserInformations();
 
   var futureBuilderFuture;
 
@@ -41,7 +41,7 @@ class _MyInformationState extends State<MyInformation> {
         future: futureBuilderFuture,
         builder: (BuildContext ctx, snapshot) {
           switch (snapshot.connectionState) {
-            case ConnectionState.waiting: return Center(child: CircularProgressIndicator());
+            case ConnectionState.waiting: return const Center(child: CircularProgressIndicator());
             default:
               if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
@@ -77,12 +77,12 @@ class _MyInformationState extends State<MyInformation> {
       children: [
         Expanded(
             flex: 2,
-            child: Container(
+            child: SizedBox(
               height: deviceHeight / 6.6,
               child: TextButton(
                 child: Icon(
                   Icons.keyboard_backspace,
-                  color: Color(0xFF2D9BF0),
+                  color: const Color(0xFF2D9BF0),
                   size: deviceHeight / 6.6,
                 ),
                 onPressed: () {
@@ -96,10 +96,10 @@ class _MyInformationState extends State<MyInformation> {
               child: Text(
                 "WashMe",
                 style: GoogleFonts.fredokaOne(
-                    fontSize: deviceHeight / 9, color: Color(0xFF2D9BF0)),
+                    fontSize: deviceHeight / 9, color: const Color(0xFF2D9BF0)),
               ),
             )),
-        Expanded(flex: 1, child: SizedBox())
+        const Expanded(flex: 1, child: SizedBox())
       ],
     );
   }
@@ -110,100 +110,90 @@ class _MyInformationState extends State<MyInformation> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            child:  TextFormField(
-              keyboardType: TextInputType.name,
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.zero,
-                fillColor: Colors.white,
-                focusedErrorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue, width: 4),
-                ),
-                filled: true,
-                labelText: _myInformationFormData.fullName ?? "Full Name",
+          TextFormField(
+            keyboardType: TextInputType.name,
+            textInputAction: TextInputAction.next,
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.zero,
+              fillColor: Colors.white,
+              focusedErrorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue, width: 4),
               ),
-              onSaved: (String? value) {
-                _addedInformationFormData.fullName = value;
-              },
+              filled: true,
+              labelText: _myInformationFormData.fullName ?? "Full Name",
             ),
+            onSaved: (String? value) {
+              _addedInformationFormData.fullName = value;
+            },
           ),
           SizedBox(height: deviceHeight/40),
-          Container(
-            child: TextFormField(
-              keyboardType: TextInputType.name,
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.zero,
-                fillColor: Colors.white,
-                focusedErrorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue, width: 4),
-                ),
-                filled: true,
-                labelText: _myInformationFormData.surname ?? "Surname",
+          TextFormField(
+            keyboardType: TextInputType.name,
+            textInputAction: TextInputAction.next,
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.zero,
+              fillColor: Colors.white,
+              focusedErrorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue, width: 4),
               ),
-              onSaved: (String? value) {
-                _addedInformationFormData.surname = value;
-              },
+              filled: true,
+              labelText: _myInformationFormData.surname ?? "Surname",
             ),
+            onSaved: (String? value) {
+              _addedInformationFormData.surname = value;
+            },
           ),
           SizedBox(height: deviceHeight/40),
-          Container(
-            child: TextFormField(
-              keyboardType: TextInputType.phone,
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.zero,
-                fillColor: Colors.white,
-                focusedErrorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue, width: 4),
-                ),
-                filled: true,
-                labelText: _myInformationFormData.phoneNumber ?? "Phone Number",
+          TextFormField(
+            keyboardType: TextInputType.phone,
+            textInputAction: TextInputAction.next,
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.zero,
+              fillColor: Colors.white,
+              focusedErrorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue, width: 4),
               ),
-              onSaved: (String? value) {
-                _addedInformationFormData.phoneNumber = value;
-              },
+              filled: true,
+              labelText: _myInformationFormData.phoneNumber ?? "Phone Number",
             ),
+            onSaved: (String? value) {
+              _addedInformationFormData.phoneNumber = value;
+            },
           ),
           SizedBox(height: deviceHeight/40),
-          Container(
-            child: TextFormField(
-              keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.zero,
-                fillColor: Colors.white,
-                focusedErrorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue, width: 4),
-                ),
-                filled: true,
-                labelText: _myInformationFormData.contactEmail ?? "E-mail",
+          TextFormField(
+            keyboardType: TextInputType.emailAddress,
+            textInputAction: TextInputAction.next,
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.zero,
+              fillColor: Colors.white,
+              focusedErrorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue, width: 4),
               ),
-              onSaved: (String? value) {
-                _addedInformationFormData.contactEmail = value;
-              },
+              filled: true,
+              labelText: _myInformationFormData.contactEmail ?? "E-mail",
             ),
+            onSaved: (String? value) {
+              _addedInformationFormData.contactEmail = value;
+            },
           ),
           SizedBox(height: deviceHeight/40),
-          Container(
-            child: TextFormField(
-              enabled: false,
-              keyboardType: TextInputType.visiblePassword,
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.zero,
-                fillColor: Colors.white,
-                focusedErrorBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue, width: 4),
-                ),
-                filled: true,
-                labelText: "Password",
+          TextFormField(
+            enabled: false,
+            keyboardType: TextInputType.visiblePassword,
+            textInputAction: TextInputAction.next,
+            decoration: const InputDecoration(
+              contentPadding: EdgeInsets.zero,
+              fillColor: Colors.white,
+              focusedErrorBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue, width: 4),
               ),
-              onSaved: (String? value) {
-                //registerFormData.email = value.toString();
-              },
+              filled: true,
+              labelText: "Password",
             ),
+            onSaved: (String? value) {
+              //registerFormData.email = value.toString();
+            },
           ),
         ],
       ),
@@ -226,7 +216,7 @@ class _MyInformationState extends State<MyInformation> {
             SizedBox(
               height: deviceHeight / 30,
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Text(
                 "My Information",

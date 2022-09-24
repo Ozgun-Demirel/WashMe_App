@@ -26,7 +26,7 @@ class WasherBoard extends StatelessWidget {
                 SizedBox(
                   height: _deviceHeight / 30,
                 ),
-                Container(
+                SizedBox(
                   width: double.infinity,
                   child: Text(
                     "Washer Board",
@@ -54,12 +54,12 @@ class WasherBoard extends StatelessWidget {
       children: [
         Expanded(
             flex: 2,
-            child: Container(
+            child: SizedBox(
               height:  deviceHeight / 6.6,
               child: TextButton(
                 child: Icon(
                   Icons.keyboard_backspace,
-                  color: Color(0xFF2D9BF0),
+                  color: const Color(0xFF2D9BF0),
                   size: deviceHeight / 6.6,
                 ),
                 onPressed: () {
@@ -73,10 +73,10 @@ class WasherBoard extends StatelessWidget {
               child: Text(
                 "WashMe",
                 style: GoogleFonts.fredokaOne(
-                    fontSize: deviceHeight / 9, color: Color(0xFF2D9BF0)),
+                    fontSize: deviceHeight / 9, color: const Color(0xFF2D9BF0)),
               ),
             )),
-        Expanded(flex: 1, child: SizedBox())
+        const Expanded(flex: 1, child: SizedBox())
       ],
     );
   }

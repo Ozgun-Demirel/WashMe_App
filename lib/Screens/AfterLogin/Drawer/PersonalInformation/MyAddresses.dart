@@ -39,16 +39,14 @@ class _MyAddressesState extends State<MyAddresses> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  child: Text(
-                    "My Addresses",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: _deviceWidth / 21),
-                  ),
+                Text(
+                  "My Addresses",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: _deviceWidth / 21),
                 ),
                 IconButton(
-                    icon: Icon(Icons.add),
+                    icon: const Icon(Icons.add),
                     onPressed: () {
                       showDialog(
                           context: context,
@@ -72,12 +70,12 @@ class _MyAddressesState extends State<MyAddresses> {
       children: [
         Expanded(
             flex: 2,
-            child: Container(
+            child: SizedBox(
               height: deviceHeight / 6.6,
               child: TextButton(
                 child: Icon(
                   Icons.keyboard_backspace,
-                  color: Color(0xFF2D9BF0),
+                  color: const Color(0xFF2D9BF0),
                   size: deviceHeight / 6.6,
                 ),
                 onPressed: () {
@@ -91,30 +89,30 @@ class _MyAddressesState extends State<MyAddresses> {
               child: Text(
                 "WashMe",
                 style: GoogleFonts.fredokaOne(
-                    fontSize: deviceHeight / 9, color: Color(0xFF2D9BF0)),
+                    fontSize: deviceHeight / 9, color: const Color(0xFF2D9BF0)),
               ),
             )),
-        Expanded(flex: 1, child: SizedBox())
+        const Expanded(flex: 1, child: SizedBox())
       ],
     );
   }
 
   Widget addressesBuilder(
       BuildContext context, double deviceHeight, double deviceWidth) {
-    return Container(
+    return SizedBox(
       height: deviceHeight * (5 / 6),
       child: FutureBuilder(
           future: LocationHelper.getLocationsData(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
-                return Text('Loading....');
+                return const Text('Loading....');
               default:
-                if (snapshot.hasError)
-                  return Text('Error');
-                else {
+                if (snapshot.hasError) {
+                  return const Text('Error');
+                } else {
                   List dataList = snapshot.data as List;
-                  if (dataList.length == 0) {
+                  if (dataList.isEmpty) {
                     return Column(
                       children: [
                         SizedBox(
@@ -129,7 +127,7 @@ class _MyAddressesState extends State<MyAddresses> {
                           height: deviceHeight / 16,
                         ),
                         IconButton(
-                            icon: Icon(Icons.add),
+                            icon: const Icon(Icons.add),
                             onPressed: () {
                               showDialog(
                                   context: context,
@@ -173,7 +171,7 @@ class _MyAddressesState extends State<MyAddresses> {
                                   },
                                 ),
                               ),
-                              Divider(thickness: 2, color: Colors.grey),
+                              const Divider(thickness: 2, color: Colors.grey),
                             ],
                           );
                         });
@@ -194,19 +192,19 @@ class _MyAddressesState extends State<MyAddresses> {
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.waiting:
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 default:
-                  if (snapshot.hasError)
-                    return Text('Error');
-                  else {
+                  if (snapshot.hasError) {
+                    return const Text('Error');
+                  } else {
                     var data = snapshot.data as LocationValues;
-                    return Container(
+                    return SizedBox(
                       width: double.infinity,
                       child: Column(
                         children: [
-                          Container(
+                          SizedBox(
                               width: double.infinity,
                               child: locationInfo(
                                   deviceHeight, deviceWidth, data)),
@@ -234,6 +232,7 @@ class _MyAddressesState extends State<MyAddresses> {
                                   FirestoreUserLocationsHelper.userLocationsAdder(
                                       insertResult, data);
                                 }
+                                if(!mounted) return;
                                 Navigator.of(context).pop();
                               },
                               child: Text(
@@ -280,7 +279,7 @@ class _MyAddressesState extends State<MyAddresses> {
                 width: double.infinity,
                 padding: EdgeInsets.only(
                     left: deviceWidth / 30, right: deviceWidth / 20),
-                child: Divider(thickness: 2, color: Colors.black)),
+                child: const Divider(thickness: 2, color: Colors.black)),
             Container(
               width: double.infinity,
               padding: EdgeInsets.only(
@@ -308,7 +307,7 @@ class _MyAddressesState extends State<MyAddresses> {
                 flex: 4,
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                         width: double.infinity,
                         child: Text(
                           "${dialogLocationValues?.adminArea}",
@@ -316,8 +315,8 @@ class _MyAddressesState extends State<MyAddresses> {
                             fontSize: deviceWidth / 24,
                           ),
                         )),
-                    Divider(thickness: 2, color: Colors.black),
-                    Container(
+                    const Divider(thickness: 2, color: Colors.black),
+                    SizedBox(
                       width: double.infinity,
                       child: Text(
                         "City",
@@ -337,7 +336,7 @@ class _MyAddressesState extends State<MyAddresses> {
                 flex: 4,
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                         width: double.infinity,
                         child: Text(
                           "${dialogLocationValues?.state}",
@@ -345,8 +344,8 @@ class _MyAddressesState extends State<MyAddresses> {
                             fontSize: deviceWidth / 24,
                           ),
                         )),
-                    Divider(thickness: 2, color: Colors.black),
-                    Container(
+                    const Divider(thickness: 2, color: Colors.black),
+                    SizedBox(
                       width: double.infinity,
                       child: Text(
                         "state",
@@ -366,7 +365,7 @@ class _MyAddressesState extends State<MyAddresses> {
                 flex: 2,
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                         width: double.infinity,
                         child: Text(
                           "${dialogLocationValues?.zip}",
@@ -374,8 +373,8 @@ class _MyAddressesState extends State<MyAddresses> {
                             fontSize: deviceWidth / 24,
                           ),
                         )),
-                    Divider(thickness: 2, color: Colors.black),
-                    Container(
+                    const Divider(thickness: 2, color: Colors.black),
+                    SizedBox(
                       width: double.infinity,
                       child: Text(
                         "Zip",

@@ -16,7 +16,7 @@ class _ContinueWithoutRegistrationState
     extends State<ContinueWithoutRegistration> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   bool filtered = false;
-  LatLng selectedCustomerLatLong = LatLng(31.2, -99.6);
+  LatLng selectedCustomerLatLong = const LatLng(31.2, -99.6);
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class _ContinueWithoutRegistrationState
             },
             child: Icon(
               Icons.menu_rounded,
-              color: Color(0xFF414BB2),
+              color: const Color(0xFF414BB2),
               size: deviceWidth / 6.6,
             ),
           ),
@@ -83,11 +83,11 @@ class _ContinueWithoutRegistrationState
               "WashMe Washer",
               textAlign: TextAlign.center,
               style: GoogleFonts.fredokaOne(
-                  fontSize: deviceWidth / 12, color: Color(0xFF2D9BF0)),
+                  fontSize: deviceWidth / 12, color: const Color(0xFF2D9BF0)),
             ),
           ),
         ),
-        Expanded(flex: 1, child: SizedBox())
+        const Expanded(flex: 1, child: SizedBox())
       ],
     );
   }
@@ -101,54 +101,54 @@ class _ContinueWithoutRegistrationState
           SizedBox(
             height: deviceHeight / 20,
           ),
-          Container(
+          SizedBox(
             height: deviceHeight / 10,
             child: Text(
               "WashMe",
               textAlign: TextAlign.center,
               style: GoogleFonts.fredokaOne(
-                  fontSize: deviceWidth / 9, color: Color(0xFF2D9BF0)),
+                  fontSize: deviceWidth / 9, color: const Color(0xFF2D9BF0)),
             ),
           ),
           ListTile(
-            title: Text('Current Jobs'),
-            visualDensity: VisualDensity(vertical: -3),
+            title: const Text('Current Jobs'),
+            visualDensity: const VisualDensity(vertical: -3),
             onTap: () async {
               await showRegisterDialog(deviceWidth);
             },
           ),
           ListTile(
-            title: Text('Previous Jobs'),
-            visualDensity: VisualDensity(vertical: -3),
+            title: const Text('Previous Jobs'),
+            visualDensity: const VisualDensity(vertical: -3),
             onTap: () async {
               await showRegisterDialog(deviceWidth);
             },
           ),
           ListTile(
-            title: Text('Earnings and Payments'),
-            visualDensity: VisualDensity(vertical: -3),
+            title: const Text('Earnings and Payments'),
+            visualDensity: const VisualDensity(vertical: -3),
             onTap: () async {
               await showRegisterDialog(deviceWidth);
             },
           ),
-          ListTile(
+          const ListTile(
             title: Divider(color: Colors.grey, thickness: 1),
             visualDensity: VisualDensity(vertical: -3),
           ),
           ListTile(
-            title: Text('Washer Board'),
-            visualDensity: VisualDensity(vertical: -3),
+            title: const Text('Washer Board'),
+            visualDensity: const VisualDensity(vertical: -3),
             onTap: () async {
               await showRegisterDialog(deviceWidth);
             },
           ),
-          ListTile(
+          const ListTile(
             title: Divider(color: Colors.grey, thickness: 1),
             visualDensity: VisualDensity(vertical: -3),
           ),
           ListTile(
-            title: Text('Return to Become a Washer'),
-            visualDensity: VisualDensity(vertical: -3),
+            title: const Text('Return to Become a Washer'),
+            visualDensity: const VisualDensity(vertical: -3),
             onTap: () {
               Navigator.popUntil(context, ModalRoute.withName("/BecomeWasher"));
             },
@@ -193,7 +193,7 @@ class _ContinueWithoutRegistrationState
   }
 
   Widget map(double deviceHeight, double deviceWidth) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Center(
           child: FaIcon(
@@ -204,7 +204,7 @@ class _ContinueWithoutRegistrationState
   }
 
   Widget filter(double deviceWidth, BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -237,7 +237,7 @@ class _ContinueWithoutRegistrationState
     return SizedBox(
       width: double.infinity,
       child: ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
 
           padding: EdgeInsets.zero,
@@ -298,12 +298,11 @@ class _ContinueWithoutRegistrationState
                             SizedBox(
                                 width: double.infinity,
                                 child: Text(
-                                  "Extras : " +
-                                      (index % 3 == 0
+                                  "Extras : ${index % 3 == 0
                                           ? "No extra clean"
                                           : index % 2 == 0
                                               ? "Interior, Trunk"
-                                              : "Interior, Engine"),
+                                              : "Interior, Engine"}",
                                   style: GoogleFonts.notoSans(
                                     fontSize: deviceWidth / 20,
                                   ),
@@ -378,7 +377,7 @@ class _ContinueWithoutRegistrationState
                         onPressed: () async {
                           await showRegisterDialog(deviceWidth);
                         },
-                        child: Container(
+                        child: SizedBox(
                             width: deviceWidth * (3 / 10),
                             height: deviceHeight / 15,
                             child: Center(
@@ -394,7 +393,7 @@ class _ContinueWithoutRegistrationState
                         onPressed: () async {
                           await showRegisterDialog(deviceWidth);
                         },
-                        child: Container(
+                        child: SizedBox(
                             width: deviceWidth * (3 / 10),
                             height: deviceHeight / 15,
                             child: Center(
@@ -415,13 +414,13 @@ class _ContinueWithoutRegistrationState
   }
 
   Widget dragInformation(double deviceHeight, double deviceWidth) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
+            children: const [
               FaIcon(FontAwesomeIcons.arrowUp),
               FaIcon(FontAwesomeIcons.arrowDown),
             ],
@@ -458,7 +457,7 @@ class _ContinueWithoutRegistrationState
                           Navigator.popUntil(context, ModalRoute.withName("/BecomeWasher"));
                         },
                         child: Container(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: Text("Return Back!",
                             style: GoogleFonts.notoSans(
                               fontSize: deviceWidth / 16,

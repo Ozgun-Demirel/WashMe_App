@@ -23,7 +23,7 @@ class BLCurrentOrders extends StatefulWidget {
 class _BLCurrentOrdersState extends State<BLCurrentOrders> {
   int currentPage = 0;
 
-  LatLng selectedCustomerLatLong = LatLng(31.2, -99.6);
+  LatLng selectedCustomerLatLong = const LatLng(31.2, -99.6);
 
   GoogleMapController? mapController;
   GlobalKey<State<StatefulWidget>>? mapKey;
@@ -75,12 +75,12 @@ class _BLCurrentOrdersState extends State<BLCurrentOrders> {
       children: [
         Expanded(
             flex: 2,
-            child: Container(
+            child: SizedBox(
               height: deviceHeight / 10,
               child: TextButton(
                 child: Icon(
                   Icons.keyboard_backspace,
-                  color: Color(0xFF2D9BF0),
+                  color: const Color(0xFF2D9BF0),
                   size: deviceWidth / 6.6,
                 ),
                 onPressed: () {
@@ -94,10 +94,10 @@ class _BLCurrentOrdersState extends State<BLCurrentOrders> {
               child: Text(
                 "WashMe",
                 style: GoogleFonts.fredokaOne(
-                    fontSize: deviceWidth / 9, color: Color(0xFF2D9BF0)),
+                    fontSize: deviceWidth / 9, color: const Color(0xFF2D9BF0)),
               ),
             )),
-        Expanded(flex: 1, child: SizedBox())
+        const Expanded(flex: 1, child: SizedBox())
       ],
     );
   }
@@ -109,7 +109,7 @@ class _BLCurrentOrdersState extends State<BLCurrentOrders> {
       children: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: currentPage == 0 ? Colors.lightBlueAccent : Color(0xFF414BB2),
+            primary: currentPage == 0 ? Colors.lightBlueAccent : const Color(0xFF414BB2),
           ),
           onPressed: () {
             if (currentPage != 0) {
@@ -149,7 +149,7 @@ class _BLCurrentOrdersState extends State<BLCurrentOrders> {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: currentPage == 1 ? Colors.lightBlueAccent : Color(0xFF414BB2),
+            primary: currentPage == 1 ? Colors.lightBlueAccent : const Color(0xFF414BB2),
           ),
           onPressed: () {
             if (pendingOrdersMap.isEmpty) {
@@ -193,7 +193,7 @@ class _BLCurrentOrdersState extends State<BLCurrentOrders> {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: currentPage == 2 ? Colors.lightBlueAccent : Color(0xFF414BB2),),
+            primary: currentPage == 2 ? Colors.lightBlueAccent : const Color(0xFF414BB2),),
           onPressed: () async {
 
             youNeedToLoginFirstDialog(deviceHeight, deviceWidth, context);
@@ -309,7 +309,7 @@ class _BLCurrentOrdersState extends State<BLCurrentOrders> {
           height: deviceHeight / 60,
         ),
         Text(
-          "${data["nameAndAddress"]["name"]} ${middleName == "null" ? "" : middleName} ${surname}",
+          "${data["nameAndAddress"]["name"]} ${middleName == "null" ? "" : middleName} $surname",
           style: GoogleFonts.openSans(
               fontWeight: FontWeight.bold, fontSize: deviceWidth / 18),
         ),
@@ -464,7 +464,7 @@ class _BLCurrentOrdersState extends State<BLCurrentOrders> {
 
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: passedTime - passedTime % 900000 != 0 ? Colors.grey : Color(0xFF414BB2),),
+                                primary: passedTime - passedTime % 900000 != 0 ? Colors.grey : const Color(0xFF414BB2),),
                               onPressed: () async {
                                 if (passedTime - passedTime % 900000 != 0) {
                                   return;
@@ -509,7 +509,7 @@ class _BLCurrentOrdersState extends State<BLCurrentOrders> {
                                     replaced: true);
                               },
                               child: Text(passedTime - passedTime % 900000 == 0
-                                  ? "Cancel remaining: ${remainingTimeString}"
+                                  ? "Cancel remaining: $remainingTimeString"
                                   : "Cancel Unavailable"),
                             ), // "Cancel active Order"
                           ],
@@ -686,10 +686,10 @@ class _BLCurrentOrdersState extends State<BLCurrentOrders> {
                                           deviceWidth, context, mounted,
                                           replaced: true);
                                     },
-                                    child: Text("Cancel Order")),
+                                    child: const Text("Cancel Order")),
                                 ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      primary: Color(0xFF2D9BF0),
+                                      primary: const Color(0xFF2D9BF0),
                                     ),
                                     onPressed: () async {
 
@@ -697,7 +697,7 @@ class _BLCurrentOrdersState extends State<BLCurrentOrders> {
 
 
                                     },
-                                    child: Text("Confirm Order"))
+                                    child: const Text("Confirm Order"))
                               ],
                             ), // "Cancel active Order"
                           ],
@@ -735,7 +735,7 @@ class _BLCurrentOrdersState extends State<BLCurrentOrders> {
 
                   Navigator.of(context).pushNamed("/LoginPage");
 
-                }, child: Text("Go To Login")),
+                }, child: const Text("Go To Login")),
               ],
             ),
           ),

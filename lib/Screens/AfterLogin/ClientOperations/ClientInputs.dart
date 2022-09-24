@@ -132,7 +132,7 @@ class _ALClientInputsState extends State<ALClientInputs> {
             },
             child: Icon(
               Icons.menu_rounded,
-              color: Color(0xFF414BB2),
+              color: const Color(0xFF414BB2),
               size: deviceWidth / 6.6,
             ),
           ),
@@ -143,50 +143,50 @@ class _ALClientInputsState extends State<ALClientInputs> {
               child: Text(
                 "WashMe",
                 style: GoogleFonts.fredokaOne(
-                    fontSize: deviceWidth / 9, color: Color(0xFF2D9BF0)),
+                    fontSize: deviceWidth / 9, color: const Color(0xFF2D9BF0)),
               ),
             )),
-        Expanded(flex: 1, child: SizedBox())
+        const Expanded(flex: 1, child: SizedBox())
       ],
     );
   }
 
   _introduction(double deviceHeight) {
     return Container(
-        margin: EdgeInsets.only(top: 5),
+        margin: const EdgeInsets.only(top: 5),
         child: Column(
           children: [
             Text(
               "Our washers",
               style: GoogleFonts.fredokaOne(
-                  fontSize: deviceHeight / 30, color: Color(0xFF414BB2)),
+                  fontSize: deviceHeight / 30, color: const Color(0xFF414BB2)),
             ),
             Text(
               "are waiting for",
               style: GoogleFonts.fredokaOne(
-                  fontSize: deviceHeight / 30, color: Color(0xFF414BB2)),
+                  fontSize: deviceHeight / 30, color: const Color(0xFF414BB2)),
             ),
             Text(
               "your wash orders",
               style: GoogleFonts.fredokaOne(
-                  fontSize: deviceHeight / 30, color: Color(0xFF414BB2)),
+                  fontSize: deviceHeight / 30, color: const Color(0xFF414BB2)),
             ),
             Text(
               "with our",
               style: GoogleFonts.fredokaOne(
-                  fontSize: deviceHeight / 30, color: Color(0xFF414BB2)),
+                  fontSize: deviceHeight / 30, color: const Color(0xFF414BB2)),
             ),
             Text(
               "most competitive prices",
               style: GoogleFonts.fredokaOne(
-                  fontSize: deviceHeight / 30, color: Color(0xFF414BB2)),
+                  fontSize: deviceHeight / 30, color: const Color(0xFF414BB2)),
             ),
           ],
         ));
   }
 
   Column _location(double deviceHeight, double deviceWidth) {
-    CameraPosition initialCameraPosition = CameraPosition(
+    CameraPosition initialCameraPosition = const CameraPosition(
       target: LatLng(31.2, -99.6),
       zoom: 6,
     );
@@ -210,7 +210,7 @@ class _ALClientInputsState extends State<ALClientInputs> {
                         if (snapshot.connectionState == ConnectionState.done) {
                           return snapshot.data as Widget;
                         } else {
-                          return Center(child: CircularProgressIndicator());
+                          return const Center(child: CircularProgressIndicator());
                         }
                       });
                 });
@@ -219,7 +219,7 @@ class _ALClientInputsState extends State<ALClientInputs> {
             "Enter or Select wash Address",
             style: GoogleFonts.notoSans(
               fontSize: deviceWidth / 21,
-              color: Color(0xFF414BB2),
+              color: const Color(0xFF414BB2),
               fontWeight: FontWeight.bold,
               decoration: TextDecoration.underline,
             ),
@@ -253,7 +253,7 @@ class _ALClientInputsState extends State<ALClientInputs> {
                 _cameraPosition = cameraPosition;
                 globalMarkers = {
                   Marker(
-                      markerId: MarkerId("You"),
+                      markerId: const MarkerId("You"),
                       position: cameraPosition.target)
                 };
               });
@@ -290,10 +290,7 @@ class _ALClientInputsState extends State<ALClientInputs> {
                     children: [
                       Text(
                         _currentLocationValues?.streetNumberAndName ??
-                            "null" +
-                                ", " +
-                                (_currentLocationValues?.adminArea ?? "null ") +
-                                ", ",
+                            "null, ${_currentLocationValues?.adminArea ?? "null "}, ",
                         style: GoogleFonts.openSans(
                           fontSize: deviceWidth / 28,
                           color: Colors.grey,
@@ -302,9 +299,7 @@ class _ALClientInputsState extends State<ALClientInputs> {
                         textAlign: TextAlign.center,
                       ),
                       Text(
-                        (_currentLocationValues?.state ?? "null") +
-                            ", " +
-                            (_currentLocationValues?.zip.toString() ?? "null"),
+                        "${_currentLocationValues?.state ?? "null"}, ${_currentLocationValues?.zip.toString() ?? "null"}",
                         style: GoogleFonts.openSans(
                           fontSize: deviceWidth / 28,
                           color: Colors.grey,
@@ -316,51 +311,47 @@ class _ALClientInputsState extends State<ALClientInputs> {
                   ),
                 ),
               ),
-              Expanded(flex: 1, child: SizedBox()),
+              const Expanded(flex: 1, child: SizedBox()),
               Expanded(
                 flex: 4,
-                child: Container(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_currentLocationValues?.streetNumberAndName == null) {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return SimpleDialog(
-                                children: [
-                                  Container(
-                                    child: Text(
-                                      "Your location is empty.\n\nYou either did not allow location services or you are observing a bug.",
-                                      style: GoogleFonts.openSans(
-                                          fontSize: deviceWidth / 21,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            });
-                      } else {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return addressDialog(deviceHeight, deviceWidth);
-                            });
-                      }
-                    },
-                    child: Container(
-                      padding: EdgeInsets.only(
-                          top: deviceHeight / 84,
-                          bottom: deviceHeight / 84,
-                          left: deviceWidth / 40,
-                          right: deviceWidth / 40),
-                      child: Text(
-                        "Accept",
-                        style: GoogleFonts.openSans(
-                          fontSize: deviceWidth / 21,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_currentLocationValues?.streetNumberAndName == null) {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return SimpleDialog(
+                              children: [
+                                Text(
+                                  "Your location is empty.\n\nYou either did not allow location services or you are observing a bug.",
+                                  style: GoogleFonts.openSans(
+                                      fontSize: deviceWidth / 21,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            );
+                          });
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return addressDialog(deviceHeight, deviceWidth);
+                          });
+                    }
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(
+                        top: deviceHeight / 84,
+                        bottom: deviceHeight / 84,
+                        left: deviceWidth / 40,
+                        right: deviceWidth / 40),
+                    child: Text(
+                      "Accept",
+                      style: GoogleFonts.openSans(
+                        fontSize: deviceWidth / 21,
+                        color: Colors.white,
                       ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
@@ -429,11 +420,7 @@ class _ALClientInputsState extends State<ALClientInputs> {
                     child: Text(
                       _orderValue.dateValue == null
                           ? "Date Picker"
-                          : _orderValue.dateValue!.month.toString() +
-                              "/" +
-                              _orderValue.dateValue!.day.toString() +
-                              "/" +
-                              _orderValue.dateValue!.year.toString(),
+                          : "${_orderValue.dateValue!.month}/${_orderValue.dateValue!.day}/${_orderValue.dateValue!.year}",
                       style: GoogleFonts.openSans(
                           fontSize: deviceWidth / 28,
                           fontWeight: FontWeight.bold,
@@ -448,10 +435,7 @@ class _ALClientInputsState extends State<ALClientInputs> {
                   onPressed: () {
                     showCustomTimePicker(
                         context: context,
-                        // It is a must if you provide selectableTimePredicate
-                        onFailValidation: (context) =>
-                            print('Unavailable selection'),
-                        initialTime: TimeOfDay(hour: 0, minute: 0),
+                        initialTime: const TimeOfDay(hour: 0, minute: 0),
                         selectableTimePredicate: (time) =>
                             time!.minute % 15 == 0).then((time) {
                       if (time != null) {
@@ -502,78 +486,74 @@ class _ALClientInputsState extends State<ALClientInputs> {
           ),
           textAlign: TextAlign.center,
         ),
-        Container(
-          child: Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Radio<String>(
-                  value: "Small or medium size sedan",
-                  groupValue: _orderValue.carClass,
-                  onChanged: (String? value) {
+        Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Radio<String>(
+                value: "Small or medium size sedan",
+                groupValue: _orderValue.carClass,
+                onChanged: (String? value) {
+                  setState(() {
+                    _orderValue.carClass = value;
+                  });
+                },
+              ),
+            ),
+            Expanded(
+              flex: 4,
+              child: TextButton(
+                  onPressed: () {
                     setState(() {
-                      _orderValue.carClass = value;
+                      _orderValue.carClass = "Small or medium size sedan";
                     });
                   },
-                ),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      "Small or medium size sedan",
+                      style: GoogleFonts.openSans(
+                        fontSize: deviceWidth / 21,
+                        color: Colors.black,
+                      ),
+                    ),
+                  )),
+            )
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Radio<String>(
+                value: "SUV or van",
+                groupValue: _orderValue.carClass,
+                onChanged: (String? value) {
+                  setState(() {
+                    _orderValue.carClass = value;
+                  });
+                },
               ),
-              Expanded(
+            ),
+            Expanded(
                 flex: 4,
                 child: TextButton(
                     onPressed: () {
                       setState(() {
-                        _orderValue.carClass = "Small or medium size sedan";
+                        _orderValue.carClass = "SUV or van";
                       });
                     },
                     child: SizedBox(
                       width: double.infinity,
                       child: Text(
-                        "Small or medium size sedan",
+                        "SUV or van",
                         style: GoogleFonts.openSans(
                           fontSize: deviceWidth / 21,
                           color: Colors.black,
                         ),
                       ),
-                    )),
-              )
-            ],
-          ),
-        ),
-        Container(
-          child: Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Radio<String>(
-                  value: "SUV or van",
-                  groupValue: _orderValue.carClass,
-                  onChanged: (String? value) {
-                    setState(() {
-                      _orderValue.carClass = value;
-                    });
-                  },
-                ),
-              ),
-              Expanded(
-                  flex: 4,
-                  child: TextButton(
-                      onPressed: () {
-                        setState(() {
-                          _orderValue.carClass = "SUV or van";
-                        });
-                      },
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          "SUV or van",
-                          style: GoogleFonts.openSans(
-                            fontSize: deviceWidth / 21,
-                            color: Colors.black,
-                          ),
-                        ),
-                      )))
-            ],
-          ),
+                    )))
+          ],
         ),
       ],
     );
@@ -592,119 +572,113 @@ class _ALClientInputsState extends State<ALClientInputs> {
           textAlign: TextAlign.center,
         ),
         Container(
-          margin: EdgeInsets.only(top: 10),
+          margin: const EdgeInsets.only(top: 10),
           child: Column(
             children: [
               Row(
                 children: [
-                  Expanded(flex: 1, child: SizedBox()),
+                  const Expanded(flex: 1, child: SizedBox()),
                   Expanded(
                     flex: 4,
-                    child: Container(
-                      child: Text(
-                        "Exterior cleaning:",
-                        style: GoogleFonts.openSans(
-                          fontSize: deviceWidth / 21,
-                          color: Colors.black,
-                        ),
+                    child: Text(
+                      "Exterior cleaning:",
+                      style: GoogleFonts.openSans(
+                        fontSize: deviceWidth / 21,
+                        color: Colors.black,
                       ),
                     ),
                   ),
                 ],
               ),
-              Container(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Radio<String>(
-                        value: "With bucket and sponge",
-                        groupValue: _orderValue.exteriorWashType,
-                        onChanged: (String? value) {
-                          setState(() {
-                            _orderValue.exteriorWashType = value;
-                          });
-                        },
-                      ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Radio<String>(
+                      value: "With bucket and sponge",
+                      groupValue: _orderValue.exteriorWashType,
+                      onChanged: (String? value) {
+                        setState(() {
+                          _orderValue.exteriorWashType = value;
+                        });
+                      },
                     ),
-                    Expanded(
-                      flex: 3,
-                      child: TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _orderValue.exteriorWashType =
-                                "With bucket and sponge";
-                          });
-                        },
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: Text(
-                            "With bucket and sponge",
-                            style: GoogleFonts.openSans(
-                              fontSize: deviceWidth / 21,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                        flex: 1,
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          _orderValue.exteriorWashType =
+                              "With bucket and sponge";
+                        });
+                      },
+                      child: SizedBox(
+                        width: double.infinity,
                         child: Text(
-                          "\$25",
+                          "With bucket and sponge",
                           style: GoogleFonts.openSans(
                             fontSize: deviceWidth / 21,
                             color: Colors.black,
                           ),
-                        )),
-                  ],
-                ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      flex: 1,
+                      child: Text(
+                        "\$25",
+                        style: GoogleFonts.openSans(
+                          fontSize: deviceWidth / 21,
+                          color: Colors.black,
+                        ),
+                      )),
+                ],
               ),
-              Container(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Radio<String>(
-                        value: "With waterjet or vapor",
-                        groupValue: _orderValue.exteriorWashType,
-                        onChanged: (String? value) {
-                          setState(() {
-                            _orderValue.exteriorWashType = value;
-                          });
-                        },
-                      ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Radio<String>(
+                      value: "With waterjet or vapor",
+                      groupValue: _orderValue.exteriorWashType,
+                      onChanged: (String? value) {
+                        setState(() {
+                          _orderValue.exteriorWashType = value;
+                        });
+                      },
                     ),
-                    Expanded(
-                      flex: 3,
-                      child: TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _orderValue.exteriorWashType =
-                                "With waterjet or vapor";
-                          });
-                        },
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: Text(
-                            "With waterjet or vapor",
-                            style: GoogleFonts.openSans(
-                              fontSize: deviceWidth / 21,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                        flex: 1,
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          _orderValue.exteriorWashType =
+                              "With waterjet or vapor";
+                        });
+                      },
+                      child: SizedBox(
+                        width: double.infinity,
                         child: Text(
-                          "\$25",
+                          "With waterjet or vapor",
                           style: GoogleFonts.openSans(
                             fontSize: deviceWidth / 21,
                             color: Colors.black,
                           ),
-                        )),
-                  ],
-                ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                      flex: 1,
+                      child: Text(
+                        "\$25",
+                        style: GoogleFonts.openSans(
+                          fontSize: deviceWidth / 21,
+                          color: Colors.black,
+                        ),
+                      )),
+                ],
               ),
               Row(
                 children: [
@@ -712,10 +686,10 @@ class _ALClientInputsState extends State<ALClientInputs> {
                     flex: 1,
                     child: Checkbox(
                       side: MaterialStateBorderSide.resolveWith(
-                        (states) => BorderSide(width: 2.0, color: Colors.grey),
+                        (states) => const BorderSide(width: 2.0, color: Colors.grey),
                       ),
                       checkColor: Colors.white,
-                      fillColor: MaterialStateProperty.all(Color(0xFF2D9BF0)),
+                      fillColor: MaterialStateProperty.all(const Color(0xFF2D9BF0)),
                       value: _orderValue.isInterior,
                       onChanged: (bool? value) {
                         setState(() {
@@ -761,10 +735,10 @@ class _ALClientInputsState extends State<ALClientInputs> {
                     flex: 1,
                     child: Checkbox(
                       side: MaterialStateBorderSide.resolveWith(
-                        (states) => BorderSide(width: 2.0, color: Colors.grey),
+                        (states) => const BorderSide(width: 2.0, color: Colors.grey),
                       ),
                       checkColor: Colors.white,
-                      fillColor: MaterialStateProperty.all(Color(0xFF2D9BF0)),
+                      fillColor: MaterialStateProperty.all(const Color(0xFF2D9BF0)),
                       value: _orderValue.isTruck,
                       onChanged: (bool? value) {
                         setState(() {
@@ -810,10 +784,10 @@ class _ALClientInputsState extends State<ALClientInputs> {
                     flex: 1,
                     child: Checkbox(
                       side: MaterialStateBorderSide.resolveWith(
-                        (states) => BorderSide(width: 2.0, color: Colors.grey),
+                        (states) => const BorderSide(width: 2.0, color: Colors.grey),
                       ),
                       checkColor: Colors.white,
-                      fillColor: MaterialStateProperty.all(Color(0xFF2D9BF0)),
+                      fillColor: MaterialStateProperty.all(const Color(0xFF2D9BF0)),
                       value: _orderValue.isEngine,
                       onChanged: (bool? value) {
                         setState(() {
@@ -862,7 +836,7 @@ class _ALClientInputsState extends State<ALClientInputs> {
 
   _findWasher(double deviceHeight, double deviceWidth) {
     return Container(
-      margin: EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 20),
       child: ElevatedButton(
           onPressed: () async {
             var locationsData = await LocationHelper.getLocationsData();
@@ -1052,18 +1026,18 @@ class _ALClientInputsState extends State<ALClientInputs> {
         SizedBox(
           height: deviceHeight / 20,
         ),
-        Container(
+        SizedBox(
           height: deviceHeight / 10,
           child: Text(
             "WashMe",
             textAlign: TextAlign.center,
             style: GoogleFonts.fredokaOne(
-                fontSize: deviceWidth / 9, color: Color(0xFF2D9BF0)),
+                fontSize: deviceWidth / 9, color: const Color(0xFF2D9BF0)),
           ),
         ),
         ListTile(
-          title: Text('Current Order'),
-          visualDensity: VisualDensity(vertical: -3),
+          title: const Text('Current Order'),
+          visualDensity: const VisualDensity(vertical: -3),
           onTap: () async {
             showTransparentDialogOnLoad(context, deviceHeight, deviceWidth);
             currentOrdersOpener(context, deviceHeight, deviceWidth, mounted,
@@ -1071,8 +1045,8 @@ class _ALClientInputsState extends State<ALClientInputs> {
           },
         ),
         ListTile(
-          title: Text('Previous Orders'),
-          visualDensity: VisualDensity(vertical: -3),
+          title: const Text('Previous Orders'),
+          visualDensity: const VisualDensity(vertical: -3),
           onTap: () {
 
             showTransparentDialogOnLoad(context, deviceHeight, deviceWidth);
@@ -1081,20 +1055,20 @@ class _ALClientInputsState extends State<ALClientInputs> {
 
           },
         ),
-        ListTile(
+        const ListTile(
           title: Divider(color: Colors.grey, thickness: 1),
           visualDensity: VisualDensity(vertical: -3),
         ),
         ListTile(
-          title: Text('Personal Information'),
-          visualDensity: VisualDensity(vertical: -3),
+          title: const Text('Personal Information'),
+          visualDensity: const VisualDensity(vertical: -3),
           onTap: () {
             Navigator.of(context).pushNamed("/ALPersonalInformation");
           },
         ),
         ListTile(
-          title: Text('Refer a Friend'),
-          visualDensity: VisualDensity(vertical: -3),
+          title: const Text('Refer a Friend'),
+          visualDensity: const VisualDensity(vertical: -3),
           onTap: () {
             showDialog(
                 context: context,
@@ -1104,33 +1078,33 @@ class _ALClientInputsState extends State<ALClientInputs> {
           },
         ),
         ListTile(
-          title: Text('WashMe Washer'),
-          visualDensity: VisualDensity(vertical: -3),
+          title: const Text('WashMe Washer'),
+          visualDensity: const VisualDensity(vertical: -3),
           onTap: () async {
             Navigator.of(context).pushNamed("/ALWashMeWasher");
           },
         ),
-        ListTile(
+        const ListTile(
           title: Divider(color: Colors.grey, thickness: 1),
           visualDensity: VisualDensity(vertical: -3),
         ),
         ListTile(
-          title: Text('About Us'),
-          visualDensity: VisualDensity(vertical: -3),
+          title: const Text('About Us'),
+          visualDensity: const VisualDensity(vertical: -3),
           onTap: () {
             Navigator.of(context).pushNamed("/AboutUs");
           },
         ),
         ListTile(
-          title: Text('Contact Us'),
-          visualDensity: VisualDensity(vertical: -3),
+          title: const Text('Contact Us'),
+          visualDensity: const VisualDensity(vertical: -3),
           onTap: () {
             Navigator.of(context).pushNamed("/ContactUs");
           },
         ),
         ListTile(
-          title: Text('Disclaimer'),
-          visualDensity: VisualDensity(vertical: -3),
+          title: const Text('Disclaimer'),
+          visualDensity: const VisualDensity(vertical: -3),
           onTap: () {
             Navigator.of(context).pushNamed("/Disclaimer");
           },
@@ -1143,11 +1117,11 @@ class _ALClientInputsState extends State<ALClientInputs> {
     return SimpleDialog(
       insetPadding: EdgeInsets.all(deviceWidth / 40),
       children: [
-        Container(
+        SizedBox(
           width: double.infinity,
           child: Column(
             children: [
-              Container(
+              SizedBox(
                   width: double.infinity,
                   child: locationInfo(
                       deviceHeight, deviceWidth, _currentLocationValues)),
@@ -1227,7 +1201,7 @@ class _ALClientInputsState extends State<ALClientInputs> {
                 width: double.infinity,
                 padding: EdgeInsets.only(
                     left: deviceWidth / 30, right: deviceWidth / 20),
-                child: Divider(thickness: 2, color: Colors.black)),
+                child: const Divider(thickness: 2, color: Colors.black)),
             Container(
               width: double.infinity,
               padding: EdgeInsets.only(
@@ -1255,7 +1229,7 @@ class _ALClientInputsState extends State<ALClientInputs> {
                 flex: 4,
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                         width: double.infinity,
                         child: Text(
                           "${dialogLocationValues?.adminArea}",
@@ -1263,8 +1237,8 @@ class _ALClientInputsState extends State<ALClientInputs> {
                             fontSize: deviceWidth / 24,
                           ),
                         )),
-                    Divider(thickness: 2, color: Colors.black),
-                    Container(
+                    const Divider(thickness: 2, color: Colors.black),
+                    SizedBox(
                       width: double.infinity,
                       child: Text(
                         "City",
@@ -1284,7 +1258,7 @@ class _ALClientInputsState extends State<ALClientInputs> {
                 flex: 2,
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                         width: double.infinity,
                         child: Text(
                           "${dialogLocationValues?.state}",
@@ -1292,8 +1266,8 @@ class _ALClientInputsState extends State<ALClientInputs> {
                             fontSize: deviceWidth / 24,
                           ),
                         )),
-                    Divider(thickness: 2, color: Colors.black),
-                    Container(
+                    const Divider(thickness: 2, color: Colors.black),
+                    SizedBox(
                       width: double.infinity,
                       child: Text(
                         "State",
@@ -1313,7 +1287,7 @@ class _ALClientInputsState extends State<ALClientInputs> {
                 flex: 2,
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                         width: double.infinity,
                         child: Text(
                           "${dialogLocationValues?.zip}",
@@ -1321,8 +1295,8 @@ class _ALClientInputsState extends State<ALClientInputs> {
                             fontSize: deviceWidth / 24,
                           ),
                         )),
-                    Divider(thickness: 2, color: Colors.black),
-                    Container(
+                    const Divider(thickness: 2, color: Colors.black),
+                    SizedBox(
                       width: double.infinity,
                       child: Text(
                         "Zip",
@@ -1348,7 +1322,7 @@ class _ALClientInputsState extends State<ALClientInputs> {
     return SimpleDialog(
       insetPadding: EdgeInsets.all(deviceWidth / 40),
       children: [
-        Container(
+        SizedBox(
           height: deviceHeight * (3 / 4),
           width: deviceWidth * (11 / 12),
           child: SingleChildScrollView(
@@ -1366,33 +1340,33 @@ class _ALClientInputsState extends State<ALClientInputs> {
                               fontWeight: FontWeight.bold),
                         )),
                     Container(
-                      margin: EdgeInsets.only(right: 10),
+                      margin: const EdgeInsets.only(right: 10),
                       child: IconButton(
                           onPressed: () {
                             Navigator.of(context, rootNavigator: true)
                                 .pop('dialog');
                           },
-                          icon: Icon(Icons.close)),
+                          icon: const Icon(Icons.close)),
                     ),
                   ],
                 ),
                 SizedBox(
                   height: deviceHeight / 40,
                 ),
-                Container(
+                SizedBox(
                   height: deviceHeight * (5 / 8),
                   child: FutureBuilder(
                       future: LocationHelper.getLocationsData(),
                       builder: (context, snapshot) {
                         switch (snapshot.connectionState) {
                           case ConnectionState.waiting:
-                            return Text('Loading....');
+                            return const Text('Loading....');
                           default:
                             if (snapshot.hasError) {
-                              return Text('Error');
+                              return const Text('Error');
                             } else {
                               var dataList = snapshot.data as List;
-                              if (dataList.length == 0) {
+                              if (dataList.isEmpty) {
                                 return Column(
                                   children: [
                                     SizedBox(
@@ -1438,7 +1412,7 @@ class _ALClientInputsState extends State<ALClientInputs> {
                                             children: [
                                               Expanded(
                                                   flex: 4,
-                                                  child: Container(
+                                                  child: SizedBox(
                                                       height: deviceHeight / 12,
                                                       width: double.infinity,
                                                       child: ElevatedButton(
@@ -1447,7 +1421,7 @@ class _ALClientInputsState extends State<ALClientInputs> {
                                                                           "id"] ==
                                                                       selectedLocationId
                                                                   ? Colors.blue
-                                                                  : Color(
+                                                                  : const Color(
                                                                       0xFF414BB2)),
                                                           onPressed: () {
                                                             selectedLocationId =
@@ -1472,7 +1446,7 @@ class _ALClientInputsState extends State<ALClientInputs> {
                                               ),
                                               Expanded(
                                                   flex: 4,
-                                                  child: Container(
+                                                  child: SizedBox(
                                                       height: deviceHeight / 12,
                                                       width: double.infinity,
                                                       child: ElevatedButton(

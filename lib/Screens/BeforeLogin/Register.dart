@@ -77,23 +77,23 @@ class _RegisterPageState extends State with RegisterValidationMixin {
                     key: _registerFormKey,
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
-                        EmailTaker(),
-                        SizedBox(
+                        emailTaker(),
+                        const SizedBox(
                           height: 10,
                         ),
-                        PasswordTaker(),
-                        SizedBox(
+                        passwordTaker(),
+                        const SizedBox(
                           height: 10,
                         ),
-                        PasswordChecker(),
-                        SizedBox(
+                        passwordChecker(),
+                        const SizedBox(
                           height: 20,
                         ),
                         buildRegisterButton(_deviceHeight, _deviceWidth),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                       ],
@@ -108,7 +108,7 @@ class _RegisterPageState extends State with RegisterValidationMixin {
     );
   }
 
-  Widget EmailTaker() {
+  Widget emailTaker() {
     return TextFormField(
       keyboardType: TextInputType.emailAddress, //@
       textInputAction: TextInputAction.next,
@@ -132,17 +132,17 @@ class _RegisterPageState extends State with RegisterValidationMixin {
     );
   }
 
-  Widget PasswordTaker() {
+  Widget passwordTaker() {
     return TextFormField(
       obscureText: _passwordVisible,
       textInputAction: TextInputAction.next,
       validator: (value) => validatePassword(value.toString()),
       decoration: InputDecoration(
         fillColor: Colors.white,
-        focusedErrorBorder: OutlineInputBorder(
+        focusedErrorBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.blue, width: 4),
         ),
-        prefixIcon: Icon(
+        prefixIcon: const Icon(
           Icons.lock_outline,
           color: Colors.black,
         ),
@@ -173,7 +173,7 @@ class _RegisterPageState extends State with RegisterValidationMixin {
   }
 
   bool isEnabled = false;
-  Widget PasswordChecker() {
+  Widget passwordChecker() {
     return TextFormField(
       obscureText: _passwordVisible,
       enabled: isEnabled,
@@ -181,10 +181,10 @@ class _RegisterPageState extends State with RegisterValidationMixin {
           password: registerFormData.password, rePassword: value.toString()),
       decoration: InputDecoration(
         fillColor: Colors.white,
-        focusedErrorBorder: OutlineInputBorder(
+        focusedErrorBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.blue, width: 4),
         ),
-        prefixIcon: Icon(
+        prefixIcon: const Icon(
           Icons.lock_outline,
           color: Colors.black,
         ),
@@ -326,7 +326,7 @@ class _RegisterPageState extends State with RegisterValidationMixin {
             child: TextButton(
               child: Icon(
                 Icons.keyboard_backspace,
-                color: Color(0xFF2D9BF0),
+                color: const Color(0xFF2D9BF0),
                 size: deviceHeight / 6.6,
               ),
               onPressed: () {
@@ -339,10 +339,10 @@ class _RegisterPageState extends State with RegisterValidationMixin {
               child: Text(
                 "WashMe",
                 style: GoogleFonts.fredokaOne(
-                    fontSize: deviceHeight / 9, color: Color(0xFF2D9BF0)),
+                    fontSize: deviceHeight / 9, color: const Color(0xFF2D9BF0)),
               ),
             )),
-        Expanded(flex: 1, child: SizedBox())
+        const Expanded(flex: 1, child: SizedBox())
       ],
     );
   }

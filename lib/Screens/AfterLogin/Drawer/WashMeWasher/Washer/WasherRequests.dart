@@ -29,7 +29,7 @@ class WasherRequests extends StatefulWidget {
 class _WasherRequestsState extends State<WasherRequests> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   bool filtered = false;
-  LatLng selectedCustomerLatLong =LatLng(31.2, -99.6);
+  LatLng selectedCustomerLatLong =const LatLng(31.2, -99.6);
 
   GoogleMapController? mapController;
   GlobalKey<State<StatefulWidget>>? mapKey;
@@ -99,7 +99,7 @@ class _WasherRequestsState extends State<WasherRequests> {
             },
             child: Icon(
               Icons.menu_rounded,
-              color: Color(0xFF414BB2),
+              color: const Color(0xFF414BB2),
               size: deviceWidth / 6.6,
             ),
           ),
@@ -111,11 +111,11 @@ class _WasherRequestsState extends State<WasherRequests> {
               "WashMe Washer",
               textAlign: TextAlign.center,
               style: GoogleFonts.fredokaOne(
-                  fontSize: deviceWidth / 12, color: Color(0xFF2D9BF0)),
+                  fontSize: deviceWidth / 12, color: const Color(0xFF2D9BF0)),
             ),
           ),
         ),
-        Expanded(flex: 1, child: SizedBox())
+        const Expanded(flex: 1, child: SizedBox())
       ],
     );
   }
@@ -129,13 +129,13 @@ class _WasherRequestsState extends State<WasherRequests> {
         SizedBox(
           height: deviceHeight / 20,
         ),
-        Container(
+        SizedBox(
           height: deviceHeight / 10,
           child: Text(
             "WashMe",
             textAlign: TextAlign.center,
             style: GoogleFonts.fredokaOne(
-                fontSize: deviceWidth / 9, color: Color(0xFF2D9BF0)),
+                fontSize: deviceWidth / 9, color: const Color(0xFF2D9BF0)),
           ),
         ),
         ListTile(
@@ -150,8 +150,8 @@ class _WasherRequestsState extends State<WasherRequests> {
           },
         ),
         ListTile(
-          title: Text('Previous Jobs'),
-          visualDensity: VisualDensity(vertical: -3),
+          title: const Text('Previous Jobs'),
+          visualDensity: const VisualDensity(vertical: -3),
           onTap: () {
 
             showTransparentDialogOnLoad(context, deviceHeight, deviceWidth);
@@ -161,30 +161,30 @@ class _WasherRequestsState extends State<WasherRequests> {
           },
         ),
         ListTile(
-          title: Text('Earnings and Payments'),
-          visualDensity: VisualDensity(vertical: -3),
+          title: const Text('Earnings and Payments'),
+          visualDensity: const VisualDensity(vertical: -3),
           onTap: () {
             null;
           },
         ),
-        ListTile(
+        const ListTile(
           title: Divider(color: Colors.grey, thickness: 1),
           visualDensity: VisualDensity(vertical: -3),
         ),
         ListTile(
-          title: Text('Washer Board'),
-          visualDensity: VisualDensity(vertical: -3),
+          title: const Text('Washer Board'),
+          visualDensity: const VisualDensity(vertical: -3),
           onTap: () {
             Navigator.of(context).pushNamed("/WasherBoard");
           },
         ),
-        ListTile(
+        const ListTile(
           title: Divider(color: Colors.grey, thickness: 1),
           visualDensity: VisualDensity(vertical: -3),
         ),
         ListTile(
-          title: Text('Return to Customer Portal'),
-          visualDensity: VisualDensity(vertical: -3),
+          title: const Text('Return to Customer Portal'),
+          visualDensity: const VisualDensity(vertical: -3),
           onTap: () {
             Navigator.popUntil(
                 context, ModalRoute.withName("/ALClientInputs"));
@@ -245,7 +245,7 @@ class _WasherRequestsState extends State<WasherRequests> {
 
             globalMarkers = {
               Marker(
-                  markerId: MarkerId("You"),
+                  markerId: const MarkerId("You"),
                   position: LatLng(double.parse(currentLocation!.lat.toString()), double.parse(currentLocation.long.toString()) ))
             };
 
@@ -288,7 +288,7 @@ class _WasherRequestsState extends State<WasherRequests> {
     return SizedBox(
       width: double.infinity,
       child: ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           padding: EdgeInsets.zero, itemCount: orderKeysList.length ,itemBuilder: (BuildContext context, int index){
 
@@ -305,9 +305,9 @@ class _WasherRequestsState extends State<WasherRequests> {
         double distance = sqrt(pow(latDistance,2) + pow(longDistance, 2))*oneDegreeToMiles;
         String strDistance ="";
         if (distance<5.280){
-          strDistance = (distance* 5.280).toStringAsFixed(2) + " feet";
+          strDistance = "${(distance* 5.280).toStringAsFixed(2)} feet";
         } else {
-          strDistance = distance.toStringAsFixed(2) + " miles";
+          strDistance = "${distance.toStringAsFixed(2)} miles";
         }
 
         final df = DateFormat('dd-MM-yyyy hh:mm a');
@@ -370,7 +370,7 @@ class _WasherRequestsState extends State<WasherRequests> {
                               // this try-catch block handles the error behind but removing it releases it again. This error should be handled later.
                               try {
                                 for (Marker element in globalMarkers){
-                                  if (element.markerId == MarkerId("customerMarker")){
+                                  if (element.markerId == const MarkerId("customerMarker")){
                                     globalMarkers.remove(element);
                                   }
                                 }
@@ -449,7 +449,7 @@ class _WasherRequestsState extends State<WasherRequests> {
                             Navigator.of(context).pop();
                             washerRequestsOpener(context, mounted);
 
-                          }, child: Container(
+                          }, child: SizedBox(
                           width: deviceWidth * (3/10),
                           height: deviceHeight/15,
                           child: Center(child: Text("Accept", style: GoogleFonts.notoSans(fontSize: deviceWidth/20,), textAlign: TextAlign.center),),),),
@@ -462,7 +462,7 @@ class _WasherRequestsState extends State<WasherRequests> {
                               print(index);
                             },
 
-                            child: Container(
+                            child: SizedBox(
                                 width: deviceWidth* (3/10),
                                 height: deviceHeight/15,
                                 child: Center(child: Text("Hide", style: GoogleFonts.notoSans(fontSize: deviceWidth/20,), textAlign: TextAlign.center)))),

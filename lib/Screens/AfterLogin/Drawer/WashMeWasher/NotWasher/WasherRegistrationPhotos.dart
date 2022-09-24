@@ -44,7 +44,7 @@ class _WasherRegistrationPhotosState extends State<WasherRegistrationPhotos> {
             SizedBox(
               height: _deviceHeight / 30,
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Text(
                 "Uplaod Your Personal Photo",
@@ -67,7 +67,7 @@ class _WasherRegistrationPhotosState extends State<WasherRegistrationPhotos> {
             SizedBox(
               height: _deviceHeight / 30,
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Text(
                 "1. Profile Photo",
@@ -91,7 +91,7 @@ class _WasherRegistrationPhotosState extends State<WasherRegistrationPhotos> {
             SizedBox(
               height: _deviceHeight / 40,
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Text(
                 "2. Photo showing you washing a car (optional)",
@@ -119,17 +119,15 @@ class _WasherRegistrationPhotosState extends State<WasherRegistrationPhotos> {
       children: [
         Expanded(
             flex: 2,
-            child: Container(
-              child: TextButton(
-                child: Icon(
-                  Icons.keyboard_backspace,
-                  color: Color(0xFF2D9BF0),
-                  size: deviceWidth / 12,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+            child: TextButton(
+              child: Icon(
+                Icons.keyboard_backspace,
+                color: const Color(0xFF2D9BF0),
+                size: deviceWidth / 12,
               ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             )),
         Expanded(
           flex: 12,
@@ -138,7 +136,7 @@ class _WasherRegistrationPhotosState extends State<WasherRegistrationPhotos> {
               "WashMe Washer",
               textAlign: TextAlign.center,
               style: GoogleFonts.fredokaOne(
-                  fontSize: deviceWidth / 10, color: Color(0xFF2D9BF0)),
+                  fontSize: deviceWidth / 10, color: const Color(0xFF2D9BF0)),
             ),
           ),
         )
@@ -184,13 +182,11 @@ class _WasherRegistrationPhotosState extends State<WasherRegistrationPhotos> {
                   )),
               Expanded(
                   flex: 1,
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        "or",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.openSans(fontSize: deviceWidth / 24),
-                      ),
+                  child: Center(
+                    child: Text(
+                      "or",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.openSans(fontSize: deviceWidth / 24),
                     ),
                   )),
               Expanded(
@@ -229,7 +225,7 @@ class _WasherRegistrationPhotosState extends State<WasherRegistrationPhotos> {
         Container(
           height: deviceHeight / 4,
           decoration:
-              BoxDecoration(border: Border.all(color: Color(0xFF414BB2))),
+              BoxDecoration(border: Border.all(color: const Color(0xFF414BB2))),
           child: profilePhotoFile == null
               ? null
               : Image.file(
@@ -244,103 +240,99 @@ class _WasherRegistrationPhotosState extends State<WasherRegistrationPhotos> {
 
   Widget workPhotoBuilder(
       double deviceHeight, double deviceWidth, BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.only(
-                left: deviceWidth / 20, right: deviceWidth / 20),
-            child: Row(
-              children: [
-                Expanded(
-                    flex: 4,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: const Color(0xFF2D9BF0),
-                      ),
-                      child: Container(
-                        margin: EdgeInsets.only(
-                          top: deviceHeight / 40,
-                          bottom: deviceHeight / 40,
-                        ),
-                        child: Text(
-                          "Open Camera",
-                          textAlign: TextAlign.center,
-                          style:
-                              GoogleFonts.openSans(fontSize: deviceWidth / 24),
-                        ),
-                      ),
-                      onPressed: () async {
-                        File? fileName = await ImagePickerHelper.takePicture();
-                        if (fileName == null) {
-                          return;
-                        } else {
-                          optionalPhotoFile = fileName;
-                          setState(() {});
-                        }
-                      },
-                    )),
-                Expanded(
-                    flex: 1,
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.only(
+              left: deviceWidth / 20, right: deviceWidth / 20),
+          child: Row(
+            children: [
+              Expanded(
+                  flex: 4,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: const Color(0xFF2D9BF0),
+                    ),
                     child: Container(
-                      child: Center(
-                        child: Text(
-                          "or",
-                          textAlign: TextAlign.center,
-                          style:
-                              GoogleFonts.openSans(fontSize: deviceWidth / 24),
-                        ),
+                      margin: EdgeInsets.only(
+                        top: deviceHeight / 40,
+                        bottom: deviceHeight / 40,
                       ),
-                    )),
-                Expanded(
-                    flex: 4,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: const Color(0xFF2D9BF0),
+                      child: Text(
+                        "Open Camera",
+                        textAlign: TextAlign.center,
+                        style:
+                            GoogleFonts.openSans(fontSize: deviceWidth / 24),
                       ),
-                      child: Container(
-                        margin: EdgeInsets.only(
-                          top: deviceHeight / 40,
-                          bottom: deviceHeight / 40,
-                        ),
-                        child: Text(
-                          "Open Galery",
-                          textAlign: TextAlign.center,
-                          style:
-                              GoogleFonts.openSans(fontSize: deviceWidth / 24),
-                        ),
+                    ),
+                    onPressed: () async {
+                      File? fileName = await ImagePickerHelper.takePicture();
+                      if (fileName == null) {
+                        return;
+                      } else {
+                        optionalPhotoFile = fileName;
+                        setState(() {});
+                      }
+                    },
+                  )),
+              Expanded(
+                  flex: 1,
+                  child: Center(
+                    child: Text(
+                      "or",
+                      textAlign: TextAlign.center,
+                      style:
+                          GoogleFonts.openSans(fontSize: deviceWidth / 24),
+                    ),
+                  )),
+              Expanded(
+                  flex: 4,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: const Color(0xFF2D9BF0),
+                    ),
+                    child: Container(
+                      margin: EdgeInsets.only(
+                        top: deviceHeight / 40,
+                        bottom: deviceHeight / 40,
                       ),
-                      onPressed: () async {
-                        File? fileName =
-                            await ImagePickerHelper.selectPicture();
-                        if (fileName == null) {
-                          return;
-                        } else {
-                          optionalPhotoFile = fileName;
-                          setState(() {});
-                        }
-                      },
-                    )),
-              ],
-            ),
+                      child: Text(
+                        "Open Galery",
+                        textAlign: TextAlign.center,
+                        style:
+                            GoogleFonts.openSans(fontSize: deviceWidth / 24),
+                      ),
+                    ),
+                    onPressed: () async {
+                      File? fileName =
+                          await ImagePickerHelper.selectPicture();
+                      if (fileName == null) {
+                        return;
+                      } else {
+                        optionalPhotoFile = fileName;
+                        setState(() {});
+                      }
+                    },
+                  )),
+            ],
           ),
-          SizedBox(
-            height: deviceHeight / 40,
-          ),
-          Container(
-            height: deviceHeight / 4,
-            decoration:
-                BoxDecoration(border: Border.all(color: Color(0xFF414BB2))),
-            child: optionalPhotoFile == null
-                ? null
-                : Image.file(
-                    optionalPhotoFile as File,
-                    width: double.infinity,
-                    height: double.infinity,
-                  ),
-          ),
-        ],
-      ),
+        ),
+        SizedBox(
+          height: deviceHeight / 40,
+        ),
+        Container(
+          height: deviceHeight / 4,
+          decoration:
+              BoxDecoration(border: Border.all(color: const Color(0xFF414BB2))),
+          child: optionalPhotoFile == null
+              ? null
+              : Image.file(
+                  optionalPhotoFile as File,
+                  width: double.infinity,
+                  height: double.infinity,
+                ),
+        ),
+      ],
     );
   }
 
@@ -368,6 +360,7 @@ class _WasherRegistrationPhotosState extends State<WasherRegistrationPhotos> {
             Map<String, dynamic>? data = querySnapshot.data();
 
               if (data!.containsKey("photosURL")){
+                if(!mounted) return;
                 Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -389,6 +382,7 @@ class _WasherRegistrationPhotosState extends State<WasherRegistrationPhotos> {
                registerWasher(data, keys, context, mounted);
               }
 
+            if(!mounted) return;
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(duration: Duration(seconds: 3),content: Text('Photos are uploaded successfully')),
@@ -406,13 +400,13 @@ class _WasherRegistrationPhotosState extends State<WasherRegistrationPhotos> {
 
         },
         child: Container(
-          child: Text("Done",
-              style: TextStyle(fontSize: deviceWidth / 20)),
           margin: EdgeInsets.only(
               right: deviceWidth / 10,
               left: deviceWidth / 10,
               top: deviceWidth / 20,
               bottom: deviceWidth / 20),
+          child: Text("Done",
+              style: TextStyle(fontSize: deviceWidth / 20)),
         ));
   }
 }

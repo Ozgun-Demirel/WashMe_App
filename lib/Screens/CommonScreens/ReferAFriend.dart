@@ -7,7 +7,7 @@ Widget ReferAFriend(double deviceHeight, double deviceWidth, BuildContext contex
   return SimpleDialog(
     insetPadding: EdgeInsets.all(deviceWidth / 40),
     children: [
-      Container(
+      SizedBox(
         width: deviceWidth * (11 / 12),
         child: Column(
           children: [
@@ -23,13 +23,13 @@ Widget ReferAFriend(double deviceHeight, double deviceWidth, BuildContext contex
                           fontWeight: FontWeight.bold),
                     )),
                 Container(
-                  margin: EdgeInsets.only(right: 10),
+                  margin: const EdgeInsets.only(right: 10),
                   child: IconButton(
                       onPressed: () {
                         Navigator.of(context, rootNavigator: true)
                             .pop('dialog');
                       },
-                      icon: Icon(Icons.close)),
+                      icon: const Icon(Icons.close)),
                 ),
               ],
             ),

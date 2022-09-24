@@ -80,7 +80,7 @@ class _BecomeWasherState extends State<BecomeWasher> {
                   if (!mounted) return;
                   Navigator.of(context).pushNamed("/WasherRegistration");
                 },
-                child: Container(
+                child: SizedBox(
                     width: _deviceWidth * (3 / 4),
                     height: _deviceHeight / 14,
                     child: Center(
@@ -92,14 +92,12 @@ class _BecomeWasherState extends State<BecomeWasher> {
             SizedBox(
               height: _deviceHeight / 80,
             ),
-            Container(
-              child: Center(
-                  child: Text(
-                "OR",
-                style: GoogleFonts.openSans(
-                    fontWeight: FontWeight.bold, fontSize: _deviceWidth / 24),
-              )),
-            ),
+            Center(
+                child: Text(
+              "OR",
+              style: GoogleFonts.openSans(
+                  fontWeight: FontWeight.bold, fontSize: _deviceWidth / 24),
+            )),
             SizedBox(
               height: _deviceHeight / 80,
             ),
@@ -108,7 +106,7 @@ class _BecomeWasherState extends State<BecomeWasher> {
                   Navigator.of(context)
                       .pushNamed("/ContinueWithoutRegistration");
                 },
-                child: Container(
+                child: SizedBox(
                   width: _deviceWidth * (3 / 4),
                   height: _deviceHeight / 14,
                   child: Center(
@@ -131,17 +129,15 @@ class _BecomeWasherState extends State<BecomeWasher> {
       children: [
         Expanded(
             flex: 2,
-            child: Container(
-              child: TextButton(
-                child: Icon(
-                  Icons.keyboard_backspace,
-                  color: Color(0xFF2D9BF0),
-                  size: deviceHeight / 16,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pushNamed("/ALClientInputs");
-                },
+            child: TextButton(
+              child: Icon(
+                Icons.keyboard_backspace,
+                color: const Color(0xFF2D9BF0),
+                size: deviceHeight / 16,
               ),
+              onPressed: () {
+                Navigator.of(context).pushNamed("/ALClientInputs");
+              },
             )),
         Expanded(
           flex: 12,
@@ -150,7 +146,7 @@ class _BecomeWasherState extends State<BecomeWasher> {
               "WashMe Washer",
               textAlign: TextAlign.center,
               style: GoogleFonts.fredokaOne(
-                  fontSize: deviceWidth / 10, color: Color(0xFF2D9BF0)),
+                  fontSize: deviceWidth / 10, color: const Color(0xFF2D9BF0)),
             ),
           ),
         )
@@ -166,25 +162,25 @@ class _BecomeWasherState extends State<BecomeWasher> {
             Text(
               "Become",
               style: GoogleFonts.fredokaOne(
-                  color: Color(0xFF414BB2), fontSize: deviceWidth / 9),
+                  color: const Color(0xFF414BB2), fontSize: deviceWidth / 9),
               textAlign: TextAlign.center,
             ),
             Text(
               "a Washer",
               style: GoogleFonts.fredokaOne(
-                  color: Color(0xFF414BB2), fontSize: deviceWidth / 9),
+                  color: const Color(0xFF414BB2), fontSize: deviceWidth / 9),
               textAlign: TextAlign.center,
             ),
             Text(
               "and make",
               style: GoogleFonts.fredokaOne(
-                  color: Color(0xFF414BB2), fontSize: deviceWidth / 9),
+                  color: const Color(0xFF414BB2), fontSize: deviceWidth / 9),
               textAlign: TextAlign.center,
             ),
             Text(
               "\$2,200 - \$3,100",
               style: GoogleFonts.fredokaOne(
-                  color: Color(0xFF414BB2), fontSize: deviceWidth / 9),
+                  color: const Color(0xFF414BB2), fontSize: deviceWidth / 9),
               textAlign: TextAlign.center,
             ),
           ],

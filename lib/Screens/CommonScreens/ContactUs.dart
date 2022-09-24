@@ -32,7 +32,7 @@ class ContactUs extends StatelessWidget {
                   SizedBox(height: _deviceHeight/45,),
                   hamMenuAndTitle(_deviceWidth, context),
                   SizedBox(height: _deviceHeight/45,),
-                  Container(width: double.infinity, child: Text("Contact Us", style: GoogleFonts.fredokaOne(fontWeight: FontWeight.bold, fontSize: _deviceWidth/21),),),
+                  SizedBox(width: double.infinity, child: Text("Contact Us", style: GoogleFonts.fredokaOne(fontWeight: FontWeight.bold, fontSize: _deviceWidth/21),),),
                   SizedBox(height: _deviceHeight/45,),
                   Image.asset(
                     "lib/Assets/WashMe/CommonScreens/operator.png",
@@ -41,7 +41,7 @@ class ContactUs extends StatelessWidget {
                   SizedBox(height: _deviceHeight/60,),
                   infoTaker(_deviceHeight, _deviceWidth),
                   SizedBox(height: _deviceHeight/80,),
-                  Container(width: double.infinity, child: Text("Your E-mail", style: GoogleFonts.openSans(fontSize: _deviceWidth/26, fontWeight: FontWeight.bold),),),
+                  SizedBox(width: double.infinity, child: Text("Your E-mail", style: GoogleFonts.openSans(fontSize: _deviceWidth/26, fontWeight: FontWeight.bold),),),
                   eMailTaker(_deviceHeight, _deviceWidth),
                   SizedBox(height: _deviceHeight/40,),
               ElevatedButton(onPressed: (){}, child: SizedBox( height: _deviceHeight/15, width: _deviceWidth/4 ,child: Center(child: Text("Send", style: GoogleFonts.openSans(fontSize: _deviceWidth/24),))),),
@@ -65,12 +65,12 @@ class ContactUs extends StatelessWidget {
       children: [
         Expanded(
             flex: 2,
-            child: Container(
+            child: SizedBox(
               height:  deviceHeight / 6.6,
               child: TextButton(
                 child: Icon(
                   Icons.keyboard_backspace,
-                  color: Color(0xFF2D9BF0),
+                  color: const Color(0xFF2D9BF0),
                   size: deviceHeight / 6.6,
                 ),
                 onPressed: () {
@@ -84,16 +84,16 @@ class ContactUs extends StatelessWidget {
               child: Text(
                 "WashMe",
                 style: GoogleFonts.fredokaOne(
-                    fontSize: deviceHeight / 9, color: Color(0xFF2D9BF0)),
+                    fontSize: deviceHeight / 9, color: const Color(0xFF2D9BF0)),
               ),
             )),
-        Expanded(flex: 1, child: SizedBox())
+        const Expanded(flex: 1, child: SizedBox())
       ],
     );
   }
 
   Widget infoTaker(double deviceHeight, double deviceWidth) {
-    return TextField(
+    return const TextField(
       keyboardType: TextInputType.text,
       textInputAction: TextInputAction.next,
       maxLength: 1000,
@@ -106,7 +106,7 @@ class ContactUs extends StatelessWidget {
   }
 
   Widget eMailTaker(double deviceHeight, double deviceWidth) {
-    return TextField(
+    return const TextField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black, width: 3), ),
@@ -119,9 +119,9 @@ class ContactUs extends StatelessWidget {
   Widget orDividerBuilder(double deviceWidth) {
     return  Row(
       children: [
-        Expanded(flex: 4, child: Divider(color: Colors.black, thickness: 2,)),
+        const Expanded(flex: 4, child: Divider(color: Colors.black, thickness: 2,)),
         Expanded(flex: 2, child: Center(child: Text("OR", style: GoogleFonts.openSans(fontSize: deviceWidth/26, fontWeight: FontWeight.bold),))),
-        Expanded(flex: 4, child: Divider(color: Colors.black, thickness: 2,)),
+        const Expanded(flex: 4, child: Divider(color: Colors.black, thickness: 2,)),
       ],
     );
   }

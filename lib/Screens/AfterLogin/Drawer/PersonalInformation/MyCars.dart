@@ -44,16 +44,14 @@ class _MyCarsState extends State<MyCars> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  child: Text(
-                    "My Cars",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: _deviceWidth / 21),
-                  ),
+                Text(
+                  "My Cars",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: _deviceWidth / 21),
                 ),
                 IconButton(
-                    icon: Icon(Icons.add),
+                    icon: const Icon(Icons.add),
                     onPressed: () {
                       showDialog(
                           context: context,
@@ -77,12 +75,12 @@ class _MyCarsState extends State<MyCars> {
       children: [
         Expanded(
             flex: 2,
-            child: Container(
+            child: SizedBox(
               height: deviceHeight / 6.6,
               child: TextButton(
                 child: Icon(
                   Icons.keyboard_backspace,
-                  color: Color(0xFF2D9BF0),
+                  color: const Color(0xFF2D9BF0),
                   size: deviceHeight / 6.6,
                 ),
                 onPressed: () {
@@ -96,30 +94,30 @@ class _MyCarsState extends State<MyCars> {
               child: Text(
                 "WashMe",
                 style: GoogleFonts.fredokaOne(
-                    fontSize: deviceHeight / 9, color: Color(0xFF2D9BF0)),
+                    fontSize: deviceHeight / 9, color: const Color(0xFF2D9BF0)),
               ),
             )),
-        Expanded(flex: 1, child: SizedBox())
+        const Expanded(flex: 1, child: SizedBox())
       ],
     );
   }
 
   Widget carsBuilder(
       BuildContext context, double deviceHeight, double deviceWidth) {
-    return Container(
+    return SizedBox(
       height: deviceHeight * (5 / 6),
       child: FutureBuilder(
           future: VehiclesSQLHelper.getCarsData(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
-                return Text('Loading....');
+                return const Text('Loading....');
               default:
-                if (snapshot.hasError)
-                  return Text('Error');
-                else {
+                if (snapshot.hasError) {
+                  return const Text('Error');
+                } else {
                   List dataList = snapshot.data as List;
-                  if (dataList.length == 0) {
+                  if (dataList.isEmpty) {
                     return Column(
                       children: [
                         SizedBox(
@@ -134,7 +132,7 @@ class _MyCarsState extends State<MyCars> {
                           height: deviceHeight / 16,
                         ),
                         IconButton(
-                            icon: Icon(Icons.add),
+                            icon: const Icon(Icons.add),
                             onPressed: () {
                               showDialog(
                                   context: context,
@@ -162,16 +160,14 @@ class _MyCarsState extends State<MyCars> {
                                 title: Row(
                                   children: [
                                     Expanded(
-                                      child: Container(
-                                        child: Text(vehicleInstance[
-                                                "licensePlateNumber"] +
-                                            " " +
-                                            vehicleInstance["brand"] +
-                                            " " +
-                                            vehicleInstance["model"]),
-                                      ),
+                                      child: Text(vehicleInstance[
+                                              "licensePlateNumber"] +
+                                          " " +
+                                          vehicleInstance["brand"] +
+                                          " " +
+                                          vehicleInstance["model"]),
                                     ),
-                                    Container(
+                                    SizedBox(
                                         width: deviceWidth / 4,
                                         child: Image.file(File(
                                             vehicleInstance["photoFile"]))),
@@ -195,7 +191,7 @@ class _MyCarsState extends State<MyCars> {
                                   },
                                 ),
                               ),
-                              Divider(thickness: 2, color: Colors.grey),
+                              const Divider(thickness: 2, color: Colors.grey),
                             ],
                           );
                         });
@@ -250,6 +246,7 @@ class _MyCarsState extends State<MyCars> {
                             FirestoreUserVehiclesHelper.userVehiclesAdder(
                                 insertResult, _vehicleValue);
                             setState(() {});
+                            if(!mounted) return;
                             Navigator.pop(context);
                           } else {
                             print(insertResult);
@@ -275,203 +272,190 @@ class _MyCarsState extends State<MyCars> {
     double deviceWidth, VehicleValues vehicleValue,
   ) {
     return StatefulBuilder(builder: (context, setState) {
-      return Container(
+      return SizedBox(
         width: deviceWidth * (11 / 12),
         child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                    child: Text(
-                      "Add Your Car",
-                      style: GoogleFonts.notoSans(
-                          fontSize: deviceWidth / 21, fontWeight: FontWeight.bold),
-                    )),
-                Container(
-                  child: IconButton(
-                      onPressed: () {
-                        Navigator.of(context, rootNavigator: true).pop('dialog');
-                      },
-                      icon: Icon(Icons.close)),
+                Text(
+                  "Add Your Car",
+                  style: GoogleFonts.notoSans(
+                      fontSize: deviceWidth / 21, fontWeight: FontWeight.bold),
                 ),
+                IconButton(
+                    onPressed: () {
+                      Navigator.of(context, rootNavigator: true).pop('dialog');
+                    },
+                    icon: const Icon(Icons.close)),
               ],
             ),
             Form(
               key: _carInfoFormKey,
               child: Column(
                 children: [
-                  Container(
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          textInputAction: TextInputAction.next,
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.zero,
-                            fillColor: Colors.white,
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Colors.blue, width: 4),
-                            ),
-                            filled: true,
-                            hintText: 'XX XXX000',
-                            labelText: 'License Plate Number',
+                  Column(
+                    children: [
+                      TextFormField(
+                        textInputAction: TextInputAction.next,
+                        decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.zero,
+                          fillColor: Colors.white,
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide:
+                            BorderSide(color: Colors.blue, width: 4),
                           ),
-                          onSaved: (String? value) {
-                            vehicleValue.licensePlateNumber = value.toString();
-                          },
+                          filled: true,
+                          hintText: 'XX XXX000',
+                          labelText: 'License Plate Number',
                         ),
-                        Container(
-                          width: double.infinity,
-                          child: Text(
-                            "License Plate Number",
-                            style: GoogleFonts.openSans(
-                                fontSize: deviceWidth / 24,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        )
-                      ],
-                    ),
+                        onSaved: (String? value) {
+                          vehicleValue.licensePlateNumber = value.toString();
+                        },
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          "License Plate Number",
+                          style: GoogleFonts.openSans(
+                              fontSize: deviceWidth / 24,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
                   ),
                   SizedBox(
                     height: deviceHeight / 100,
                   ),
-                  Container(
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          textInputAction: TextInputAction.next,
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.zero,
-                            fillColor: Colors.white,
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Colors.blue, width: 4),
-                            ),
-                            filled: true,
-                            hintText: 'Ford',
-                            labelText: 'Brand',
+                  Column(
+                    children: [
+                      TextFormField(
+                        textInputAction: TextInputAction.next,
+                        decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.zero,
+                          fillColor: Colors.white,
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide:
+                            BorderSide(color: Colors.blue, width: 4),
                           ),
-                          onSaved: (String? value) {
-                            vehicleValue.brand = value.toString();
-                          },
+                          filled: true,
+                          hintText: 'Ford',
+                          labelText: 'Brand',
                         ),
-                        Container(
-                          width: double.infinity,
-                          child: Text(
-                            "Brand",
-                            style: GoogleFonts.openSans(
-                                fontSize: deviceWidth / 24,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        )
-                      ],
-                    ),
+                        onSaved: (String? value) {
+                          vehicleValue.brand = value.toString();
+                        },
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          "Brand",
+                          style: GoogleFonts.openSans(
+                              fontSize: deviceWidth / 24,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
                   ),
                   SizedBox(
                     height: deviceHeight / 100,
                   ),
-                  Container(
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          textInputAction: TextInputAction.next,
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.zero,
-                            fillColor: Colors.white,
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Colors.blue, width: 4),
-                            ),
-                            filled: true,
-                            hintText: 'Escape',
-                            labelText: 'Model',
+                  Column(
+                    children: [
+                      TextFormField(
+                        textInputAction: TextInputAction.next,
+                        decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.zero,
+                          fillColor: Colors.white,
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide:
+                            BorderSide(color: Colors.blue, width: 4),
                           ),
-                          onSaved: (String? value) {
-                            vehicleValue.model = value.toString();
-                          },
+                          filled: true,
+                          hintText: 'Escape',
+                          labelText: 'Model',
                         ),
-                        Container(
-                          width: double.infinity,
-                          child: Text(
-                            "Model",
-                            style: GoogleFonts.openSans(
-                                fontSize: deviceWidth / 24,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        )
-                      ],
-                    ),
+                        onSaved: (String? value) {
+                          vehicleValue.model = value.toString();
+                        },
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          "Model",
+                          style: GoogleFonts.openSans(
+                              fontSize: deviceWidth / 24,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
                   ),
                   SizedBox(
                     height: deviceHeight / 100,
                   ),
-                  Container(
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          textInputAction: TextInputAction.next,
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.zero,
-                            fillColor: Colors.white,
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Colors.blue, width: 4),
-                            ),
-                            filled: true,
-                            hintText: 'Navy Blue',
-                            labelText: 'Color',
+                  Column(
+                    children: [
+                      TextFormField(
+                        textInputAction: TextInputAction.next,
+                        decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.zero,
+                          fillColor: Colors.white,
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide:
+                            BorderSide(color: Colors.blue, width: 4),
                           ),
-                          onSaved: (String? value) {
-                            vehicleValue.color = value.toString();
-                          },
+                          filled: true,
+                          hintText: 'Navy Blue',
+                          labelText: 'Color',
                         ),
-                        Container(
-                          width: double.infinity,
-                          child: Text(
-                            "Color",
-                            style: GoogleFonts.openSans(
-                                fontSize: deviceWidth / 24,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        )
-                      ],
-                    ),
+                        onSaved: (String? value) {
+                          vehicleValue.color = value.toString();
+                        },
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          "Color",
+                          style: GoogleFonts.openSans(
+                              fontSize: deviceWidth / 24,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
                   ),
                   SizedBox(
                     height: deviceHeight / 100,
                   ),
-                  Container(
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          textInputAction: TextInputAction.next,
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.zero,
-                            fillColor: Colors.white,
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Colors.blue, width: 4),
-                            ),
-                            filled: true,
-                            hintText: 'Small, Medium, Sedan, Van, SUV,',
-                            labelText: 'Class Type',
+                  Column(
+                    children: [
+                      TextFormField(
+                        textInputAction: TextInputAction.next,
+                        decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.zero,
+                          fillColor: Colors.white,
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide:
+                            BorderSide(color: Colors.blue, width: 4),
                           ),
-                          onSaved: (String? value) {
-                            vehicleValue.classType = value.toString();
-                          },
+                          filled: true,
+                          hintText: 'Small, Medium, Sedan, Van, SUV,',
+                          labelText: 'Class Type',
                         ),
-                        Container(
-                          width: double.infinity,
-                          child: Text(
-                            "Class Type",
-                            style: GoogleFonts.openSans(
-                                fontSize: deviceWidth / 24,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        )
-                      ],
-                    ),
+                        onSaved: (String? value) {
+                          vehicleValue.classType = value.toString();
+                        },
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          "Class Type",
+                          style: GoogleFonts.openSans(
+                              fontSize: deviceWidth / 24,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
                   ),
                   SizedBox(
                     height: deviceHeight / 100,

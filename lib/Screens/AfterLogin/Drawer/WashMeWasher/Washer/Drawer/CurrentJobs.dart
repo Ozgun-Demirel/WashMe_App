@@ -28,7 +28,7 @@ class _CurrentJobsState extends State<CurrentJobs> {
   Set<Marker> globalMarkers = {};
   CustomerLocation customerLocation = CustomerLocation();
 
-  LatLng selectedCustomerLatLong = LatLng(31.2, -99.6);
+  LatLng selectedCustomerLatLong = const LatLng(31.2, -99.6);
 
   @override
   Widget build(BuildContext context) {
@@ -203,7 +203,7 @@ class _CurrentJobsState extends State<CurrentJobs> {
 
         globalMarkers = {
           Marker(
-              markerId: MarkerId("You"),
+              markerId: const MarkerId("You"),
               position: LatLng(double.parse(currentLocation!.lat.toString()),
                   double.parse(currentLocation.long.toString())))
         };
@@ -244,7 +244,7 @@ class _CurrentJobsState extends State<CurrentJobs> {
               });
             }
 
-            globalMarkers.remove(MarkerId("customerMarker"));
+            globalMarkers.remove(const MarkerId("customerMarker"));
 
 
             var customerBitMap = BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueCyan);
@@ -273,7 +273,7 @@ class _CurrentJobsState extends State<CurrentJobs> {
                 children: [
                   Row(
                     children: [
-                      Expanded(flex: 1, child: SizedBox()),
+                      const Expanded(flex: 1, child: SizedBox()),
                       Visibility(
                         visible: currentPage == 1,
                         child: Expanded(
@@ -400,7 +400,7 @@ class _CurrentJobsState extends State<CurrentJobs> {
                       washMeOrderCompletion(mounted, context, currentOrder, currentOrderKey);
 
 
-                    }, child: Container(
+                    }, child: SizedBox(
                         width: deviceWidth * (5/8),
                         height: deviceHeight /16,
                         child: Center(child: Text(minDifference >10 || minDifference < -45 ? "Can Not Complete Yet" : "Complete Order (${(minDifference+45).toStringAsFixed(0)}min left)",

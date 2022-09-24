@@ -17,9 +17,9 @@ class Assets {
   static const String CommonScreensPhone = 'lib/Assets/WashMe/CommonScreens/phone.png';
   static const String CommonScreensReferAFriend = 'lib/Screens/CommonScreens/ReferAFriend.dart';
   static const String CommonScreensSharing = 'lib/Assets/WashMe/CommonScreens/sharing.png';
+  static const String CommonScreensSukru = 'lib/Assets/WashMe/CommonScreens/sukru.jpg';
   static const String CommonScreensTwitter = 'lib/Assets/WashMe/CommonScreens/twitter.png';
   static const String CommonScreensWhatsapp = 'lib/Assets/WashMe/CommonScreens/whatsapp.png';
-  static const String CommonScreensSukru= 'lib/Assets/WashMe/CommonScreens/sukru.jpg';
   static const String CustomerSideBLCurrentOrdersOpener = 'lib/InterfaceFunc/screenOpeners/CustomerSide/BLCurrentOrdersOpener.dart';
   static const String CustomerSideCurrentOrdersOpener = 'lib/InterfaceFunc/screenOpeners/CustomerSide/currentOrdersOpener.dart';
   static const String CustomerSidePreviousOrdersOpener = 'lib/InterfaceFunc/screenOpeners/CustomerSide/previousOrdersOpener.dart';
@@ -37,7 +37,6 @@ class Assets {
   static const String FirebaseHelperFirebaseMainHelper = 'lib/FirebaseHelper/FirebaseMainHelper.dart';
   static const String ImageHelperImagePicker = 'lib/InterfaceFunc/ImageHelper/imagePicker.dart';
   static const String InterfaceFuncMaterialColorCreator = 'lib/InterfaceFunc/MaterialColorCreator.dart';
-  static const String InterfaceFuncOnLoginSQLHelper = 'lib/InterfaceFunc/onLoginSQLHelper.dart';
   static const String InterfaceFuncPlatformDependedWidgetChanges = 'lib/InterfaceFunc/platformDependedWidgetChanges.dart';
   static const String InterfaceFuncRegisterWasher = 'lib/InterfaceFunc/registerWasher.dart';
   static const String InterfaceFuncSnackBarInformation = 'lib/InterfaceFunc/snackBarInformation.dart';

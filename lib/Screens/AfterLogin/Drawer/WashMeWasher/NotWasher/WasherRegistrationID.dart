@@ -44,7 +44,7 @@ class _WasherRegistrationIDState extends State<WasherRegistrationID> {
                 SizedBox(
                   height: _deviceHeight / 30,
                 ),
-                Container(
+                SizedBox(
                   width: double.infinity,
                   child: Text(
                     "Uplaod Your ID",
@@ -83,7 +83,7 @@ class _WasherRegistrationIDState extends State<WasherRegistrationID> {
                 SizedBox(
                   height: _deviceHeight / 40,
                 ),
-                Container(
+                SizedBox(
                   width: double.infinity,
                   child: Text(
                     "2. Back of your ID. Leave blank for passport.",
@@ -109,17 +109,15 @@ class _WasherRegistrationIDState extends State<WasherRegistrationID> {
       children: [
         Expanded(
             flex: 2,
-            child: Container(
-              child: TextButton(
-                child: Icon(
-                  Icons.keyboard_backspace,
-                  color: Color(0xFF2D9BF0),
-                  size: deviceWidth / 12,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+            child: TextButton(
+              child: Icon(
+                Icons.keyboard_backspace,
+                color: const Color(0xFF2D9BF0),
+                size: deviceWidth / 12,
               ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
             )),
         Expanded(
           flex: 12,
@@ -128,7 +126,7 @@ class _WasherRegistrationIDState extends State<WasherRegistrationID> {
               "WashMe Washer",
               textAlign: TextAlign.center,
               style: GoogleFonts.fredokaOne(
-                  fontSize: deviceWidth / 10, color: Color(0xFF2D9BF0)),
+                  fontSize: deviceWidth / 10, color: const Color(0xFF2D9BF0)),
             ),
           ),
         )
@@ -137,138 +135,134 @@ class _WasherRegistrationIDState extends State<WasherRegistrationID> {
   }
 
   Widget frontOfIDPhotoBuilder(double deviceHeight, double deviceWidth, BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.only(left: deviceWidth/20, right: deviceWidth/20),
-            child: Row(
-              children: [
-                Expanded(flex: 4, child: ElevatedButton(style: ElevatedButton.styleFrom(
-                  primary: const Color(0xFF2D9BF0),
-                ),
-                  child: Container(
-                    margin: EdgeInsets.only(top: deviceHeight/40, bottom: deviceHeight/40,),
-                    child: Text("Open Camera",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.openSans(
-                          fontSize: deviceWidth / 24),),
-                  ), onPressed: () async {
-                    File? fileName = await ImagePickerHelper.takePicture();
-                    if (fileName == null) {
-                      return;
-                    } else {
-                      frontOfIDFile = fileName;
-                      setState(() {});
-                    }
-                  },)),
-                Expanded(flex: 1, child: Container(child: Center(child: Text("or",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.openSans(
-                      fontSize: deviceWidth / 24),),),)),
-                Expanded(flex: 4, child: ElevatedButton(style: ElevatedButton.styleFrom(
-                  primary: const Color(0xFF2D9BF0),
-                ),
-                  child: Container(
-                    margin: EdgeInsets.only(top: deviceHeight/40, bottom: deviceHeight/40,),
-                    child: Text("Open Galery",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.openSans(
-                          fontSize: deviceWidth / 24),),
-                  ), onPressed: () async {
-                    File? fileName = await ImagePickerHelper.selectPicture();
-                    if (fileName == null) {
-                      return;
-                    } else {
-                      frontOfIDFile = fileName;
-                      setState(() {});
-                    }
-                  },)),
-              ],
-            ),
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.only(left: deviceWidth/20, right: deviceWidth/20),
+          child: Row(
+            children: [
+              Expanded(flex: 4, child: ElevatedButton(style: ElevatedButton.styleFrom(
+                primary: const Color(0xFF2D9BF0),
+              ),
+                child: Container(
+                  margin: EdgeInsets.only(top: deviceHeight/40, bottom: deviceHeight/40,),
+                  child: Text("Open Camera",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.openSans(
+                        fontSize: deviceWidth / 24),),
+                ), onPressed: () async {
+                  File? fileName = await ImagePickerHelper.takePicture();
+                  if (fileName == null) {
+                    return;
+                  } else {
+                    frontOfIDFile = fileName;
+                    setState(() {});
+                  }
+                },)),
+              Expanded(flex: 1, child: Center(child: Text("or",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.openSans(
+                    fontSize: deviceWidth / 24),),)),
+              Expanded(flex: 4, child: ElevatedButton(style: ElevatedButton.styleFrom(
+                primary: const Color(0xFF2D9BF0),
+              ),
+                child: Container(
+                  margin: EdgeInsets.only(top: deviceHeight/40, bottom: deviceHeight/40,),
+                  child: Text("Open Galery",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.openSans(
+                        fontSize: deviceWidth / 24),),
+                ), onPressed: () async {
+                  File? fileName = await ImagePickerHelper.selectPicture();
+                  if (fileName == null) {
+                    return;
+                  } else {
+                    frontOfIDFile = fileName;
+                    setState(() {});
+                  }
+                },)),
+            ],
           ),
-          SizedBox(height: deviceHeight/40,),
-          Container(
-            height: deviceHeight/4,
-            decoration: BoxDecoration(border: Border.all(color: Color(0xFF414BB2))),
-            child: frontOfIDFile == null
-                ? null
-                : Image.file(
-              frontOfIDFile as File,
-              width: double.infinity,
-              height: double.infinity,
-            ),
+        ),
+        SizedBox(height: deviceHeight/40,),
+        Container(
+          height: deviceHeight/4,
+          decoration: BoxDecoration(border: Border.all(color: const Color(0xFF414BB2))),
+          child: frontOfIDFile == null
+              ? null
+              : Image.file(
+            frontOfIDFile as File,
+            width: double.infinity,
+            height: double.infinity,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
   Widget backOfIDPhotoBuilder(double deviceHeight, double deviceWidth, BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.only(left: deviceWidth/20, right: deviceWidth/20),
-            child: Row(
-              children: [
-                Expanded(flex: 4, child: ElevatedButton(style: ElevatedButton.styleFrom(
-                  primary: const Color(0xFF2D9BF0),
-                ),
-                  child: Container(
-                    margin: EdgeInsets.only(top: deviceHeight/40, bottom: deviceHeight/40,),
-                    child: Text("Open Camera",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.openSans(
-                          fontSize: deviceWidth / 24),),
-                  ), onPressed: () async {
-                    File? fileName = await ImagePickerHelper.takePicture();
-                    if (fileName == null) {
-                      return;
-                    } else {
-                      backOfIDFile = fileName;
-                      setState(() {});
-                    }
-                  },)),
-                Expanded(flex: 1, child: Container(child: Center(child: Text("or",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.openSans(
-                      fontSize: deviceWidth / 24),),),)),
-                Expanded(flex: 4, child: ElevatedButton(style: ElevatedButton.styleFrom(
-                  primary: const Color(0xFF2D9BF0),
-                ),
-                  child: Container(
-                    margin: EdgeInsets.only(top: deviceHeight/40, bottom: deviceHeight/40,),
-                    child: Text("Open Galery",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.openSans(
-                          fontSize: deviceWidth / 24),),
-                  ), onPressed: () async {
-                    File? fileName = await ImagePickerHelper.selectPicture();
-                    if (fileName == null) {
-                      return;
-                    } else {
-                      backOfIDFile = fileName;
-                      setState(() {});
-                    }
-                  },)),
-              ],
-            ),
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.only(left: deviceWidth/20, right: deviceWidth/20),
+          child: Row(
+            children: [
+              Expanded(flex: 4, child: ElevatedButton(style: ElevatedButton.styleFrom(
+                primary: const Color(0xFF2D9BF0),
+              ),
+                child: Container(
+                  margin: EdgeInsets.only(top: deviceHeight/40, bottom: deviceHeight/40,),
+                  child: Text("Open Camera",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.openSans(
+                        fontSize: deviceWidth / 24),),
+                ), onPressed: () async {
+                  File? fileName = await ImagePickerHelper.takePicture();
+                  if (fileName == null) {
+                    return;
+                  } else {
+                    backOfIDFile = fileName;
+                    setState(() {});
+                  }
+                },)),
+              Expanded(flex: 1, child: Center(child: Text("or",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.openSans(
+                    fontSize: deviceWidth / 24),),)),
+              Expanded(flex: 4, child: ElevatedButton(style: ElevatedButton.styleFrom(
+                primary: const Color(0xFF2D9BF0),
+              ),
+                child: Container(
+                  margin: EdgeInsets.only(top: deviceHeight/40, bottom: deviceHeight/40,),
+                  child: Text("Open Galery",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.openSans(
+                        fontSize: deviceWidth / 24),),
+                ), onPressed: () async {
+                  File? fileName = await ImagePickerHelper.selectPicture();
+                  if (fileName == null) {
+                    return;
+                  } else {
+                    backOfIDFile = fileName;
+                    setState(() {});
+                  }
+                },)),
+            ],
           ),
-          SizedBox(height: deviceHeight/40,),
-          Container(
-            height: deviceHeight/4,
-            decoration: BoxDecoration(border: Border.all(color: Color(0xFF414BB2))),
-            child: backOfIDFile == null
-                ? null
-                : Image.file(
-              backOfIDFile as File,
-              width: double.infinity,
-              height: double.infinity,
-            ),
+        ),
+        SizedBox(height: deviceHeight/40,),
+        Container(
+          height: deviceHeight/4,
+          decoration: BoxDecoration(border: Border.all(color: const Color(0xFF414BB2))),
+          child: backOfIDFile == null
+              ? null
+              : Image.file(
+            backOfIDFile as File,
+            width: double.infinity,
+            height: double.infinity,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -294,6 +288,7 @@ class _WasherRegistrationIDState extends State<WasherRegistrationID> {
             Map<String, dynamic>? data = querySnapshot.data();
 
               if (data!.containsKey("IDURL")){
+                if (!mounted) return;
                 Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -317,7 +312,7 @@ class _WasherRegistrationIDState extends State<WasherRegistrationID> {
 
               }
 
-
+            if(!mounted) return;
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(duration: Duration(seconds: 3),content: Text('Photos are uploaded successfully')),
@@ -335,13 +330,13 @@ class _WasherRegistrationIDState extends State<WasherRegistrationID> {
 
         },
         child: Container(
-          child: Text("Done",
-              style: TextStyle(fontSize: deviceWidth / 20)),
           margin: EdgeInsets.only(
               right: deviceWidth / 10,
               left: deviceWidth / 10,
               top: deviceWidth / 20,
               bottom: deviceWidth / 20),
+          child: Text("Done",
+              style: TextStyle(fontSize: deviceWidth / 20)),
         ));
   }
 }

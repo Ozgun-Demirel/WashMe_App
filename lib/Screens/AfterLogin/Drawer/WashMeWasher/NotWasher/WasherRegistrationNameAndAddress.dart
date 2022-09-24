@@ -8,10 +8,10 @@ import '../../../../../InterfaceFunc/registerWasher.dart';
 import '../../../../../InterfaceFunc/screenOpeners/showTransparentDialogOnLoad.dart';
 import '../../../../../Validation/WasherRegistration/nameAndAddressValidator.dart';
 
-class washerRegistrationNameAndAddressFormData {
+class WasherRegistrationNameAndAddressFormData {
   String? name, middleName, surname, streetNumberAndName, city, state, zip;
 
-  washerRegistrationNameAndAddressFormData({
+  WasherRegistrationNameAndAddressFormData({
     this.name,
     this.middleName,
     this.surname,
@@ -38,7 +38,7 @@ class WasherRegistrationNameAndAddress extends StatefulWidget {
 class _WasherRegistrationNameAndAddressState
     extends State<WasherRegistrationNameAndAddress> with NameAndAddressValidatorMixin {
   final _washerInformationFormKey = GlobalKey<FormState>();
-  washerRegistrationNameAndAddressFormData washerRegisterFormData = washerRegistrationNameAndAddressFormData();
+  WasherRegistrationNameAndAddressFormData washerRegisterFormData = WasherRegistrationNameAndAddressFormData();
 
   @override
   Widget build(BuildContext context) {

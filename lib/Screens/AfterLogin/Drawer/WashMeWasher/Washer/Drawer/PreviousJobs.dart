@@ -30,10 +30,10 @@ class PreviousJobs extends StatelessWidget {
                 hamMenuAndTitle(_deviceWidth, context),
 
                 SizedBox(height: _deviceHeight/30,),
-                Container(width: double.infinity, child: Text("Previous Jobs:", style: GoogleFonts.notoSans(fontWeight: FontWeight.bold, fontSize: _deviceWidth/21),),),
+                SizedBox(width: double.infinity, child: Text("Previous Jobs:", style: GoogleFonts.notoSans(fontWeight: FontWeight.bold, fontSize: _deviceWidth/21),),),
                 SizedBox(height: _deviceHeight/45,),
 
-                previousJobs.length == 0 ? Text("There are no previous jobs!") : previousJobsBuilder(_deviceHeight, _deviceWidth, previousJobs),
+                previousJobs.isEmpty ? const Text("There are no previous jobs!") : previousJobsBuilder(_deviceHeight, _deviceWidth, previousJobs),
               ],
             ),
           ),
@@ -46,12 +46,12 @@ class PreviousJobs extends StatelessWidget {
       children: [
         Expanded(
             flex: 2,
-            child: Container(
+            child: SizedBox(
               height:  deviceHeight / 6.6,
               child: TextButton(
                 child: Icon(
                   Icons.keyboard_backspace,
-                  color: Color(0xFF2D9BF0),
+                  color: const Color(0xFF2D9BF0),
                   size: deviceHeight / 6.6,
                 ),
                 onPressed: () {
@@ -65,10 +65,10 @@ class PreviousJobs extends StatelessWidget {
               child: Text(
                 "WashMe",
                 style: GoogleFonts.fredokaOne(
-                    fontSize: deviceHeight / 9, color: Color(0xFF2D9BF0)),
+                    fontSize: deviceHeight / 9, color: const Color(0xFF2D9BF0)),
               ),
             )),
-        Expanded(flex: 1, child: SizedBox())
+        const Expanded(flex: 1, child: SizedBox())
       ],
     );
   }

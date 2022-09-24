@@ -56,7 +56,7 @@ class _SplashState extends State<Splash> {
                       endIndent: _deviceWidth / 20,
                       indent: _deviceWidth / 20,
                     )),
-                Expanded(flex: 1, child: SizedBox()),
+                const Expanded(flex: 1, child: SizedBox()),
                 Expanded(
                   flex: 40,
                   child: Column(
@@ -121,10 +121,10 @@ class _SplashState extends State<Splash> {
                     children: [
                       Checkbox(
                         side: MaterialStateBorderSide.resolveWith(
-                              (states) => BorderSide(width: 2.0, color: Colors.white),
+                              (states) => const BorderSide(width: 2.0, color: Colors.white),
                         ),
                         checkColor: Colors.white,
-                        fillColor: MaterialStateProperty.all(Color(0xFF2D9BF0)),
+                        fillColor: MaterialStateProperty.all(const Color(0xFF2D9BF0)),
                         value: !(widget.showIntro ?? true),
                         onChanged: (bool? value) async {
 

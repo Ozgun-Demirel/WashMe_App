@@ -62,12 +62,12 @@ class _Intro1State extends State<Intro> {
                       fontSize: _deviceWidth / 16, color: Colors.white),
                 ),
               ),
-              Expanded(flex: 20, child: SizedBox()),
+              const Expanded(flex: 20, child: SizedBox()),
               Expanded(
                 flex: 6,
                 child: Row(
                   children: [
-                    Expanded(flex: 4, child: SizedBox()),
+                    const Expanded(flex: 4, child: SizedBox()),
                     Expanded(
                       flex: 6,
                       child: pageNum != 1
@@ -80,9 +80,9 @@ class _Intro1State extends State<Intro> {
                                 "lib/Assets/WashMe/SplashScreen/IntroLeftArrow.png", height: _deviceWidth/2,
                               ),
                             )
-                          : SizedBox(),
+                          : const SizedBox(),
                     ),
-                    Expanded(flex: 2,child: SizedBox()),
+                    const Expanded(flex: 2,child: SizedBox()),
                     Expanded(
                       flex: 6,
                       child:  TextButton(
@@ -98,7 +98,7 @@ class _Intro1State extends State<Intro> {
                                 "lib/Assets/WashMe/SplashScreen/IntroRightArrow.png", height: _deviceWidth/2,
                               )),
                     ),
-                    Expanded(flex: 4, child: SizedBox()),
+                    const Expanded(flex: 4, child: SizedBox()),
                   ],
                 ),
               ),
