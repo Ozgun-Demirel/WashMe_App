@@ -89,7 +89,7 @@ class AboutUs extends StatelessWidget {
                     )),
 
                 Image.asset(
-                  "lib/Assets/WashMe/CommonScreens/şükrü.jpg",
+                  "lib/Assets/WashMe/CommonScreens/sukru.jpg",
                   height: _deviceHeight / 5,
                 ),
                 SizedBox(height: _deviceHeight/60,),

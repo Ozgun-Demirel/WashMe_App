@@ -95,7 +95,7 @@ class FirestoreWashMeOrderShifterHelper {
         .doc(orderKey).delete();
   }
 
-  static completedOrderCreator(Map<String, dynamic> currentOrder, String orderKey, bool isCompleted) async {
+  static completedOrderCreator(Map<String, dynamic> currentOrder, String orderKey, bool isCompleted, {bool? washerPendingOrderExpire}) async {
 
     currentOrder["isCompleted"] = isCompleted;
 
@@ -106,13 +106,23 @@ class FirestoreWashMeOrderShifterHelper {
         .doc(orderKey)
         .set(currentOrder);
 
-    await FirebaseFirestore.instance
-        .collection('jobs')
-        .doc("washMe")
-        .collection("cities")
-        .doc(currentOrder["adminArea"])
-        .collection("ongoingRequests")
-        .doc(orderKey).delete();
+    if (washerPendingOrderExpire == true){
+      await FirebaseFirestore.instance
+          .collection('jobs')
+          .doc("washMe")
+          .collection("cities")
+          .doc(currentOrder["adminArea"])
+          .collection("pendingRequests")
+          .doc(orderKey).delete();
+    } else {
+      await FirebaseFirestore.instance
+          .collection('jobs')
+          .doc("washMe")
+          .collection("cities")
+          .doc(currentOrder["adminArea"])
+          .collection("ongoingRequests")
+          .doc(orderKey).delete();
+    }
 
   }
 }

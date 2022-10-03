@@ -1,4 +1,5 @@
 
+
 import '../../InterfaceFunc/DatabaseHelpers/SubHelpers/userMyInformationHelper.dart';
 
 class UserInformations {
@@ -11,7 +12,7 @@ class UserInformations {
   int? birthDayDay;
   int? birthDayYear;
   String? gender;
-  String? photoFile;
+  String? photoFilePath;
 
   UserInformations();
 
@@ -25,7 +26,7 @@ class UserInformations {
     this.birthDayDay,
     this.birthDayYear,
     this.gender,
-    this.photoFile,
+    this.photoFilePath,
   });
 
   UserInformations.withAllInfo(
@@ -38,21 +39,22 @@ class UserInformations {
     this.birthDayDay,
     this.birthDayYear,
     this.gender,
-    this.photoFile,
+    this.photoFilePath,
   );
 
   factory UserInformations.fromMap(Map dataMap) {
-    return UserInformations.withAllInfo(
-        dataMap["id"],
-        dataMap["fullName"],
-        dataMap["surname"],
-        dataMap["phoneNumber"],
-        dataMap["contactEmail"],
-        dataMap["birthDayMonth"],
-        dataMap["birthDayDay"],
-        dataMap["birthDayYear"],
-        dataMap["gender"],
-        dataMap["photoFile"]);
+    return UserInformations.free(
+        id: dataMap["id"],
+       fullName: dataMap["fullName"],
+      surname: dataMap["surname"],
+      phoneNumber: dataMap["phoneNumber"],
+      contactEmail: dataMap["contactEmail"],
+      birthDayMonth: dataMap["birthDayMonth"],
+      birthDayDay: dataMap["birthDayDay"],
+      birthDayYear: dataMap["birthDayYear"],
+      gender: dataMap["gender"],
+      photoFilePath: dataMap["photoFilePath"],
+    );
   }
 
   static Future<UserInformations> returnAllInfo(String id) async {
@@ -77,7 +79,7 @@ class UserInformations {
           DateTime(birthDayYear ?? 2022, birthDayMonth ?? 1, birthDayDay ?? 1)
               .toString(),
       "gender": gender.toString(),
-      "photoFile": photoFile.toString(),
+      "photoFilePath": photoFilePath.toString(),
     };
   }
 }

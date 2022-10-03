@@ -269,6 +269,7 @@ class _WasherRegistrationNameAndAddressState
         hintText: 'Domingo',
         labelText: 'Middle Name',
       ),
+      validator: (value) => nameValidator(value.toString()),
       onSaved: (String? value) {
         washerRegisterFormData.middleName = value.toString().trim();
       },
@@ -364,6 +365,7 @@ class _WasherRegistrationNameAndAddressState
                 filled: true,
                 hintText: 'NY',
                 labelText: 'State',
+                counterText: "",
               ),
               validator: (value) => stateValidator(value.toString()),
               onSaved: (String? value) {
@@ -391,6 +393,7 @@ class _WasherRegistrationNameAndAddressState
                 filled: true,
                 hintText: '10417',
                 labelText: 'ZIP',
+                counterText: "",
               ),
               validator: (value) => zipValidator(value.toString()),
               onSaved: (String? value) {

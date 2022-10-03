@@ -1,13 +1,13 @@
 import 'package:WashMe/InterfaceFunc/platformDependedWidgetChanges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:time_picker_widget/time_picker_widget.dart';
+import 'package:time/time.dart';
 
 import '../../../FirebaseHelper/FirestoreHelpers/UserHelpers/UserLocationsHelper.dart';
 import '../../../FirebaseHelper/FirestoreHelpers/WashMeOperationsHelper/washMeOrderAdder.dart';
@@ -425,116 +425,43 @@ class _BLClientInputsState extends State<BLClientInputs> {
   }
 
   _washTime(double deviceHeight, double deviceWidth) {
-    String timePickerString = "";
-
-    if (_orderValue.timeValue == null) {
-      timePickerString = "Time Picker";
-    } else if (_orderValue.timeValue!.hour > 12) {
-      timePickerString =
-      "${_orderValue.timeValue!.hour - 12}:${_orderValue.timeValue!.minute} P.M.";
-    } else {
-      timePickerString =
-      "${_orderValue.timeValue!.hour}:${_orderValue.timeValue!.minute} A.M.";
-    }
-
-    return Column(
-      children: [
-        Text(
-          "Select Wash Time",
-          style: GoogleFonts.openSans(
-            fontSize: deviceWidth / 21,
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        Row(
+    return TextButton(
+      onPressed: () {
+        buildDateTimePicker(deviceHeight, deviceWidth, context);
+      },
+      child: Container(
+        width: deviceWidth * (3/4),
+        padding: EdgeInsets.symmetric(
+            horizontal: deviceWidth / 20,
+            vertical: deviceHeight / 100),
+        child: Column(
           children: [
-            Expanded(
-              flex: 5,
-              child: TextButton(
-                  onPressed: () {
-                    var now = DateTime.now();
-                    DatePicker.showDatePicker(context,
-                        showTitleActions: true,
-                        minTime: now,
-                        maxTime: DateTime(now.year, now.month, now.day + 6),
-                        onChanged: (date) {
-                          setState(() {
-                            _orderValue.dateValue = date;
-                          });
-                        }, onConfirm: (date) {
-                          setState(() {
-                            _orderValue.dateValue = date;
-                          });
-                        }, currentTime: DateTime.now(), locale: LocaleType.en);
-                  },
-                  child: Container(
-                    width: deviceWidth * (3 / 8),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: deviceWidth / 20,
-                        vertical: deviceHeight / 100),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue, width: 2),
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(deviceWidth / 30))),
-                    child: Text(
-                      _orderValue.dateValue == null
-                          ? "Date Picker"
-                          : "${_orderValue.dateValue!.month}/${_orderValue.dateValue!.day}/${_orderValue.dateValue!.year}",
-                      style: GoogleFonts.openSans(
-                          fontSize: deviceWidth / 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                      textAlign: TextAlign.center,
-                    ),
-                  )),
+            Center(
+              child: Text(
+                "Select wash time",
+                style: GoogleFonts.openSans(
+                  fontSize: deviceWidth / 21,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
-            Expanded(
-              flex: 5,
-              child: TextButton(
-                  onPressed: () {
-                    showCustomTimePicker(
-                        context: context,
-                        // It is a must if you provide selectableTimePredicate
-                        onFailValidation: (context) =>
-                            print('Unavailable selection'),
-                        initialTime: const TimeOfDay(hour: 0, minute: 0),
-                        selectableTimePredicate: (time) =>
-                        time!.minute % 15 == 0).then((time) {
-                      if (time != null) {
-                        var now = DateTime.now();
-                        _orderValue.timeValue = DateTime(now.year, now.month,
-                            now.day, time.hour, time.minute);
-                        setState(() {});
-                      } else {
-                        return;
-                      }
-                    });
-                  },
-                  child: Container(
-                    width: deviceWidth * (3 / 8),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: deviceWidth / 20,
-                        vertical: deviceHeight / 100),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue, width: 2),
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(deviceWidth / 30))),
-                    child: Text(
-                      timePickerString,
-                      style: GoogleFonts.openSans(
-                          fontSize: deviceWidth / 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                      textAlign: TextAlign.center,
-                    ),
-                  )),
+            SizedBox(height: deviceHeight/60,),
+            Icon(Icons.access_time, size: deviceWidth/8,),
+            SizedBox(height: deviceHeight/60,),
+            Visibility(
+              visible: _orderValue.dateValue != null,
+              child: Text("${_orderValue.dateValue?.month}/${_orderValue.dateValue?.day}/${_orderValue.dateValue?.year} ${_orderValue.dateValue?.hour == 0 ? "00" : _orderValue.dateValue?.hour}:${_orderValue.dateValue?.minute == 0 ? "00" : _orderValue.dateValue?.minute}",
+                style: GoogleFonts.openSans(
+                  fontSize: deviceWidth / 21,
+                  color: Colors.black,
+                ),),
             ),
+
           ],
         ),
-      ],
-    );
+      ),);
   }
 
   _carType(double deviceHeight, double deviceWidth) {
@@ -1678,5 +1605,81 @@ class _BLClientInputsState extends State<BLClientInputs> {
             )
           ],
         ));
+  }
+
+  void buildDateTimePicker(double deviceHeight, double deviceWidth, BuildContext context) {
+    DateTime dateTimeNow = DateTime.now();
+
+    int minMin = (dateTimeNow.minute == 0 ? 1 : dateTimeNow.minute/15).ceil()*15;
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            insetPadding: EdgeInsets.zero,
+            children: [
+              SizedBox(
+                width: deviceWidth,
+                height: deviceHeight* (3/8),
+                child: Center(
+                  child: CupertinoDatePicker(
+                      initialDateTime: DateTime(dateTimeNow.year, dateTimeNow.month, dateTimeNow.day, dateTimeNow.hour, minMin),
+                      minimumDate: dateTimeNow,
+                      maximumDate: DateTime.now() + 6.days,
+
+                      minuteInterval: 15,
+                      use24hFormat: false,
+                      mode: CupertinoDatePickerMode.dateAndTime,
+
+                      onDateTimeChanged: (dateTime){
+
+                        _orderValue.timeValue = DateTime(dateTimeNow.year, dateTimeNow.month,
+                            dateTimeNow.day, dateTime.hour, dateTime.minute);
+                        _orderValue.dateValue = dateTime;
+
+                        print(_orderValue.timeValue);
+                        print(_orderValue.dateValue);
+                        setState(() {
+
+                        });
+
+                      }),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    child: Text("Done",
+                      style: GoogleFonts.openSans(
+                          fontSize: deviceWidth / 28,
+                          //decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                      textAlign: TextAlign.center,),
+                    onPressed: (){
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  SizedBox(width: deviceWidth/20,),
+                  TextButton(
+                    child: Text("Cancel",
+                      style: GoogleFonts.openSans(
+                          fontSize: deviceWidth / 28,
+                          //decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                      textAlign: TextAlign.center,),
+                    onPressed: (){
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  SizedBox(width: deviceWidth/20,),
+
+                ],
+              ),
+            ],
+          );
+        });
   }
 }

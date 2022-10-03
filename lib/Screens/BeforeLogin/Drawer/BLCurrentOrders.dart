@@ -336,6 +336,14 @@ class _BLCurrentOrdersState extends State<BLCurrentOrders> {
       List<dynamic> ordersKeyList) {
     return Column(
       children: [
+        SizedBox(height: deviceHeight/40,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            IconButton(icon: Icon(Icons.refresh, size: deviceWidth/8, color: Colors.blue,), onPressed: (){setState(() {});}, padding: EdgeInsets.zero, ),
+            SizedBox(width: deviceWidth/28,),
+          ],
+        ),
         SizedBox(
           width: double.infinity,
           child: ListView.builder(

@@ -98,12 +98,12 @@ class RoadEO_3 extends StatelessWidget {
         ALCurrentOrder.routeName : (context) => const ALCurrentOrder(),
         ALPersonalInformation.routeName : (context) => const ALPersonalInformation(),
         ALPreviousOrders.routeName : (context) => const ALPreviousOrders(),
-        // AL Personal Information Sub Pages:
+        // AL Personal Information Drawer:
         MyAddresses.routeName : (context) => const MyAddresses(),
         MyCars.routeName : (context) => const MyCars(),
         MyInformation.routeName : (context) => const MyInformation(),
         PaymentMethods.routeName : (context) => const PaymentMethods(),
-        // AL WashMeWasher Not Washer Sub Pages:
+        // AL WashMeWasher Not Washer:
         BecomeWasher.routeName : (context) => const BecomeWasher(),
         WasherRegistration.routeName : (context) => const WasherRegistration(),
         WasherRegistrationID.routeName : (context) => const WasherRegistrationID(),
@@ -111,7 +111,7 @@ class RoadEO_3 extends StatelessWidget {
         WasherRegistrationPhotos.routeName : (context) => const WasherRegistrationPhotos(),
         WasherRegistrationSecurityCheck.routeName : (context) => const WasherRegistrationSecurityCheck(),
         ContinueWithoutRegistration.routeName : (context) => const ContinueWithoutRegistration(),
-        // AL WashMeWasher Washer Sub Pages:
+        // AL WashMeWasher Washer:
         WasherRequests.routeName : (context) => const WasherRequests(),
         // AL WashMeWasher Washer Drawer:
         WasherBoard.routeName : (context) => const WasherBoard(),

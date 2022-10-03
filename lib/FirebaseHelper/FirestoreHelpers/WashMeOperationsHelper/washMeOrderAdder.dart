@@ -32,11 +32,10 @@ class FirestoreWashMeOrderHelper {
       DocumentSnapshot<Map<String, dynamic>> querySnapshot = await documentRef.get();
       Map<String, dynamic>? data = querySnapshot.data();
       if (data != null){
-        var subNum = int.parse(((orderValues.timeValue!.minute - orderValues.timeValue!.minute % 15)/15).toStringAsFixed(0));
         data.addAll({
           orderKey : {
             "adminArea" : locationValues.adminArea.toString(),
-            "orderDate" : DateTime(orderValues.dateValue!.year, orderValues.dateValue!.month, orderValues.dateValue!.day, orderValues.timeValue!.hour, subNum),
+            "orderDate" : DateTime(orderValues.dateValue!.year, orderValues.dateValue!.month, orderValues.dateValue!.day, orderValues.timeValue!.hour, orderValues.timeValue!.minute),
             "orderInitiationDate" : currentTime,
           }
         });
@@ -46,7 +45,7 @@ class FirestoreWashMeOrderHelper {
             .collection("currentOrders")
             .doc("washMe").set(data);
       } else {
-        var subNum = orderValues.timeValue!.minute % 15;
+
         await FirebaseFirestore.instance
             .collection('users')
             .doc(user!.uid)
@@ -54,7 +53,7 @@ class FirestoreWashMeOrderHelper {
             .doc("washMe").set({
           orderKey : {
             "adminArea" : locationValues.adminArea.toString(),
-            "orderDate" : DateTime(orderValues.dateValue!.year, orderValues.dateValue!.month, orderValues.dateValue!.day, orderValues.timeValue!.hour, subNum*15),
+            "orderDate" : DateTime(orderValues.dateValue!.year, orderValues.dateValue!.month, orderValues.dateValue!.day, orderValues.timeValue!.hour, orderValues.timeValue!.minute),
             "orderInitiationDate" : currentTime,
           }
         });
@@ -65,7 +64,7 @@ class FirestoreWashMeOrderHelper {
       print(err);
       return;
     }
-    var subNum = orderValues.timeValue!.minute % 15;
+
     return await FirebaseFirestore.instance
         .collection('jobs')
         .doc("washMe")
@@ -77,7 +76,7 @@ class FirestoreWashMeOrderHelper {
       "adminArea": locationValues.adminArea.toString(),
       "acceptedPrice" :"50",
       "carType" : orderValues.carClass,
-      "orderDate" : DateTime(orderValues.dateValue!.year, orderValues.dateValue!.month, orderValues.dateValue!.day, orderValues.timeValue!.hour, subNum*15),
+      "orderDate" : DateTime(orderValues.dateValue!.year, orderValues.dateValue!.month, orderValues.dateValue!.day, orderValues.timeValue!.hour, orderValues.timeValue!.minute),
       "latitude" : locationValues.lat,
       "longitude" : locationValues.long,
       "streetNumberAndName" : locationValues.streetNumberAndName,

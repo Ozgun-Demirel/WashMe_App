@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -23,12 +24,14 @@ class ALCurrentOrder extends StatefulWidget {
 class _ALCurrentOrderState extends State<ALCurrentOrder> {
   int currentPage = 0;
 
+
   LatLng selectedCustomerLatLong = const LatLng(31.2, -99.6);
 
   GoogleMapController? mapController;
   GlobalKey<State<StatefulWidget>>? mapKey;
   Set<Marker> globalMarkers = {};
   CustomerLocation customerLocation = CustomerLocation();
+
 
   @override
   Widget build(BuildContext context) {
@@ -425,6 +428,14 @@ class _ALCurrentOrderState extends State<ALCurrentOrder> {
       List<dynamic> ordersKeyList) {
     return Column(
       children: [
+        SizedBox(height: deviceHeight/40,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            IconButton(icon: Icon(Icons.refresh, size: deviceWidth/8, color: Colors.blue,), onPressed: (){setState(() {});}, padding: EdgeInsets.zero, ),
+            SizedBox(width: deviceWidth/28,),
+          ],
+        ),
         SizedBox(
           width: double.infinity,
           child: ListView.builder(
@@ -452,23 +463,26 @@ class _ALCurrentOrderState extends State<ALCurrentOrder> {
                         1); // deleted last character from string. which in this case removes excess /
 
                 int orderInitiationDate =
-                    currentOrder["orderInitiationDate"].seconds * 1000;
+                    currentOrder["orderInitiationDate"].seconds * 1000; // in milliseconds
                 int timeNow = DateTime.now().millisecondsSinceEpoch;
 
                 int passedTime = timeNow - orderInitiationDate;
                 int passedMin = int.parse(
-                    ((passedTime - passedTime % 60000) / 60000)
+                    (passedTime/ 60000).floor()
                         .toStringAsFixed(0));
                 int passedSec = int.parse(
-                        ((passedTime - passedTime % 1000) / 1000)
+                        (passedTime/ 1000).floor()
                             .toStringAsFixed(0)) %
                     60;
 
+                //startTimer(50);
+
                 int secRemaining = 59 - passedSec;
                 int minRemaining = 14 - passedMin;
-
                 String remainingTimeString =
-                    "${minRemaining > 10 ? minRemaining : "0$minRemaining"}:${secRemaining > 10 ? secRemaining : "0$secRemaining"}";
+                    "${minRemaining > 9 ? minRemaining : "0$minRemaining"}:${secRemaining > 9 ? secRemaining : "0$secRemaining"}";
+
+                //int totalSecRemaining = minRemaining*60 + secRemaining;
 
                 return Column(
                   children: [
@@ -973,4 +987,5 @@ class _ALCurrentOrderState extends State<ALCurrentOrder> {
       ],
     );
   }
+
 }

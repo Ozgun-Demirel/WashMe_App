@@ -1,11 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:io';
+
+import 'package:WashMe/InterfaceFunc/ImageHelper/imagePicker.dart';
+import 'package:WashMe/InterfaceFunc/screenOpeners/showTransparentDialogOnLoad.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../FirebaseHelper/FirestoreHelpers/UserHelpers/UserInformationsHelper.dart';
 import '../../../../InterfaceFunc/DatabaseHelpers/SubHelpers/userMyInformationHelper.dart';
+import '../../../../InterfaceFunc/screenOpeners/CustomerSide/PersonalInformation/myInformationsOpener.dart';
 import '../../../../Models/Users/userInformations.dart';
+import '../../../../Validation/Customer/myInformationsValidator.dart';
 
 class MyInformation extends StatefulWidget {
   static const routeName = "/MyInformation";
@@ -15,61 +20,25 @@ class MyInformation extends StatefulWidget {
   State<MyInformation> createState() => _MyInformationState();
 }
 
-class _MyInformationState extends State<MyInformation> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  User? user;
-
+class _MyInformationState extends State<MyInformation>
+    with MyInformationsValidationMixin {
   final _myInformationFormKey = GlobalKey<FormState>();
-  var _myInformationFormData = UserInformations();
   final _addedInformationFormData = UserInformations();
-
-  var futureBuilderFuture;
-
-  @override
-  initState(){
-    super.initState();
-    futureBuilderFuture =  getMyInformations();
-  }
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, UserInformations?> arguments =
+        (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{})
+            as Map<String, UserInformations?>;
+    UserInformations? userInformations = arguments["userInformations"];
+
     final _deviceHeight = MediaQuery.of(context).size.height;
     final _deviceWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: FutureBuilder(
-        future: futureBuilderFuture,
-        builder: (BuildContext ctx, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting: return const Center(child: CircularProgressIndicator());
-            default:
-              if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
-              } else {
-                return _myInformationMainPage(_deviceHeight, _deviceWidth, ctx);
-              }
-          }
-        },
-      )
-
-
+      body: _myInformationMainPage(
+          _deviceHeight, _deviceWidth, context, userInformations),
     );
-  }
-
-  getMyInformations() async {
-    user = _auth.currentUser;
-    var informationData = await InformationHelper.getInformationsData();
-    if (informationData.isNotEmpty) {
-      _myInformationFormData = UserInformations.fromMap(informationData[0]);
-    }
-    if (user != null) {
-      DocumentReference<Map<String, dynamic>> documentRef =
-          FirebaseFirestore.instance.collection('users').doc(user!.uid);
-      DocumentSnapshot<Map<String, dynamic>> querySnapshot =
-          await documentRef.get();
-      _myInformationFormData =
-          UserInformations.fromMap(querySnapshot.data() as Map<String, dynamic>);
-    }
   }
 
   hamMenuAndTitle(double deviceHeight, BuildContext context) {
@@ -104,7 +73,8 @@ class _MyInformationState extends State<MyInformation> {
     );
   }
 
-  Widget myInformationForm(double deviceHeight, double deviceWidth) {
+  Widget myInformationForm(double deviceHeight, double deviceWidth,
+      UserInformations? userInformations) {
     return Form(
       key: _myInformationFormKey,
       child: Column(
@@ -113,6 +83,7 @@ class _MyInformationState extends State<MyInformation> {
           TextFormField(
             keyboardType: TextInputType.name,
             textInputAction: TextInputAction.next,
+            validator: (value) => validateFullName(value.toString()),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.zero,
               fillColor: Colors.white,
@@ -120,16 +91,20 @@ class _MyInformationState extends State<MyInformation> {
                 borderSide: BorderSide(color: Colors.blue, width: 4),
               ),
               filled: true,
-              labelText: _myInformationFormData.fullName ?? "Full Name",
+              labelText:
+                  userInformations == null || userInformations.fullName == null
+                      ? "Full Name"
+                      : userInformations.fullName,
             ),
             onSaved: (String? value) {
               _addedInformationFormData.fullName = value;
             },
           ),
-          SizedBox(height: deviceHeight/40),
+          SizedBox(height: deviceHeight / 40),
           TextFormField(
             keyboardType: TextInputType.name,
             textInputAction: TextInputAction.next,
+            validator: (value) => validateSurname(value.toString()),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.zero,
               fillColor: Colors.white,
@@ -137,16 +112,21 @@ class _MyInformationState extends State<MyInformation> {
                 borderSide: BorderSide(color: Colors.blue, width: 4),
               ),
               filled: true,
-              labelText: _myInformationFormData.surname ?? "Surname",
+              labelText:
+                  userInformations == null || userInformations.surname == null
+                      ? "Surname"
+                      : userInformations.surname,
             ),
             onSaved: (String? value) {
               _addedInformationFormData.surname = value;
             },
           ),
-          SizedBox(height: deviceHeight/40),
+          SizedBox(height: deviceHeight / 40),
           TextFormField(
+            maxLength: 10,
             keyboardType: TextInputType.phone,
             textInputAction: TextInputAction.next,
+            validator: (value) => validatePhoneNumber(value.toString()),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.zero,
               fillColor: Colors.white,
@@ -154,16 +134,20 @@ class _MyInformationState extends State<MyInformation> {
                 borderSide: BorderSide(color: Colors.blue, width: 4),
               ),
               filled: true,
-              labelText: _myInformationFormData.phoneNumber ?? "Phone Number",
+              labelText: userInformations == null ||
+                      userInformations.phoneNumber == null
+                  ? "Phone Number"
+                  : userInformations.phoneNumber,
             ),
             onSaved: (String? value) {
               _addedInformationFormData.phoneNumber = value;
             },
           ),
-          SizedBox(height: deviceHeight/40),
+          SizedBox(height: deviceHeight / 40),
           TextFormField(
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
+            validator: (value) => validateEmail(value.toString()),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.zero,
               fillColor: Colors.white,
@@ -171,13 +155,16 @@ class _MyInformationState extends State<MyInformation> {
                 borderSide: BorderSide(color: Colors.blue, width: 4),
               ),
               filled: true,
-              labelText: _myInformationFormData.contactEmail ?? "E-mail",
+              labelText: userInformations == null ||
+                      userInformations.contactEmail == null
+                  ? "E-mail"
+                  : userInformations.contactEmail,
             ),
             onSaved: (String? value) {
               _addedInformationFormData.contactEmail = value;
             },
           ),
-          SizedBox(height: deviceHeight/40),
+          SizedBox(height: deviceHeight / 40),
           TextFormField(
             enabled: false,
             keyboardType: TextInputType.visiblePassword,
@@ -200,7 +187,9 @@ class _MyInformationState extends State<MyInformation> {
     );
   }
 
-  Widget _myInformationMainPage(double deviceHeight, double deviceWidth, BuildContext context) {
+  Widget _myInformationMainPage(double deviceHeight, double deviceWidth,
+      BuildContext context, UserInformations? userInformations) {
+
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -227,30 +216,77 @@ class _MyInformationState extends State<MyInformation> {
             SizedBox(
               height: deviceHeight / 30,
             ),
-            Image.asset(
-              "lib/Assets/WashMe/account.png",
-              height: deviceWidth / 4,
-            ),
+            userInformations!.photoFilePath == null
+                ? TextButton(
+                    onPressed: () async {
+                      await selectPicture(userInformations);
+                    },
+                    child: Stack(
+                      children: [
+                        SizedBox(
+                          height: deviceWidth / 4,
+                          width: deviceWidth / 4,
+                          child: Center(
+                            child: Image.asset(
+                              "lib/Assets/WashMe/camera.png",
+                              height: deviceWidth / 8,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: deviceWidth / 4,
+                          width: deviceWidth / 4,
+                          child: Image.asset(
+                            "lib/Assets/WashMe/account.png",
+                            color: Colors.black.withOpacity(0.5),
+                            height: deviceWidth / 4,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : TextButton(
+                    onPressed: () async {
+                      await selectPicture(userInformations);
+                    },
+                    child: SizedBox(
+                        width: deviceWidth / 4,
+                        child: Image.file(
+                          File(userInformations.photoFilePath!),
+                        ))),
             Container(
                 padding: EdgeInsets.all(deviceWidth / 20),
-                child: myInformationForm(deviceHeight, deviceWidth)),
+                child: myInformationForm(
+                    deviceHeight, deviceWidth, userInformations)),
             SizedBox(
               height: deviceHeight / 30,
             ),
             ElevatedButton(
                 onPressed: () async {
+                  showTransparentDialogOnLoad(
+                      context, deviceHeight, deviceWidth);
+
                   _myInformationFormKey.currentState?.save();
-                  if (user != null) {
-                    _addedInformationFormData.id = user!.uid;
-                    try {
+
+                  if (_myInformationFormKey.currentState!.validate()) {
+                    if (_addedInformationFormData.photoFilePath != null) {
+                      _addedInformationFormData.id =
+                          FirebaseAuth.instance.currentUser!.uid;
                       InformationHelper.insertInformation(
                           _addedInformationFormData.toMap());
-                      return FirestoreUserInformationsHelper
-                          .userInformationsAdder(_myInformationFormData, _addedInformationFormData);
-                    } catch (error) {
-                      print(error);
+                      await FirestoreUserInformationsHelper
+                          .userInformationsAdder(_addedInformationFormData);
+
+                      if (!mounted) return;
+                      Navigator.of(context).pop();
+                      myInformationsOpener(
+                          context, deviceHeight, deviceWidth, mounted, true);
                     }
+                  } else {
+                    Navigator.of(context).pop();
                   }
+
+
                 },
                 child: Container(
                   padding: EdgeInsets.only(
@@ -267,5 +303,12 @@ class _MyInformationState extends State<MyInformation> {
         ),
       ),
     );
+  }
+
+  Future<void> selectPicture(UserInformations userInformations) async {
+    _addedInformationFormData.photoFilePath =
+        (await ImagePickerHelper.selectPicture())?.path;
+    userInformations.photoFilePath = _addedInformationFormData.photoFilePath;
+    setState(() {});
   }
 }

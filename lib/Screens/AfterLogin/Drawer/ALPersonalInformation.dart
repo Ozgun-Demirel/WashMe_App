@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../InterfaceFunc/screenOpeners/CustomerSide/PersonalInformation/myInformationsOpener.dart';
 import '../../../InterfaceFunc/screenOpeners/showTransparentDialogOnLoad.dart';
 import '../../SplashAndIntro/Splash.dart';
-import 'PersonalInformation/MyAddresses.dart';
-import 'PersonalInformation/MyCars.dart';
-import 'PersonalInformation/MyInformation.dart';
 
 class ALPersonalInformation extends StatefulWidget {
   static const routeName = "/ALPersonalInformation";
@@ -62,8 +60,7 @@ class _ALPersonalInformationState extends State<ALPersonalInformation> {
                       primary: const Color(0xFF2D9BF0),
                     ),
                     onPressed: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => const MyInformation()));
+                      myInformationsOpener(context, _deviceHeight, _deviceWidth, mounted, false);
                     },
                     child: SizedBox(
                         height: _deviceHeight / 12,
@@ -79,8 +76,8 @@ class _ALPersonalInformationState extends State<ALPersonalInformation> {
                       primary: const Color(0xFF2D9BF0),
                     ),
                     onPressed: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => const MyCars()));
+                      Navigator.of(context).pushNamed("/MyCars");
+
                     },
                     child: SizedBox(
                         height: _deviceHeight / 12,
@@ -96,8 +93,8 @@ class _ALPersonalInformationState extends State<ALPersonalInformation> {
                       primary: const Color(0xFF2D9BF0),
                     ),
                     onPressed: () {
-                      Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => const MyAddresses()));
+                      Navigator.of(context).pushNamed("/MyAddresses");
+
                     },
                     child: SizedBox(
                         height: _deviceHeight / 12,

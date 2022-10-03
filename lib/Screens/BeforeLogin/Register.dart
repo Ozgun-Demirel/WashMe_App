@@ -240,6 +240,8 @@ class _RegisterPageState extends State with RegisterValidationMixin {
             deviceHeight: deviceHeight,
             deviceWidth: deviceWidth
           );
+        } else {
+          Navigator.of(context).pop();
         }
       },
     );
@@ -282,8 +284,6 @@ class _RegisterPageState extends State with RegisterValidationMixin {
               .collection('users')
               .doc(newUser!.uid).collection("locations").doc(locationsCollection.docs[index].id).set(locationsCollection.docs[index].data());
         }
-      } else {
-        print("it is empty");
       }
 
       if (currentOrdersCollection.exists && currentOrdersCollection.data() != null){
