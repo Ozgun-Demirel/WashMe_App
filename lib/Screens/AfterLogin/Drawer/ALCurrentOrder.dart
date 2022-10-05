@@ -41,9 +41,7 @@ class _ALCurrentOrderState extends State<ALCurrentOrder> {
     List<Map>? ordersInfo = arguments["ordersInfo"] as List<Map>;
 
     Map activeOrdersMap = ordersInfo[0];
-
     Map pendingOrdersMap = ordersInfo[1];
-
     Map ongoingOrdersMap = ordersInfo[2];
 
     final deviceHeight = MediaQuery.of(context).size.height;
@@ -54,7 +52,6 @@ class _ALCurrentOrderState extends State<ALCurrentOrder> {
         padding: EdgeInsets.all(deviceWidth / 45),
         child: SingleChildScrollView(
           child: Column(children: [
-
             SizedBox(
               height: deviceHeight / 45,
             ),
@@ -80,33 +77,46 @@ class _ALCurrentOrderState extends State<ALCurrentOrder> {
 
   hamMenuAndTitle(
       double deviceHeight, double deviceWidth, BuildContext context) {
-    return Row(
+    return Stack(
       children: [
-        Expanded(
-            flex: 2,
-            child: SizedBox(
-              height: deviceHeight / 10,
-              child: TextButton(
-                child: Icon(
-                  Icons.keyboard_backspace,
-                  color: const Color(0xFF2D9BF0),
-                  size: deviceWidth / 6.6,
+        Row(
+        children: [
+          Expanded(
+              flex: 2,
+              child: SizedBox(
+                height: deviceHeight / 10,
+                child: TextButton(
+                  child: Icon(
+                    Icons.keyboard_backspace,
+                    color: const Color(0xFF2D9BF0),
+                    size: deviceWidth / 6.6,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            )),
-        Expanded(
-            flex: 10,
-            child: Center(
-              child: Text(
-                "WashMe",
-                style: GoogleFonts.fredokaOne(
-                    fontSize: deviceWidth / 9, color: const Color(0xFF2D9BF0)),
-              ),
-            )),
-        const Expanded(flex: 1, child: SizedBox())
+              )),
+          Expanded(
+              flex: 10,
+              child: Center(
+                child: Text(
+                  "WashMe",
+                  style: GoogleFonts.fredokaOne(
+                      fontSize: deviceWidth / 9, color: const Color(0xFF2D9BF0)),
+                ),
+              )),
+          const Expanded(flex: 1, child: SizedBox())
+        ],
+      ),
+        Visibility(
+          visible: currentPage == 0,
+          child: Container(
+            height: deviceHeight / 10,
+            padding: EdgeInsets.only(right: deviceWidth/20),
+            alignment: Alignment.centerRight,
+            child: IconButton(icon: Icon(Icons.refresh, size: deviceWidth/8, color: Color(0xFF414BB2),), onPressed: (){setState(() {});}, padding: EdgeInsets.zero, ),
+          ),
+        ),
       ],
     );
   }
@@ -428,14 +438,7 @@ class _ALCurrentOrderState extends State<ALCurrentOrder> {
       List<dynamic> ordersKeyList) {
     return Column(
       children: [
-        SizedBox(height: deviceHeight/40,),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            IconButton(icon: Icon(Icons.refresh, size: deviceWidth/8, color: Colors.blue,), onPressed: (){setState(() {});}, padding: EdgeInsets.zero, ),
-            SizedBox(width: deviceWidth/28,),
-          ],
-        ),
+
         SizedBox(
           width: double.infinity,
           child: ListView.builder(

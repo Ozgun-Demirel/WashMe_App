@@ -748,7 +748,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                       child: SizedBox(
                           width: double.infinity,
                           child: Text(
-                            "Truck",
+                            "Trunk",
                             style: GoogleFonts.openSans(
                               fontSize: deviceWidth / 21,
                               color: Colors.black,
@@ -961,12 +961,9 @@ class _BLClientInputsState extends State<BLClientInputs> {
                     .doc("washMe")
                     .get();
                 if (ordersDataSnapshot.data() == null) {
-                  await FirestoreWashMeOrderHelper.washMeOrderAdder(
-                      _orderValue, selectedLocation);
-                  return showDialog(
-                      context: context,
-                      builder: (ctx) => yourOrderHasBeenTakenDialog(
-                          deviceHeight, deviceWidth));
+
+                  orderFinalize(_orderValue, selectedLocation, deviceHeight, deviceWidth);
+
                 } else if (ordersDataSnapshot.data()!.keys.length >= 3) {
                   return _showErrorDialogs(deviceHeight, deviceWidth,
                       firstLine:
@@ -984,12 +981,9 @@ class _BLClientInputsState extends State<BLClientInputs> {
                     tempCityList.add(element["adminArea"]);
                   }
                 }
-                await FirestoreWashMeOrderHelper.washMeOrderAdder(
-                    _orderValue, selectedLocation);
-                return showDialog(
-                    context: context,
-                    builder: (ctx) =>
-                        yourOrderHasBeenTakenDialog(deviceHeight, deviceWidth));
+
+                orderFinalize(_orderValue, selectedLocation, deviceHeight, deviceWidth);
+
               }
             }
           },
@@ -1682,4 +1676,55 @@ class _BLClientInputsState extends State<BLClientInputs> {
           );
         });
   }
+
+
+  orderFinalize(OrderValues orderValue, LocationValues selectedLocation, double deviceHeight, double deviceWidth) async {
+
+    Widget okButton = TextButton(
+      child: const Text("OK"),
+      onPressed: () async {
+        Navigator.of(context).pop();
+
+        showTransparentDialogOnLoad(context, deviceHeight, deviceWidth);
+
+        await FirestoreWashMeOrderHelper.washMeOrderAdder(
+            _orderValue, selectedLocation);
+
+        if(!mounted) return;
+        Navigator.of(context).pop();
+
+        return showDialog(
+            context: context,
+            builder: (ctx) =>
+                yourOrderHasBeenTakenDialog(deviceHeight, deviceWidth));
+      },
+    );
+
+    Widget cancelButton = TextButton(
+      child: const Text("Cancel"),
+      onPressed: () {Navigator.of(context).pop();},
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Text("Do you want to finalize your order?"),
+      content:  Text("Your order is going to cost \$52.\n\nYou will be charged LATER. ",
+        style: GoogleFonts.notoSans(fontSize: deviceWidth / 18),
+        textAlign: TextAlign.center,),
+      actions: [
+        okButton,
+        cancelButton,
+      ],
+    );
+
+    // show the dialog
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+
+  }
+
 }

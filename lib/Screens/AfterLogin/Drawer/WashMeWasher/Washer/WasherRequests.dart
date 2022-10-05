@@ -299,16 +299,15 @@ class _WasherRequestsState extends State<WasherRequests> {
         }
         extraWashTypes = extraWashTypes.substring(0, extraWashTypes.length-1); // deleted last character from string. which in this case removes excess /
 
-        int oneDegreeToMiles = 69;
+        double oneLongitudeDegreeToMiles = 54.6;
+        int oneLatitudeDegreeToMiles = 69;
+        int mileToYard = 1760;
+
         double latDistance = double.parse(locationValues.lat.toString()) - double.parse(currentOrder["latitude"]);
         double longDistance = double.parse(locationValues.long.toString()) - double.parse(currentOrder["longitude"]);
-        double distance = sqrt(pow(latDistance,2) + pow(longDistance, 2))*oneDegreeToMiles;
-        String strDistance ="";
-        if (distance<5.280){
-          strDistance = "${(distance* 5.280).toStringAsFixed(2)} feet";
-        } else {
-          strDistance = "${distance.toStringAsFixed(2)} miles";
-        }
+        double distanceMile = sqrt(pow(latDistance*oneLatitudeDegreeToMiles,2) + pow(longDistance*oneLongitudeDegreeToMiles, 2));
+
+        String strDistance = distanceMile<1 ? "${(distanceMile* mileToYard).toStringAsFixed(2)} yard" : "${distanceMile.toStringAsFixed(2)} mile(s)";
 
         final df = DateFormat('dd-MM-yyyy hh:mm a');
         String orderDate = df.format(DateTime.fromMillisecondsSinceEpoch(currentOrder["orderDate"].seconds*1000));
@@ -391,7 +390,7 @@ class _WasherRequestsState extends State<WasherRequests> {
                                 SizedBox( width: double.infinity, child: Text(currentOrder["streetNumberAndName"].toString(), style: GoogleFonts.notoSans(fontSize: deviceWidth/20,), textAlign: TextAlign.left,)),
                                 SizedBox( width: double.infinity, child: Text("${currentOrder["adminArea"]}", style: GoogleFonts.notoSans(fontSize: deviceWidth/20,), textAlign: TextAlign.left,)),
                                 SizedBox( width: double.infinity, child: Text(strDistance, style: GoogleFonts.notoSans(fontSize: deviceWidth/20, fontWeight: FontWeight.bold), textAlign: TextAlign.left,)),
-                                SizedBox( width: double.infinity, child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text(orderDate, style: GoogleFonts.notoSans(fontSize: deviceWidth/20), textAlign: TextAlign.right,), Text("\$${currentOrder["acceptedPrice"]}", style: GoogleFonts.notoSans(fontSize: deviceWidth/20, fontWeight: FontWeight.bold), textAlign: TextAlign.left,),],)),
+                                SizedBox( width: double.infinity, child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [Text(orderDate, style: GoogleFonts.notoSans(fontSize: deviceWidth/20), textAlign: TextAlign.right,), Text("\$${int.parse(currentOrder["acceptedPrice"])-13}", style: GoogleFonts.notoSans(fontSize: deviceWidth/20, fontWeight: FontWeight.bold), textAlign: TextAlign.left,),],)),
                               ],
                             ),
                           ),),

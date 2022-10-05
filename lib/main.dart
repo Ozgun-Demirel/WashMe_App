@@ -57,7 +57,7 @@ Future<void> main() async {
 
 class RoadEO_3 extends StatelessWidget {
   const RoadEO_3({Key? key, bool? this.showIntro}) : super(key: key);
-  final showIntro;
+  final bool? showIntro;
 
   @override
   Widget build(BuildContext context) {
