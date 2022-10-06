@@ -65,6 +65,21 @@ class FirestoreWashMeOrderHelper {
       return;
     }
 
+    DocumentReference<Map<String, dynamic>> washMeRef = FirebaseFirestore.instance
+        .collection('jobs')
+        .doc("washMe");
+
+    DocumentSnapshot<Map<String, dynamic>> washMeData = await washMeRef.get();
+
+    List previousCities = washMeData.get("allCities") as List;
+
+    if (!previousCities.contains(locationValues.adminArea.toString())){
+      previousCities.add(locationValues.adminArea.toString());
+      await FirebaseFirestore.instance
+          .collection('jobs')
+          .doc("washMe").update({"allCities": previousCities});
+    }
+
     return await FirebaseFirestore.instance
         .collection('jobs')
         .doc("washMe")

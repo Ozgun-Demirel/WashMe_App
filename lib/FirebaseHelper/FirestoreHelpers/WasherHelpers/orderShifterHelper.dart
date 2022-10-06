@@ -9,6 +9,39 @@ import '../../../Models/Users/locationValuesType.dart';
 class FirestoreWashMeOrderShifterHelper {
 
 
+  static Future<List> activeOrderLoaderDEVELOPER() async {
+    var customerLocation = CustomerLocation();
+    LocationValues? userAddress =await customerLocation.returnAllValues();
+
+    DocumentReference<Map<String, dynamic>> washMeRef = FirebaseFirestore
+        .instance
+        .collection('jobs')
+        .doc("washMe");
+
+    DocumentSnapshot<Map<String, dynamic>> washMeData = await washMeRef.get();
+
+    List citiesList = washMeData.get("allCities") as List;
+
+    List allOrdersList = [];
+
+    for(var city in citiesList){
+      CollectionReference<Map<String, dynamic>> activeRequestsRef = FirebaseFirestore
+          .instance
+          .collection('jobs')
+          .doc("washMe")
+          .collection("cities")
+          .doc(city)
+          .collection("activeRequests");
+      QuerySnapshot<Map<String, dynamic>> querySnapshot =
+      await activeRequestsRef.get();
+      if (querySnapshot.docs != []){
+        allOrdersList.add(querySnapshot.docs);
+      }
+    }
+
+    return [userAddress ,allOrdersList];
+  }
+
   static Future<List> activeOrderLoader() async {
 
     var customerLocation = CustomerLocation();

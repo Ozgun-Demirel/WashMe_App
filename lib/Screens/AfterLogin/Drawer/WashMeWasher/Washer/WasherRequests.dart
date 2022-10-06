@@ -46,9 +46,12 @@ class _WasherRequestsState extends State<WasherRequests> {
 
     List orderKeysList = [];
     List ordersList = [];
-    for (var element in addressAndActiveOrders[1]) {
-      orderKeysList.add(element.id);
-      ordersList.add(element.data());
+    print(addressAndActiveOrders[1]);
+    for (var cityElement in addressAndActiveOrders[1]) {
+      for(var element in cityElement) {
+        orderKeysList.add(element.id);
+        ordersList.add(element.data());
+      }
     }
 
     final _deviceHeight = MediaQuery.of(context).size.height;
