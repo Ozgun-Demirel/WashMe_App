@@ -1541,19 +1541,6 @@ class _ALClientInputsState extends State<ALClientInputs> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                    child: Text("Done",
-                      style: GoogleFonts.openSans(
-                          fontSize: deviceWidth / 28,
-                          //decoration: TextDecoration.underline,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                      textAlign: TextAlign.center,),
-                    onPressed: (){
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  SizedBox(width: deviceWidth/20,),
-                  TextButton(
                     child: Text("Cancel",
                       style: GoogleFonts.openSans(
                           fontSize: deviceWidth / 28,
@@ -1566,6 +1553,20 @@ class _ALClientInputsState extends State<ALClientInputs> {
                     },
                   ),
                   SizedBox(width: deviceWidth/20,),
+                  TextButton(
+                    child: Text("Done",
+                      style: GoogleFonts.openSans(
+                          fontSize: deviceWidth / 28,
+                          //decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                      textAlign: TextAlign.center,),
+                    onPressed: (){
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  SizedBox(width: deviceWidth/20,),
+
 
                 ],
               ),
@@ -1588,7 +1589,6 @@ class _ALClientInputsState extends State<ALClientInputs> {
 
         if(!mounted) return;
         Navigator.of(context).pop();
-
         return showDialog(
             context: context,
             builder: (ctx) =>
@@ -1608,8 +1608,9 @@ class _ALClientInputsState extends State<ALClientInputs> {
         style: GoogleFonts.notoSans(fontSize: deviceWidth / 18),
         textAlign: TextAlign.center,),
       actions: [
-        okButton,
         cancelButton,
+        okButton,
+
       ],
     );
 

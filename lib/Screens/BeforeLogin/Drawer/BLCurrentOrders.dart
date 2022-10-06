@@ -108,7 +108,7 @@ class _BLCurrentOrdersState extends State<BLCurrentOrders> {
             height: deviceHeight / 10,
             padding: EdgeInsets.only(right: deviceWidth/20),
             alignment: Alignment.centerRight,
-            child: IconButton(icon: Icon(Icons.refresh, size: deviceWidth/8, color: Color(0xFF414BB2),), onPressed: (){setState(() {});}, padding: EdgeInsets.zero, ),
+            child: IconButton(icon: Icon(Icons.refresh, size: deviceWidth/8, color: Color(0xFF2D9BF0),), onPressed: (){setState(() {});}, padding: EdgeInsets.zero, ),
           ),
         ),
       ],

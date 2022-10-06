@@ -370,7 +370,7 @@ class _CurrentJobsState extends State<CurrentJobs> {
                               SizedBox(
                                 width: double.infinity,
                                 child: Text(
-                                  "\$${currentOrder["acceptedPrice"]}",
+                                  "\$${int.parse(currentOrder["acceptedPrice"])-13}",
                                   style: GoogleFonts.openSans(
                                       fontWeight: FontWeight.bold,
                                       fontSize: deviceWidth / 24),

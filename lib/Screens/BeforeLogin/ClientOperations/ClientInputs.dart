@@ -1644,7 +1644,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                    child: Text("Done",
+                    child: Text("Cancel",
                       style: GoogleFonts.openSans(
                           fontSize: deviceWidth / 28,
                           //decoration: TextDecoration.underline,
@@ -1657,7 +1657,7 @@ class _BLClientInputsState extends State<BLClientInputs> {
                   ),
                   SizedBox(width: deviceWidth/20,),
                   TextButton(
-                    child: Text("Cancel",
+                    child: Text("Done",
                       style: GoogleFonts.openSans(
                           fontSize: deviceWidth / 28,
                           //decoration: TextDecoration.underline,
@@ -1712,8 +1712,8 @@ class _BLClientInputsState extends State<BLClientInputs> {
         style: GoogleFonts.notoSans(fontSize: deviceWidth / 18),
         textAlign: TextAlign.center,),
       actions: [
-        okButton,
         cancelButton,
+        okButton,
       ],
     );
 
