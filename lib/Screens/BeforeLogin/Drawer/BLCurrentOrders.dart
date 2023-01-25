@@ -71,33 +71,46 @@ class _BLCurrentOrdersState extends State<BLCurrentOrders> {
 
   hamMenuAndTitle(
       double deviceHeight, double deviceWidth, BuildContext context) {
-    return Row(
+    return Stack(
       children: [
-        Expanded(
-            flex: 2,
-            child: SizedBox(
-              height: deviceHeight / 10,
-              child: TextButton(
-                child: Icon(
-                  Icons.keyboard_backspace,
-                  color: const Color(0xFF2D9BF0),
-                  size: deviceWidth / 6.6,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            )),
-        Expanded(
-            flex: 10,
-            child: Center(
-              child: Text(
-                "WashMe",
-                style: GoogleFonts.fredokaOne(
-                    fontSize: deviceWidth / 9, color: const Color(0xFF2D9BF0)),
-              ),
-            )),
-        const Expanded(flex: 1, child: SizedBox())
+        Row(
+          children: [
+            Expanded(
+                flex: 2,
+                child: SizedBox(
+                  height: deviceHeight / 10,
+                  child: TextButton(
+                    child: Icon(
+                      Icons.keyboard_backspace,
+                      color: const Color(0xFF2D9BF0),
+                      size: deviceWidth / 6.6,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                )),
+            Expanded(
+                flex: 10,
+                child: Center(
+                  child: Text(
+                    "WashMe",
+                    style: GoogleFonts.fredokaOne(
+                        fontSize: deviceWidth / 9, color: const Color(0xFF2D9BF0)),
+                  ),
+                )),
+            const Expanded(flex: 1, child: SizedBox())
+          ],
+        ),
+        Visibility(
+          visible: currentPage == 0,
+          child: Container(
+            height: deviceHeight / 10,
+            padding: EdgeInsets.only(right: deviceWidth/20),
+            alignment: Alignment.centerRight,
+            child: IconButton(icon: Icon(Icons.refresh, size: deviceWidth/8, color: Color(0xFF2D9BF0),), onPressed: (){setState(() {});}, padding: EdgeInsets.zero, ),
+          ),
+        ),
       ],
     );
   }

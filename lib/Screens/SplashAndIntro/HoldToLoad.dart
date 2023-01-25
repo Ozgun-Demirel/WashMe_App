@@ -24,7 +24,7 @@ class HoldToLoad extends StatelessWidget {
       _goToPage = "/BLClientInputs";
     }
 
-    Future.delayed(const Duration(milliseconds: 500)).then((value) {
+    Future.delayed(const Duration(milliseconds: 300)).then((value) {
       OnLoginHelper.onLogin();
     });
     Future.delayed(const Duration(milliseconds: 1000)).then((value) {

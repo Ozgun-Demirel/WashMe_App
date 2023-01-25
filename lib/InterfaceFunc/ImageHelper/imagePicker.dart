@@ -26,7 +26,7 @@ class ImagePickerHelper{
         maxWidth: 640,
         imageQuality: 50);
     if (image == null) return null;
-    return  await _saveImagePermanently(image.path);
+    return File(image.path);
   }
 
   static Future<File> _saveImagePermanently(String imagePath) async {

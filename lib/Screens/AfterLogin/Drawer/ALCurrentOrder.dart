@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -23,12 +24,14 @@ class ALCurrentOrder extends StatefulWidget {
 class _ALCurrentOrderState extends State<ALCurrentOrder> {
   int currentPage = 0;
 
+
   LatLng selectedCustomerLatLong = const LatLng(31.2, -99.6);
 
   GoogleMapController? mapController;
   GlobalKey<State<StatefulWidget>>? mapKey;
   Set<Marker> globalMarkers = {};
   CustomerLocation customerLocation = CustomerLocation();
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +41,7 @@ class _ALCurrentOrderState extends State<ALCurrentOrder> {
     List<Map>? ordersInfo = arguments["ordersInfo"] as List<Map>;
 
     Map activeOrdersMap = ordersInfo[0];
-
     Map pendingOrdersMap = ordersInfo[1];
-
     Map ongoingOrdersMap = ordersInfo[2];
 
     final deviceHeight = MediaQuery.of(context).size.height;
@@ -51,7 +52,6 @@ class _ALCurrentOrderState extends State<ALCurrentOrder> {
         padding: EdgeInsets.all(deviceWidth / 45),
         child: SingleChildScrollView(
           child: Column(children: [
-
             SizedBox(
               height: deviceHeight / 45,
             ),
@@ -77,33 +77,46 @@ class _ALCurrentOrderState extends State<ALCurrentOrder> {
 
   hamMenuAndTitle(
       double deviceHeight, double deviceWidth, BuildContext context) {
-    return Row(
+    return Stack(
       children: [
-        Expanded(
-            flex: 2,
-            child: SizedBox(
-              height: deviceHeight / 10,
-              child: TextButton(
-                child: Icon(
-                  Icons.keyboard_backspace,
-                  color: const Color(0xFF2D9BF0),
-                  size: deviceWidth / 6.6,
+        Row(
+        children: [
+          Expanded(
+              flex: 2,
+              child: SizedBox(
+                height: deviceHeight / 10,
+                child: TextButton(
+                  child: Icon(
+                    Icons.keyboard_backspace,
+                    color: const Color(0xFF2D9BF0),
+                    size: deviceWidth / 6.6,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            )),
-        Expanded(
-            flex: 10,
-            child: Center(
-              child: Text(
-                "WashMe",
-                style: GoogleFonts.fredokaOne(
-                    fontSize: deviceWidth / 9, color: const Color(0xFF2D9BF0)),
-              ),
-            )),
-        const Expanded(flex: 1, child: SizedBox())
+              )),
+          Expanded(
+              flex: 10,
+              child: Center(
+                child: Text(
+                  "WashMe",
+                  style: GoogleFonts.fredokaOne(
+                      fontSize: deviceWidth / 9, color: const Color(0xFF2D9BF0)),
+                ),
+              )),
+          const Expanded(flex: 1, child: SizedBox())
+        ],
+      ),
+        Visibility(
+          visible: currentPage == 0,
+          child: Container(
+            height: deviceHeight / 10,
+            padding: EdgeInsets.only(right: deviceWidth/20),
+            alignment: Alignment.centerRight,
+            child: IconButton(icon: Icon(Icons.refresh, size: deviceWidth/8, color: Color(0xFF2D9BF0),), onPressed: (){setState(() {});}, padding: EdgeInsets.zero, ),
+          ),
+        ),
       ],
     );
   }
@@ -425,6 +438,7 @@ class _ALCurrentOrderState extends State<ALCurrentOrder> {
       List<dynamic> ordersKeyList) {
     return Column(
       children: [
+
         SizedBox(
           width: double.infinity,
           child: ListView.builder(
@@ -452,23 +466,26 @@ class _ALCurrentOrderState extends State<ALCurrentOrder> {
                         1); // deleted last character from string. which in this case removes excess /
 
                 int orderInitiationDate =
-                    currentOrder["orderInitiationDate"].seconds * 1000;
+                    currentOrder["orderInitiationDate"].seconds * 1000; // in milliseconds
                 int timeNow = DateTime.now().millisecondsSinceEpoch;
 
                 int passedTime = timeNow - orderInitiationDate;
                 int passedMin = int.parse(
-                    ((passedTime - passedTime % 60000) / 60000)
+                    (passedTime/ 60000).floor()
                         .toStringAsFixed(0));
                 int passedSec = int.parse(
-                        ((passedTime - passedTime % 1000) / 1000)
+                        (passedTime/ 1000).floor()
                             .toStringAsFixed(0)) %
                     60;
 
+                //startTimer(50);
+
                 int secRemaining = 59 - passedSec;
                 int minRemaining = 14 - passedMin;
-
                 String remainingTimeString =
-                    "${minRemaining > 10 ? minRemaining : "0$minRemaining"}:${secRemaining > 10 ? secRemaining : "0$secRemaining"}";
+                    "${minRemaining > 9 ? minRemaining : "0$minRemaining"}:${secRemaining > 9 ? secRemaining : "0$secRemaining"}";
+
+                //int totalSecRemaining = minRemaining*60 + secRemaining;
 
                 return Column(
                   children: [
@@ -973,4 +990,5 @@ class _ALCurrentOrderState extends State<ALCurrentOrder> {
       ],
     );
   }
+
 }

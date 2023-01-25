@@ -30,11 +30,10 @@ dependencies:
   flutter:
     sdk: flutter
 
-  time_picker_widget:
+  time:
   shared_preferences:
   gallery_saver:
   intl:
-  flutter_datetime_picker:
   flutter_rating_bar:
   sqflite:
   provider:

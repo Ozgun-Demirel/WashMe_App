@@ -20,6 +20,7 @@ class Assets {
   static const String CommonScreensSukru = 'lib/Assets/WashMe/CommonScreens/sukru.jpg';
   static const String CommonScreensTwitter = 'lib/Assets/WashMe/CommonScreens/twitter.png';
   static const String CommonScreensWhatsapp = 'lib/Assets/WashMe/CommonScreens/whatsapp.png';
+  static const String CustomerMyInformationsValidator = 'lib/Validation/Customer/myInformationsValidator.dart';
   static const String CustomerSideBLCurrentOrdersOpener = 'lib/InterfaceFunc/screenOpeners/CustomerSide/BLCurrentOrdersOpener.dart';
   static const String CustomerSideCurrentOrdersOpener = 'lib/InterfaceFunc/screenOpeners/CustomerSide/currentOrdersOpener.dart';
   static const String CustomerSidePreviousOrdersOpener = 'lib/InterfaceFunc/screenOpeners/CustomerSide/previousOrdersOpener.dart';
@@ -37,6 +38,7 @@ class Assets {
   static const String FirebaseHelperFirebaseMainHelper = 'lib/FirebaseHelper/FirebaseMainHelper.dart';
   static const String ImageHelperImagePicker = 'lib/InterfaceFunc/ImageHelper/imagePicker.dart';
   static const String InterfaceFuncMaterialColorCreator = 'lib/InterfaceFunc/MaterialColorCreator.dart';
+  static const String InterfaceFuncOnLoginSQLHelper = 'lib/InterfaceFunc/onLoginSQLHelper.dart';
   static const String InterfaceFuncPlatformDependedWidgetChanges = 'lib/InterfaceFunc/platformDependedWidgetChanges.dart';
   static const String InterfaceFuncRegisterWasher = 'lib/InterfaceFunc/registerWasher.dart';
   static const String InterfaceFuncSnackBarInformation = 'lib/InterfaceFunc/snackBarInformation.dart';
@@ -58,6 +60,7 @@ class Assets {
   static const String PersonalInformationMyAddresses = 'lib/Screens/AfterLogin/Drawer/PersonalInformation/MyAddresses.dart';
   static const String PersonalInformationMyCars = 'lib/Screens/AfterLogin/Drawer/PersonalInformation/MyCars.dart';
   static const String PersonalInformationMyInformation = 'lib/Screens/AfterLogin/Drawer/PersonalInformation/MyInformation.dart';
+  static const String PersonalInformationMyInformationsOpener = 'lib/InterfaceFunc/screenOpeners/CustomerSide/PersonalInformation/myInformationsOpener.dart';
   static const String PersonalInformationPaymentMethods = 'lib/Screens/AfterLogin/Drawer/PersonalInformation/PaymentMethods.dart';
   static const String RegisterUser = 'lib/Assets/WashMe/BeforeLogin/Register/user.png';
   static const String SplashAndIntroHoldToLoad = 'lib/Screens/SplashAndIntro/HoldToLoad.dart';
@@ -90,6 +93,7 @@ class Assets {
   static const String WashMeAccount = 'lib/Assets/WashMe/account.png';
   static const String WashMeAppIcon = 'lib/Assets/WashMe/appIcon.png';
   static const String WashMeBin = 'lib/Assets/WashMe/bin.png';
+  static const String WashMeCamera = 'lib/Assets/WashMe/camera.png';
   static const String WashMeHome = 'lib/Assets/WashMe/home.png';
   static const String WashMeLogoWM = 'lib/Assets/WashMe/logoWM.png';
   static const String WashMeOperationsHelperWashMeOrderAdder = 'lib/FirebaseHelper/FirestoreHelpers/WashMeOperationsHelper/washMeOrderAdder.dart';
@@ -112,6 +116,7 @@ class Assets {
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String libFinalDict = 'lib/finalDict.dart';
   static const String libFirebaseOptions = 'lib/firebase_options.dart';
+  static const String libGeneratedPluginRegistrant = 'lib/generated_plugin_registrant.dart';
   static const String libMain = 'lib/main.dart';
   static const String screenOpenersShowTransparentDialogOnLoad = 'lib/InterfaceFunc/screenOpeners/showTransparentDialogOnLoad.dart';
 

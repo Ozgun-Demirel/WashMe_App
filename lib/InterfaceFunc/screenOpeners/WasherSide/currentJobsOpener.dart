@@ -37,6 +37,13 @@ currentJobsOpener(BuildContext context, bool mounted) async {
       List eValues = data.values.toList(); // {"adminArea" : ... , "date" : ...}
 
       for (int index = 0; index < eKeys.length; index++) {
+
+        int timeRemaining = eValues[index]["orderDate"].seconds * 1000;
+        double minDifference = (timeRemaining - DateTime.now().millisecondsSinceEpoch)/(1000*60);
+
+        bool orderExpired = minDifference < 0;
+        bool orderExpired45 = minDifference < -45;
+
         DocumentReference<Map<String, dynamic>> pendingRequestsRef =
         FirebaseFirestore.instance
             .collection('jobs')
@@ -50,7 +57,23 @@ currentJobsOpener(BuildContext context, bool mounted) async {
         await pendingRequestsRef.get();
         Map<String, dynamic>? pendingRequestsData = pendingQuerySnapshot.data();
         if (pendingRequestsData != null) {
-          pendingJobsMap[eKeys[index].toString()] = pendingRequestsData;
+
+          if (orderExpired){
+            FirestoreWashMeOrderShifterHelper.completedOrderCreator(eValues[index], eKeys[index], false, washerPendingOrderExpire: true);
+
+            var notCompletedOrderMap = eValues[index].addAll({"isCompleted" : false});
+            FirebaseAuth auth = FirebaseAuth.instance;
+            User? user = auth.currentUser;
+
+            FirebaseFirestore.instance
+                .collection('users')
+                .doc(user!.uid)
+                .collection("washerPreviousJobs").doc(eKeys[index]).set(notCompletedOrderMap);
+
+          } else {
+            pendingJobsMap[eKeys[index].toString()] = pendingRequestsData;
+          }
+
         } else {
           DocumentReference<Map<String, dynamic>> ongoingRequestsRef =
           FirebaseFirestore.instance
@@ -66,11 +89,7 @@ currentJobsOpener(BuildContext context, bool mounted) async {
           ongoingQuerySnapshot.data();
           if (ongoingRequestsData != null) {
 
-            // is Order Completed:
-            int timeRemaining = eValues[index]["orderDate"].seconds * 1000;
-            double minDifference = (timeRemaining - DateTime.now().millisecondsSinceEpoch)/(1000*60);
-
-            if (minDifference < -45){
+            if (orderExpired45){
               FirestoreWashMeOrderShifterHelper.completedOrderCreator(eValues[index], eKeys[index], false);
 
               var notCompletedOrderMap = eValues[index].addAll({"isCompleted" : false});

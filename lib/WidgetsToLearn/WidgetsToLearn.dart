@@ -8,6 +8,7 @@ Card,
 Opacity,
 PageView,
 Switch,
+CustomClipper() with Path(),
 
 
 

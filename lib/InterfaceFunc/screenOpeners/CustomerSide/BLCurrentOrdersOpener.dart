@@ -53,6 +53,11 @@ getOrdersInfo() async {
   data.values.toList(); // {"adminArea" : ... , "date" : ...}
   for (int index = 0; index < eKeys.length; index++) {
 
+    int timeRemaining = eValues[index]["orderDate"].seconds * 1000;
+    double minDifference = (timeRemaining - DateTime.now().millisecondsSinceEpoch)/(1000*60);
+
+    bool orderExpired = minDifference < 0;
+
     DocumentReference<Map<String, dynamic>> activeRequestsRef =
     FirebaseFirestore.instance
         .collection('jobs')
@@ -66,13 +71,36 @@ getOrdersInfo() async {
     Map<String, dynamic>? activeRequestsData = querySnapshot.data();
     if (activeRequestsData != null) {
 
-      DocumentSnapshot<Map<String, dynamic>> washerInformationsRef = await FirebaseFirestore
-          .instance
-          .collection('washerInformations').doc(activeRequestsData["washerID"]).get();
-      var washerInfo = washerInformationsRef.data();
-      activeRequestsData["washerInfo"] = washerInfo;
+      if (orderExpired){
+        await FirebaseFirestore.instance
+            .collection('jobs')
+            .doc("washMe")
+            .collection("cities")
+            .doc(eValues[index]["adminArea"])
+            .collection("activeRequests").doc(eKeys[index]).delete();
 
-      activeOrdersMap[eKeys[index].toString()] = activeRequestsData ;
+        User? user = FirebaseAuth.instance.currentUser;
+        DocumentReference<Map<String, dynamic>> documentRef = FirebaseFirestore.instance.collection('users')
+            .doc(user!.uid)
+            .collection("currentOrders")
+            .doc("washMe");
+        DocumentSnapshot<Map<String, dynamic>> querySnapshot = await documentRef.get();
+        Map<String, dynamic>? data = querySnapshot.data();
+        data!.remove(eKeys[index]);
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .collection("currentOrders")
+            .doc("washMe").set(data);
+      } else {
+        DocumentSnapshot<Map<String, dynamic>> washerInformationsRef = await FirebaseFirestore
+            .instance
+            .collection('washerInformations').doc(activeRequestsData["washerID"]).get();
+        var washerInfo = washerInformationsRef.data();
+        activeRequestsData["washerInfo"] = washerInfo;
+
+        activeOrdersMap[eKeys[index].toString()] = activeRequestsData ;
+      }
 
     } else {
       DocumentReference<Map<String, dynamic>> pendingRequestsRef =
@@ -87,6 +115,37 @@ getOrdersInfo() async {
       await pendingRequestsRef.get();
       Map<String, dynamic>? pendingRequestsData = querySnapshot.data();
       if (pendingRequestsData != null) {
+
+        if (orderExpired){
+          await FirebaseFirestore.instance
+              .collection('jobs')
+              .doc("washMe")
+              .collection("cities")
+              .doc(eValues[index]["adminArea"])
+              .collection("pendingRequests").doc(eKeys[index]).delete();
+
+          User? user = FirebaseAuth.instance.currentUser;
+          DocumentReference<Map<String, dynamic>> documentRef = FirebaseFirestore.instance.collection('users')
+              .doc(user!.uid)
+              .collection("currentOrders")
+              .doc("washMe");
+          DocumentSnapshot<Map<String, dynamic>> querySnapshot = await documentRef.get();
+          Map<String, dynamic>? data = querySnapshot.data();
+          data!.remove(eKeys[index]);
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .collection("currentOrders")
+              .doc("washMe").set(data);
+        } else {
+          DocumentSnapshot<Map<String, dynamic>> washerInformationsRef = await FirebaseFirestore
+              .instance
+              .collection('washerInformations').doc(pendingRequestsData["washerID"]).get();
+          var washerInfo = washerInformationsRef.data();
+          pendingRequestsData["washerInfo"] = washerInfo;
+
+          pendingOrdersMap[eKeys[index].toString()] = pendingRequestsData;
+        }
 
         DocumentSnapshot<Map<String, dynamic>> washerInformationsRef = await FirebaseFirestore
             .instance
@@ -113,11 +172,7 @@ getOrdersInfo() async {
 
         if (onGoingRequestsData != null) {
 
-          //is Order Completed:
-          int timeRemaining = eValues[index]["orderDate"].seconds * 1000;
-          double minDifference = (timeRemaining - DateTime.now().millisecondsSinceEpoch)/(1000*60);
-
-          if (minDifference < -45){
+          if (orderExpired){
             FirestoreWashMeOrderShifterHelper.completedOrderCreator(eValues[index], eKeys[index], false);
 
             var notCompletedOrderMap = eValues[index].addAll({"isCompleted" : false});
