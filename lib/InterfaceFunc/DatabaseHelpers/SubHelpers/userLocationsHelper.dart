@@ -43,7 +43,7 @@ class LocationHelper {
 
     final db = await LocationHelper.createLocationsDatabase();
     var currentDataList = await LocationHelper.getLocationsData();
-    if (currentDataList != null && currentDataList.length != 0){
+    if (currentDataList.isNotEmpty){
       for(int i = 0; i< currentDataList.length; i++){
         Map<String, dynamic> currentData = currentDataList[i];
         if(currentData["state"] == data["state"] &&
