@@ -93,6 +93,7 @@ class Assets {
   static const String WashMeAccount = 'lib/Assets/WashMe/account.png';
   static const String WashMeAppIcon = 'lib/Assets/WashMe/appIcon.png';
   static const String WashMeBin = 'lib/Assets/WashMe/bin.png';
+  static const String WashMeCamera = 'lib/Assets/WashMe/camera.png';
   static const String WashMeHome = 'lib/Assets/WashMe/home.png';
   static const String WashMeLogoWM = 'lib/Assets/WashMe/logoWM.png';
   static const String WashMeOperationsHelperWashMeOrderAdder = 'lib/FirebaseHelper/FirestoreHelpers/WashMeOperationsHelper/washMeOrderAdder.dart';
@@ -115,6 +116,7 @@ class Assets {
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String libFinalDict = 'lib/finalDict.dart';
   static const String libFirebaseOptions = 'lib/firebase_options.dart';
+  static const String libGeneratedPluginRegistrant = 'lib/generated_plugin_registrant.dart';
   static const String libMain = 'lib/main.dart';
   static const String screenOpenersShowTransparentDialogOnLoad = 'lib/InterfaceFunc/screenOpeners/showTransparentDialogOnLoad.dart';
 
